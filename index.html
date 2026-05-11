@@ -1,0 +1,1992 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ponyin Trading Intel Hub — Materi Lengkap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #111827;
+  --ink2: #374151;
+  --ink3: #6b7280;
+  --bg: #fafaf9;
+  --white: #ffffff;
+  --border: #e5e7eb;
+  --border2: #f3f4f6;
+  --accent: #1d4ed8;
+  --accent-soft: #eff6ff;
+  --purple: #7c3aed;
+  --purple-soft: #f5f3ff;
+  --green: #065f46;
+  --green-soft: #f0fdf4;
+  --red: #991b1b;
+  --red-soft: #fef2f2;
+  --yellow: #92400e;
+  --yellow-soft: #fffbeb;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* ---- LAYOUT ---- */
+.page-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---- NAV ---- */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.nav-brand {
+  font-family: 'Lora', serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: -0.3px;
+}
+.nav-brand span { color: var(--accent); }
+.nav-spacer { flex: 1; }
+.nav-tag {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink3);
+  background: var(--border2);
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+/* ---- HERO ---- */
+.hero {
+  padding: 72px 24px 64px;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.hero-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+.hero h1 {
+  font-family: 'Lora', serif;
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.5px;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero-desc {
+  color: var(--ink2);
+  font-size: 16px;
+  line-height: 1.75;
+  margin-bottom: 32px;
+}
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn {
+  display: inline-block;
+  padding: 11px 22px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+.btn-blue { background: var(--accent); color: #fff; border-color: var(--accent); }
+.btn-blue:hover { background: #1e40af; }
+.btn-outline { background: transparent; color: var(--accent); border-color: var(--accent); }
+.btn-outline:hover { background: var(--accent-soft); }
+.hero-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 36px;
+  text-align: center;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+}
+.hero-card-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--accent-soft), #e0e7ff);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  font-size: 36px;
+}
+.hero-card h3 { font-family: 'Lora', serif; font-size: 22px; margin-bottom: 6px; }
+.hero-card p { color: var(--ink3); font-size: 13px; margin-bottom: 20px; }
+.hero-tags { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.hero-tag {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: var(--border2);
+  color: var(--ink2);
+}
+
+/* ---- STATS BAR ---- */
+.stats-bar {
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 24px;
+}
+.stats-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  gap: 0;
+  align-items: center;
+  justify-content: center;
+}
+.stat-item {
+  text-align: center;
+  padding: 0 40px;
+  border-right: 1px solid var(--border);
+}
+.stat-item:last-child { border-right: none; }
+.stat-num {
+  font-family: 'Lora', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--accent);
+  display: block;
+}
+.stat-label { font-size: 12px; color: var(--ink3); margin-top: 2px; }
+
+/* ---- MAIN LAYOUT ---- */
+.main-layout {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* ---- SIDEBAR ---- */
+.sidebar {
+  position: sticky;
+  top: 76px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px 0;
+  scrollbar-width: thin;
+}
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-track { background: transparent; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+.sb-section-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink3);
+  padding: 12px 20px 6px;
+}
+.sb-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 10px 12px;
+}
+.sb-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 9px 16px;
+  cursor: pointer;
+  border-radius: 0;
+  transition: background 0.15s;
+  border-left: 3px solid transparent;
+  margin: 1px 0;
+}
+.sb-item:hover { background: var(--border2); }
+.sb-item.active {
+  background: var(--accent-soft);
+  border-left-color: var(--accent);
+}
+.sb-item.active .sb-title { color: var(--accent); }
+.sb-item.advance.active {
+  background: var(--purple-soft);
+  border-left-color: var(--purple);
+}
+.sb-item.advance.active .sb-title { color: var(--purple); }
+.sb-num {
+  min-width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  background: var(--border2);
+  color: var(--ink2);
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.sb-item.advance .sb-num { background: var(--purple); color: #fff; }
+.sb-title { font-size: 13px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+.sb-sub { font-size: 11px; color: var(--ink3); margin-top: 2px; line-height: 1.3; }
+
+/* ---- CONTENT ---- */
+.content-area {}
+.panel { display: none; }
+.panel.active { display: block; }
+
+.panel-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.panel-num {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.panel-num.adv { background: var(--purple); }
+.panel-eyebrow-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink3);
+  letter-spacing: 0.5px;
+}
+h2.panel-title {
+  font-family: 'Lora', serif;
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.3px;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+.panel-sub {
+  color: var(--ink2);
+  font-size: 15.5px;
+  line-height: 1.75;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+.panel-rule {
+  width: 40px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+  margin-bottom: 8px;
+}
+.panel-rule.adv { background: var(--purple); }
+
+/* ---- TYPOGRAPHY ---- */
+.prose {
+  font-size: 15px;
+  color: var(--ink2);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+.prose strong { color: var(--ink); font-weight: 600; }
+.prose em { font-style: italic; color: var(--ink); }
+.section-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-label::before {
+  content: '';
+  display: inline-block;
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+hr.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 28px 0;
+}
+
+/* ---- PULL QUOTE ---- */
+.pull-quote {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--ink);
+  border-left: 3px solid var(--accent);
+  padding: 16px 24px;
+  background: var(--accent-soft);
+  border-radius: 0 10px 10px 0;
+  margin: 24px 0;
+}
+
+/* ---- CALLOUTS ---- */
+.callout {
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin: 16px 0;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.callout-icon { font-size: 18px; flex-shrink: 0; line-height: 1; margin-top: 1px; }
+.callout-body {}
+.callout-title { font-weight: 700; font-size: 14px; margin-bottom: 5px; }
+.callout-text { font-size: 13.5px; line-height: 1.75; }
+.callout-text strong { font-weight: 600; }
+.callout.info { background: var(--accent-soft); border: 1px solid #bfdbfe; }
+.callout.info .callout-title { color: #1e40af; }
+.callout.info .callout-text { color: #1d4ed8; }
+.callout.warn { background: var(--yellow-soft); border: 1px solid #fde68a; }
+.callout.warn .callout-title { color: var(--yellow); }
+.callout.warn .callout-text { color: #b45309; }
+.callout.danger { background: var(--red-soft); border: 1px solid #fca5a5; }
+.callout.danger .callout-title { color: var(--red); }
+.callout.danger .callout-text { color: #dc2626; }
+.callout.ok { background: var(--green-soft); border: 1px solid #a7f3d0; }
+.callout.ok .callout-title { color: var(--green); }
+.callout.ok .callout-text { color: #047857; }
+.callout.purple { background: var(--purple-soft); border: 1px solid #ddd6fe; }
+.callout.purple .callout-title { color: #4c1d95; }
+.callout.purple .callout-text { color: #5b21b6; }
+
+/* ---- CHECKLIST ---- */
+.checklist {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 12px 0;
+}
+.checklist li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 14px;
+  color: var(--ink2);
+  line-height: 1.65;
+}
+.ck {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ---- STEP FLOW ---- */
+.step-flow { display: flex; flex-direction: column; gap: 16px; margin: 12px 0; }
+.step {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+}
+.step-num {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.step-title { font-weight: 700; font-size: 14px; color: var(--ink); margin-bottom: 4px; }
+.step-desc { font-size: 13.5px; color: var(--ink2); line-height: 1.7; }
+.step-desc strong { color: var(--ink); font-weight: 600; }
+
+/* ---- 2-COL GRID ---- */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 16px 0;
+}
+
+/* ---- FEATURE CARDS ---- */
+.feature-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 12px 0;
+}
+.feature-card {
+  border-radius: 12px;
+  padding: 16px 14px;
+  border: 1px solid var(--border);
+  background: var(--white);
+}
+.feature-card-icon { font-size: 22px; margin-bottom: 8px; }
+.feature-card-title { font-size: 13.5px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.feature-card-desc { font-size: 13px; color: var(--ink2); line-height: 1.65; }
+
+/* ---- COMPARE TABLE ---- */
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 12px 0;
+}
+.compare-col {
+  border-radius: 14px;
+  padding: 20px;
+}
+.compare-col-title { font-weight: 700; font-size: 15px; margin-bottom: 14px; }
+.compare-col p {
+  font-size: 13.5px;
+  line-height: 1.7;
+  padding-left: 16px;
+  border-left: 2px solid currentColor;
+  margin-bottom: 8px;
+  opacity: 0.85;
+}
+
+/* ---- INFO BOX ---- */
+.info-box {
+  background: linear-gradient(135deg, #f4f8ff 0%, #eef3ff 100%);
+  border: 1px solid #bfdbfe;
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin: 16px 0;
+}
+.info-box-title { font-weight: 700; font-size: 15px; color: var(--ink); margin-bottom: 8px; }
+.info-box-body { font-size: 14.5px; color: var(--ink2); line-height: 1.8; }
+
+/* ---- FAKE MSG ---- */
+.fake-msg {
+  background: #f0fdf4;
+  border: 1px solid #a7f3d0;
+  border-radius: 10px;
+  padding: 13px 16px;
+  font-size: 14px;
+  color: var(--green);
+  font-weight: 600;
+  margin: 12px 0;
+}
+
+/* ---- DEF CARD ---- */
+.def-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+  height: 100%;
+}
+.def-icon { font-size: 24px; margin-bottom: 8px; }
+.def-term { font-weight: 700; font-size: 15px; color: var(--ink); margin-bottom: 8px; }
+.def-desc { font-size: 13.5px; color: var(--ink2); line-height: 1.75; }
+.def-desc strong { color: var(--ink); font-weight: 600; }
+.def-desc em { font-style: italic; }
+
+/* ---- CLOSING CARD ---- */
+.closing-card {
+  background: linear-gradient(135deg, #1e3a8a, #1e1b4b);
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  color: white;
+  margin-bottom: 24px;
+}
+.closing-quote {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+.closing-sig {
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 24px;
+  opacity: 0.8;
+}
+
+/* ---- NAV BUTTONS ---- */
+.panel-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 48px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+}
+.panel-nav-btn {
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: 1.5px solid var(--border);
+  background: var(--white);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink2);
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: 'DM Sans', sans-serif;
+}
+.panel-nav-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+.panel-nav-btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+.panel-nav-btn.primary:hover { background: #1e40af; }
+.panel-counter { font-size: 13px; color: var(--ink3); font-weight: 500; }
+
+/* ---- MOBILE TABS ---- */
+.mobile-tabs {
+  display: none;
+  overflow-x: auto;
+  gap: 8px;
+  padding: 16px 16px 0;
+  scrollbar-width: none;
+}
+.mobile-tabs::-webkit-scrollbar { display: none; }
+.mob-tab {
+  flex-shrink: 0;
+  padding: 8px 14px;
+  border-radius: 20px;
+  background: var(--border2);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink2);
+  cursor: pointer;
+  white-space: nowrap;
+  border: 1.5px solid transparent;
+  transition: all 0.15s;
+}
+.mob-tab.active { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); }
+
+/* ---- BREADCRUMB ---- */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--ink3);
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.breadcrumb-sep { opacity: 0.5; }
+
+/* ---- FOOTER ---- */
+footer {
+  background: var(--ink);
+  color: rgba(255,255,255,0.7);
+  padding: 48px 24px;
+  margin-top: 60px;
+  text-align: center;
+}
+footer h3 {
+  font-family: 'Lora', serif;
+  font-size: 22px;
+  color: #fff;
+  margin-bottom: 12px;
+}
+footer p { font-size: 13.5px; line-height: 1.8; max-width: 540px; margin: 0 auto 20px; }
+footer .ft-links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+footer a { color: #93c5fd; text-decoration: none; font-size: 13.5px; font-weight: 500; }
+footer a:hover { color: #fff; }
+.ft-copy { margin-top: 32px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 12px; opacity: 0.5; }
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 768px) {
+  .hero { grid-template-columns: 1fr; gap: 32px; padding: 40px 16px; }
+  .hero-card { display: none; }
+  .main-layout { grid-template-columns: 1fr; padding: 16px; }
+  .sidebar { display: none; }
+  .mobile-tabs { display: flex; }
+  .two-col { grid-template-columns: 1fr; }
+  .feature-cards { grid-template-columns: 1fr; }
+  .compare-grid { grid-template-columns: 1fr; }
+  .stats-inner { flex-wrap: wrap; gap: 16px; }
+  .stat-item { border-right: none; padding: 0 20px; }
+  .panel-nav { flex-wrap: wrap; gap: 10px; }
+  h2.panel-title { font-size: 24px; }
+}
+
+/* ---- VOL 2 SPECIAL ---- */
+.vol2-badge {
+  display: inline-block;
+  background: var(--purple);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+}
+
+/* ---- SCAMMER WARNING ---- */
+.scam-warn {
+  background: #fff1f1;
+  border: 2px solid #fca5a5;
+  border-radius: 14px;
+  padding: 20px;
+  margin: 20px 0;
+}
+.scam-warn-title { font-weight: 700; color: var(--red); font-size: 15px; margin-bottom: 8px; }
+.scam-warn-body { font-size: 13.5px; color: #dc2626; line-height: 1.7; }
+.scam-list { list-style: none; margin-top: 10px; }
+.scam-list li { display: flex; gap: 8px; align-items: center; margin-bottom: 6px; font-size: 13.5px; color: #991b1b; font-weight: 600; }
+.scam-badge { background: #ef4444; color: #fff; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">Ponyin<span>.</span></a>
+    <div class="nav-spacer"></div>
+    <span class="nav-tag">Trading Intel Hub</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-eyebrow">Trading Intel Hub · Solana On-Chain</div>
+    <h1>Ilmu trading yang <em>nyangkut di otak,</em> bukan cuma lewat.</h1>
+    <p class="hero-desc">Kalau kamu pernah beli token dan tiba-tiba nyangkut tanpa tahu kenapa — materi ini buat kamu. Ponyin ngemas ilmu trading on-chain Solana jadi <strong>sesimpel ngobrol sama teman</strong>, tapi sekuat analisis yang biasanya cuma dimiliki whale.</p>
+    <div class="hero-btns">
+      <a href="#materi" class="btn btn-blue">Baca Materi ↓</a>
+    </div>
+  </div>
+  <div>
+    <div class="hero-card">
+      <div class="hero-card-icon">🎓</div>
+      <h3>Ponyin</h3>
+      <p>Trader · Educator · On-Chain Specialist</p>
+      <div class="hero-tags">
+        <span class="hero-tag">On-chain</span>
+        <span class="hero-tag">Solana</span>
+        <span class="hero-tag">New Pair</span>
+        <span class="hero-tag">Vol. 1 + 2</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <span class="stat-num">9</span>
+      <div class="stat-label">Vol. 1 Basic</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">11</span>
+      <div class="stat-label">Vol. 2 Advance</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">20+</span>
+      <div class="stat-label">Total Materi</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">∞</span>
+      <div class="stat-label">Gratis Selamanya</div>
+    </div>
+  </div>
+</div>
+
+<!-- MOBILE TABS -->
+<div class="mobile-tabs" id="mobileTabs">
+  <!-- Vol 1 -->
+  <div class="mob-tab active" onclick="switchPanel('p0')">Bundle Token</div>
+  <div class="mob-tab" onclick="switchPanel('p1')">Global Fees</div>
+  <div class="mob-tab" onclick="switchPanel('p2')">Revoke & Minting</div>
+  <div class="mob-tab" onclick="switchPanel('p3')">Meme vs Utility</div>
+  <div class="mob-tab" onclick="switchPanel('p4')">Dex Paid</div>
+  <div class="mob-tab" onclick="switchPanel('p5')">3 Konfirmasi</div>
+  <div class="mob-tab" onclick="switchPanel('p6')">Cabal Play</div>
+  <div class="mob-tab" onclick="switchPanel('p7')">Membaca Holder</div>
+  <div class="mob-tab" onclick="switchPanel('p8')">Market Cap Tier</div>
+  <div class="mob-tab" onclick="switchPanel('p9')">Penutup</div>
+  <!-- Vol 2 -->
+  <div class="mob-tab" onclick="switchPanel('pa0')">A1: Snipe Early</div>
+  <div class="mob-tab" onclick="switchPanel('pa1')">A2: First 1K</div>
+  <div class="mob-tab" onclick="switchPanel('pa2')">A3: Wallet Ping</div>
+  <div class="mob-tab" onclick="switchPanel('pa3')">A4: Money Mgmt</div>
+  <div class="mob-tab" onclick="switchPanel('pa4')">A5: Transaksi Murah</div>
+  <div class="mob-tab" onclick="switchPanel('pa5')">A6: Rent Refund</div>
+  <div class="mob-tab" onclick="switchPanel('pa6')">A7: Instant Scalping</div>
+  <div class="mob-tab" onclick="switchPanel('padp')">✦ Day Phase Trade</div>
+  <div class="mob-tab" onclick="switchPanel('pa7')">A8: Multi Wallet</div>
+  <div class="mob-tab" onclick="switchPanel('pa8')">A9: Unwritten Rules</div>
+  <div class="mob-tab" onclick="switchPanel('pa9')">A10: Skema Penipuan</div>
+</div>
+
+<!-- MAIN -->
+<div class="main-layout" id="materi">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sb-section-label">Vol. 1 — Basic</div>
+    <div class="sb-item active" onclick="switchPanel('p0')"><div class="sb-num">1</div><div><div class="sb-title">Bundle Token</div><div class="sb-sub">Monopoli supply tersembunyi</div></div></div>
+    <div class="sb-item" onclick="switchPanel('p1')"><div class="sb-num">2</div><div><div class="sb-title">Global Fees</div><div class="sb-sub">Detektor transaksi palsu</div></div></div>
+    <div class="sb-item" onclick="switchPanel('p2')"><div class="sb-num">3</div><div><div class="sb-title">Revoke & Minting</div><div class="sb-sub">Jebakan yang kelihatan aman</div></div></div>
+    <div class="sb-item" onclick="switchPanel('p3')"><div class="sb-num">4</div><div><div class="sb-title">Meme vs Utility</div><div class="sb-sub">Pilih sesuai style kamu</div></div></div>
+    <div class="sb-item" onclick="switchPanel('p4')"><div class="sb-num">5</div><div><div class="sb-title">Dex Paid, Ads & Boost</div><div class="sb-sub">Sinyal kepercayaan pasar</div></div></div>
+    <div class="sb-item" onclick="switchPanel('p5')"><div class="sb-num">6</div><div><div class="sb-title">3 Konfirmasi Candle</div><div class="sb-sub">Cara nyari dip yang valid</div></div></div>
+    <div class="sb-item" onclick="switchPanel('p6')"><div class="sb-num">7</div><div><div class="sb-title">Cabal Play</div><div class="sb-sub">Kelompok terorganisir</div></div></div>
+    <div class="sb-item" onclick="switchPanel('p7')"><div class="sb-num">8</div><div><div class="sb-title">Membaca Holder</div><div class="sb-sub">Siapa yang sebenarnya pegang</div></div></div>
+    <div class="sb-item" onclick="switchPanel('p8')"><div class="sb-num">9</div><div><div class="sb-title">Market Cap Tier</div><div class="sb-sub">Micro → CEX, beda strategi</div></div></div>
+    <div class="sb-item" onclick="switchPanel('p9')"><div class="sb-num">★</div><div><div class="sb-title">Penutup</div><div class="sb-sub">Dari Ponyin</div></div></div>
+    <div class="sb-divider"></div>
+    <div class="sb-section-label" style="color:var(--purple)">Vol. 2 — Advance</div>
+    <div class="sb-item advance" onclick="switchPanel('pa0')"><div class="sb-num">A1</div><div><div class="sb-title">Cara Snipe Early</div><div class="sb-sub">Mapping + tools sniper</div></div></div>
+    <div class="sb-item advance" onclick="switchPanel('pa1')"><div class="sb-num">A2</div><div><div class="sb-title">First 1K dari $100</div><div class="sb-sub">Dua jalur nyata</div></div></div>
+    <div class="sb-item advance" onclick="switchPanel('pa2')"><div class="sb-num">A3</div><div><div class="sb-title">Wallet Ping</div><div class="sb-sub">10 mata lebih baik</div></div></div>
+    <div class="sb-item advance" onclick="switchPanel('pa3')"><div class="sb-num">A4</div><div><div class="sb-title">Money Management</div><div class="sb-sub">Compounding + greedy</div></div></div>
+    <div class="sb-item advance" onclick="switchPanel('pa4')"><div class="sb-num">A5</div><div><div class="sb-title">Transaksi Murah</div><div class="sb-sub">RUST + RPC direct</div></div></div>
+    <div class="sb-item advance" onclick="switchPanel('pa5')"><div class="sb-num">A6</div><div><div class="sb-title">Rent Refund</div><div class="sb-sub">Tarik kembali uang sewa</div></div></div>
+    <div class="sb-item advance" onclick="switchPanel('pa6')"><div class="sb-num">A7</div><div><div class="sb-title">Instant Scalping</div><div class="sb-sub">4 step new pair</div></div></div>
+    <div class="sb-item advance" onclick="switchPanel('padp')"><div class="sb-num">✦</div><div><div class="sb-title">Day Phase Trade</div><div class="sb-sub">Short swing 3–7 hari</div></div></div>
+    <div class="sb-item advance" onclick="switchPanel('pa7')"><div class="sb-num">A8</div><div><div class="sb-title">Multi Wallet</div><div class="sb-sub">Keajaiban trading</div></div></div>
+    <div class="sb-item advance" onclick="switchPanel('pa8')"><div class="sb-num">A9</div><div><div class="sb-title">Unwritten Rules</div><div class="sb-sub">Etika survival jangka panjang</div></div></div>
+    <div class="sb-item advance" onclick="switchPanel('pa9')"><div class="sb-num">A10</div><div><div class="sb-title">Skema Penipuan</div><div class="sb-sub">Pig butchering & drainer</div></div></div>
+  </aside>
+
+  <!-- PANELS -->
+  <div class="content-area">
+
+    <!-- ===================== P0: BUNDLE TOKEN ===================== -->
+    <div class="panel active" id="p0">
+      <div class="panel-eyebrow"><div class="panel-num">1</div><div class="panel-eyebrow-label">Ilmu Pertama</div></div>
+      <div class="panel-rule"></div>
+      <h2 class="panel-title">Bundle Token —<br>Monopoli yang Tak Terlihat</h2>
+      <p class="panel-sub">Dev yang cerdas tidak akan beli semua supply atas namanya sendiri. Mereka punya cara yang jauh lebih rapi — dan kamu perlu tahu cara mengenalinya.</p>
+      <div class="breadcrumb"><span>Vol. 1</span><span class="breadcrumb-sep">›</span><span>Bundle Token</span><span class="breadcrumb-sep">›</span><span>1 dari 9</span></div>
+
+      <div class="section-label">Apa itu Bundle Token?</div>
+      <p class="prose">Bayangkan pengusaha yang ingin <strong>menguasai seluruh pasokan ayam</strong> di kota. Kalau borong semua stok sendirian, semua orang langsung tahu — harga naik, media ramai, pemerintah curiga. Solusi pintarnya? Minta <strong>10 orang kepercayaan</strong> membeli di tempat berbeda, waktu berbeda, nama berbeda. Dari luar terlihat organik. Padahal <em>satu komando — satu orang di balik layar.</em></p>
+      <p class="prose">Inilah <strong>bundle token</strong> di dunia Solana. Saat token baru diluncurkan, developer sudah menyiapkan puluhan wallet berbeda yang serentak membeli di milidetik pertama. Di block explorer kamu melihat banyak pembeli. Padahal satu tangan yang menggerakkan semuanya.</p>
+      <div class="pull-quote">"Bundle bukan soal berapa banyak wallet yang beli — tapi berapa banyak wallet yang sebetulnya dikontrol oleh satu orang di balik layar."</div>
+      <hr class="divider">
+
+      <div class="section-label">Kenapa ini berbahaya?</div>
+      <div class="callout warn">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-body">
+          <div class="callout-title">Developer sudah punya kendali penuh sejak awal</div>
+          <div class="callout-text">Developer yang bundle di awal otomatis memegang <strong>mayoritas supply</strong> sejak detik pertama. Mereka bisa dump kapanpun — dan saat itu terjadi, chart ambruk dalam hitungan detik. Kamu yang beli belakangan tidak punya waktu bereaksi sama sekali.</div>
+        </div>
+      </div>
+
+      <div class="section-label">Realita di pasar new pair</div>
+      <p class="prose">Di pasar new pair, para pemain besar seperti Cupsey, Cented, Log, Decu membeli agresif di detik pertama. Tidak ada yang peduli siapa punya berapa — selama narasi menarik dan momentum ada, semua orang langsung masuk. Inilah <em>PvP sesungguhnya — Player vs Player.</em></p>
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <div class="callout-title">Mengapa patokan "holder di bawah 3%" sudah tidak akurat?</div>
+          <div class="callout-text">Di era multi-wallet, satu orang bisa punya 5 hingga 20 wallet berbeda. Meskipun setiap wallet hanya pegang 2%, kalau orangnya sama, total kepemilikannya bisa mencapai <strong>20–40%</strong>. Untuk token narasi besar, holder 7–10% per wallet sudah sangat wajar. Ini permainan — dan kamu perlu memahaminya.</div>
+        </div>
+      </div>
+      <div class="callout warn">
+        <span class="callout-icon">🧠</span>
+        <div class="callout-body">
+          <div class="callout-title">Memahami zero-sum tanpa jadi sinis</div>
+          <div class="callout-text">Semua pemain di ruang ini bermain untuk kepentingan sendiri — dari retail terkecil sampai whale terbesar. Pahami ini bukan untuk paranoid, tapi agar kamu tidak naif dalam membaca data dan mengambil keputusan.</div>
+        </div>
+      </div>
+
+      <div class="panel-nav">
+        <span></span>
+        <span class="panel-counter">1 / 9</span>
+        <button class="panel-nav-btn primary" onclick="switchPanel('p1')">Global Fees →</button>
+      </div>
+    </div>
+
+    <!-- ===================== P1: GLOBAL FEES ===================== -->
+    <div class="panel" id="p1">
+      <div class="panel-eyebrow"><div class="panel-num">2</div><div class="panel-eyebrow-label">Ilmu Kedua</div></div>
+      <div class="panel-rule"></div>
+      <h2 class="panel-title">Global Fees —<br>Detektor Transaksi Palsu</h2>
+      <p class="panel-sub">Ada satu angka kecil yang tersembunyi di setiap transaksi token — dan kalau kamu tahu cara membacanya, kamu bisa langsung tahu apakah volume yang kelihatan "besar" itu nyata atau cuma pura-pura.</p>
+      <div class="breadcrumb"><span>Vol. 1</span><span class="breadcrumb-sep">›</span><span>Global Fees</span><span class="breadcrumb-sep">›</span><span>2 dari 9</span></div>
+
+      <div class="section-label">Apa itu Global Fees?</div>
+      <p class="prose">Setiap token di Solana punya <strong>global fees</strong> — biaya transaksi kecil yang dikenakan setiap kali ada yang membeli atau menjual melalui pool seperti Raydium atau Orca. Besarnya sekitar <strong>0.25% dari nilai transaksi</strong>, dan fee ini masuk ke pool sebagai kompensasi bagi liquidity provider.</p>
+      <p class="prose">Angka ini kelihatan sepele. Tapi jika kamu tahu cara membacanya, ini adalah <em>alat deteksi volume palsu yang paling akurat saat ini.</em></p>
+
+      <div class="section-label">Cara memahaminya</div>
+      <div class="info-box">
+        <div class="info-box-title">📊 Analoginya seperti struk pajak restoran</div>
+        <div class="info-box-body">Bayangkan restoran melaporkan penjualan <strong>Rp 100 juta</strong> hari ini. Tapi struk pajaknya hanya <strong>Rp 10 ribu</strong>. Ini tidak masuk akal — artinya laporannya bohong. Hal yang sama terjadi di crypto: volume tinggi tapi fee sangat kecil = volume palsu (<strong>wash trading</strong>). Tujuannya satu: memancing pembeli awam agar masuk karena mengira token ini ramai.</div>
+      </div>
+
+      <hr class="divider">
+      <div class="section-label">Tiga tipe volume yang perlu kamu kenali</div>
+      <div class="feature-cards">
+        <div class="feature-card" style="background:#f0fdf4;border-color:#a7f3d0">
+          <div class="feature-card-icon">✅</div>
+          <div class="feature-card-title" style="color:#065f46">Volume Organik</div>
+          <div class="feature-card-desc">Fee sebanding dengan volume. Banyak wallet berbeda bertransaksi. Chart naik seiring volume — sehat dan asli.</div>
+        </div>
+        <div class="feature-card" style="background:#fffbeb;border-color:#fde68a">
+          <div class="feature-card-icon">⚠️</div>
+          <div class="feature-card-title" style="color:#92400e">Wash Trading</div>
+          <div class="feature-card-desc">Volume tinggi tapi fee sangat kecil. Wallet yang sama saling jual-beli. Manipulasi — dibuat agar terlihat ramai.</div>
+        </div>
+        <div class="feature-card" style="background:#fef2f2;border-color:#fecaca">
+          <div class="feature-card-icon">🚨</div>
+          <div class="feature-card-title" style="color:#991b1b">Bot Pump</div>
+          <div class="feature-card-desc">Volume meledak dalam detik tapi fee tidak sebanding. Biasanya di detik pertama launch. Sangat berbahaya.</div>
+        </div>
+      </div>
+
+      <hr class="divider">
+      <div class="section-label">Cara mengeceknya</div>
+      <p class="prose">Buka <strong>Trojan</strong> → pilih coin yang kamu inginkan dan fees paid itu adalah global fees, atau gunakan <strong>Birdeye</strong> dan <strong>Solscan</strong>. Bandingkan angka <em>Total Fee Collected</em> dengan <em>Total Volume</em>. Kalau volume besar tapi fee sangat kecil, kamu sudah tahu apa artinya.</p>
+      <div class="callout ok">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <div class="callout-title">Sinyal sehat yang perlu kamu cari</div>
+          <div class="callout-text">Token dengan fee yang terkumpul secara konsisten seiring waktu adalah tanda volume organik yang nyata. Ini salah satu sinyal terkuat yang ada — jauh lebih jujur dari klaim "volume 10x" di Telegram.</div>
+        </div>
+      </div>
+
+      <div class="panel-nav">
+        <button class="panel-nav-btn" onclick="switchPanel('p0')">← Bundle Token</button>
+        <span class="panel-counter">2 / 9</span>
+        <button class="panel-nav-btn primary" onclick="switchPanel('p2')">Revoke & Minting →</button>
+      </div>
+    </div>
+
+    <!-- ===================== P2: REVOKE & MINTING ===================== -->
+    <div class="panel" id="p2">
+      <div class="panel-eyebrow"><div class="panel-num">3</div><div class="panel-eyebrow-label">Ilmu Ketiga</div></div>
+      <div class="panel-rule"></div>
+      <h2 class="panel-title">Revoke & Minting —<br>Jebakan yang Kelihatan Aman</h2>
+      <p class="panel-sub">Dua fitur teknis yang kedengarannya membosankan — tapi bisa jadi perbedaan antara kamu aman atau kamu yang jadi korban rug.</p>
+      <div class="breadcrumb"><span>Vol. 1</span><span class="breadcrumb-sep">›</span><span>Revoke & Minting</span><span class="breadcrumb-sep">›</span><span>3 dari 9</span></div>
+
+      <div class="section-label">Kesalahpahaman yang paling mahal</div>
+      <p class="prose"><strong>Revoke authority</strong> dan <strong>mint authority</strong> adalah dua hal yang paling sering disalahgunakan developer nakal untuk memberi kesan aman palsu. Kamu sering melihat klaim seperti ini di Telegram:</p>
+      <div class="fake-msg">✅ Revoke sudah dilakukan! 100% aman! Ayo masuk sebelum terlambat!</div>
+      <p class="prose">Terdengar meyakinkan. Tapi faktanya: <em>Revoke sudah dilakukan ≠ Token aman.</em> Ini adalah kesalahpahaman paling mahal yang dialami trader baru.</p>
+
+      <hr class="divider">
+      <div class="section-label">Perbedaan yang wajib kamu pahami</div>
+      <div class="compare-grid">
+        <div class="compare-col" style="background:#f0fdf4;border:1px solid #a7f3d0;border-radius:14px;padding:20px;">
+          <div class="compare-col-title" style="color:#065f46">✅ Revoke Authority — Sudah Dicabut</div>
+          <p style="border-left-color:#a7f3d0;color:#374151">Developer tidak bisa lagi membekukan akun pemegang</p>
+          <p style="border-left-color:#a7f3d0;color:#374151">Token tidak bisa dikunci atau diblokir secara paksa</p>
+          <p style="border-left-color:#a7f3d0;color:#374151">Sering jadi checklist di RugCheck dan tools serupa</p>
+          <p style="border-left-color:#f59e0b;color:#92400e"><strong>⚠️ Tapi: TIDAK mencegah developer dump supply yang sudah mereka pegang</strong></p>
+        </div>
+        <div class="compare-col" style="background:#fef2f2;border:1px solid #fecaca;border-radius:14px;padding:20px;">
+          <div class="compare-col-title" style="color:#991b1b">🚨 Mint Authority — Masih Aktif</div>
+          <p style="border-left-color:#fca5a5;color:#374151">Developer bisa mencetak token baru kapan saja tanpa batas</p>
+          <p style="border-left-color:#fca5a5;color:#374151">Supply token bisa membengkak sewaktu-waktu</p>
+          <p style="border-left-color:#fca5a5;color:#374151">Nilai token yang kamu pegang otomatis terdilusi</p>
+          <p style="border-left-color:#ef4444;color:#dc2626"><strong>Ini red flag besar — hindari kecuali ada alasan yang sangat transparan</strong></p>
+        </div>
+      </div>
+
+      <hr class="divider">
+      <div class="section-label">Pola jebakan yang paling sering terjadi</div>
+      <div class="callout warn">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-body">
+          <div class="callout-title">Urutan yang harus kamu hafal</div>
+          <div class="callout-text"><strong>1) Bundle supply di awal</strong> → <strong>2) Revoke authority</strong> agar terlihat legit → <strong>3) Tunggu harga naik</strong> → <strong>4) Dump semua supply yang sudah dikuasai sejak awal.</strong><br><br>Revoke hanya menghapus kemampuan admin tertentu — tidak menyentuh token yang sudah ada di wallet mereka. Kamu wajib cek <em>bundle activity</em> secara terpisah, bukan hanya status revoke-nya.</div>
+        </div>
+      </div>
+      <div class="callout ok">
+        <span class="callout-icon">🔍</span>
+        <div class="callout-body">
+          <div class="callout-title">Tools yang bisa kamu gunakan sekarang</div>
+          <div class="callout-text">Gunakan <strong>RugCheck.xyz</strong>, <strong>Token Sniffer</strong>, atau langsung di <strong>Solscan</strong>. Cari bagian "Token Extensions" → perhatikan status <em>Mint Authority</em> dan <em>Freeze Authority</em>. Kalau tertulis "Active" — jangan masuk kecuali kamu benar-benar tahu alasannya.</div>
+        </div>
+      </div>
+
+      <div class="panel-nav">
+        <button class="panel-nav-btn" onclick="switchPanel('p1')">← Global Fees</button>
+        <span class="panel-counter">3 / 9</span>
+        <button class="panel-nav-btn primary" onclick="switchPanel('p3')">Meme vs Utility →</button>
+      </div>
+    </div>
+
+    <!-- ===================== P3: MEME VS UTILITY ===================== -->
+    <div class="panel" id="p3">
+      <div class="panel-eyebrow"><div class="panel-num">4</div><div class="panel-eyebrow-label">Ilmu Keempat</div></div>
+      <div class="panel-rule"></div>
+      <h2 class="panel-title">Meme vs Utility —<br>Pilih Sesuai Style Kamu</h2>
+      <p class="panel-sub">Pertanyaan "mana yang lebih baik — meme coin atau utility token?" adalah pertanyaan yang salah. Pertanyaan yang benar adalah: mana yang sesuai dengan cara bermain kamu?</p>
+      <div class="breadcrumb"><span>Vol. 1</span><span class="breadcrumb-sep">›</span><span>Meme vs Utility</span><span class="breadcrumb-sep">›</span><span>4 dari 9</span></div>
+
+      <div class="section-label">Perdebatan yang sering salah arah</div>
+      <p class="prose">Ini adalah perdebatan paling umum di komunitas crypto, dan juga yang paling sering membuat pemula salah kaprah. <strong>Kubu utility</strong> bilang: "Meme coin itu judi, cari yang ada produk nyatanya." Tapi mereka lupa bahwa meme coin sudah mencetak lebih banyak orang kaya dalam 12 bulan terakhir dibanding instrumen investasi manapun.</p>
+      <p class="prose"><strong>Kubu meme</strong> bilang: "Utility itu lambat, ngapain." Tapi mereka lupa bahwa tanpa pemahaman, trading meme coin sama saja dengan berjudi tanpa tahu aturan mainnya.</p>
+      <div class="pull-quote">"Pertanyaan yang benar bukan 'mana yang lebih baik?' — tapi 'mana yang sesuai dengan cara bermainku, dan apakah aku punya skill untuk memainkannya dengan benar?'"</div>
+
+      <hr class="divider">
+      <div class="section-label">Perbedaan karakteristik keduanya</div>
+      <div class="compare-grid">
+        <div class="compare-col" style="background:var(--accent-soft);border:1px solid #bfdbfe;border-radius:14px;padding:20px;">
+          <div class="compare-col-title" style="color:#1e40af">🎭 Meme Coin</div>
+          <p style="border-left-color:#93c5fd;color:#374151">Digerakkan narasi viral dan komunitas, bukan fundamental</p>
+          <p style="border-left-color:#93c5fd;color:#374151">Tidak perlu produk nyata untuk naik 100x</p>
+          <p style="border-left-color:#93c5fd;color:#374151">Window profit sangat sempit — bisa hitungan menit</p>
+          <p style="border-left-color:#93c5fd;color:#374151">High risk, high reward yang sangat ekstrem</p>
+          <p style="border-left-color:#93c5fd;color:#374151">Cocok untuk trader aktif yang terus monitor market</p>
+          <p style="border-left-color:#f59e0b;color:#92400e">Wajib cek: siapa deployer-nya, ada cabal di belakang?</p>
+        </div>
+        <div class="compare-col" style="background:var(--green-soft);border:1px solid #a7f3d0;border-radius:14px;padding:20px;">
+          <div class="compare-col-title" style="color:#065f46">🔧 Utility Token</div>
+          <p style="border-left-color:#a7f3d0;color:#374151">Punya produk atau layanan nyata sebagai fondasi nilai</p>
+          <p style="border-left-color:#a7f3d0;color:#374151">Bisa dianalisis dari sisi use-case dan tingkat adopsi</p>
+          <p style="border-left-color:#a7f3d0;color:#374151">Window profit lebih panjang — berminggu sampai berbulan</p>
+          <p style="border-left-color:#a7f3d0;color:#374151">Lebih cocok untuk investasi jangka menengah</p>
+          <p style="border-left-color:#a7f3d0;color:#374151">Cocok untuk investor yang sabar, bukan scalper</p>
+          <p style="border-left-color:#f59e0b;color:#92400e">Wajib cek: produknya benar-benar exist dan dipakai?</p>
+        </div>
+      </div>
+
+      <hr class="divider">
+      <div class="callout info">
+        <span class="callout-icon">🎯</span>
+        <div class="callout-body">
+          <div class="callout-title">Rekomendasi Ponyin untuk pemula</div>
+          <div class="callout-text"><strong>Mulailah dari meme coin dulu.</strong> Bukan karena lebih aman — justru sebaliknya. Tapi karena kecepatannya yang ekstrem akan memaksamu memahami psikologi trading, manajemen risiko, dan cara baca pasar jauh lebih cepat dibanding buku manapun.<br><br>Kamu akan belajar dengan cara yang paling nyata: uang sungguhan, kesalahan sungguhan, pelajaran permanen. Setelah fondasinya solid, baru ekspansi ke utility play jika itu arahmu.</div>
+        </div>
+      </div>
+
+      <div class="panel-nav">
+        <button class="panel-nav-btn" onclick="switchPanel('p2')">← Revoke & Minting</button>
+        <span class="panel-counter">4 / 9</span>
+        <button class="panel-nav-btn primary" onclick="switchPanel('p4')">Dex Paid →</button>
+      </div>
+    </div>
+
+    <!-- ===================== P4: DEX PAID ===================== -->
+    <div class="panel" id="p4">
+      <div class="panel-eyebrow"><div class="panel-num">5</div><div class="panel-eyebrow-label">Ilmu Kelima</div></div>
+      <div class="panel-rule"></div>
+      <h2 class="panel-title">Dex Paid, Ads & Boost —<br>Sinyal atau Sekadar Bayar?</h2>
+      <p class="panel-sub">Tiga sinyal yang kelihatannya sama tapi punya makna yang sangat berbeda. Belajar bedakannya bisa menghindarkan kamu dari FOMO yang tidak berdasar.</p>
+      <div class="breadcrumb"><span>Vol. 1</span><span class="breadcrumb-sep">›</span><span>Dex Paid, Ads & Boost</span><span class="breadcrumb-sep">›</span><span>5 dari 9</span></div>
+
+      <div class="section-label">Alat marketing, bukan bukti kualitas</div>
+      <p class="prose"><strong>Dex Paid</strong>, <strong>Ads</strong>, dan <strong>Boost/Trending</strong> adalah fitur yang sering disalahartikan sebagai bukti token layak dibeli. Kenyataannya? Ketiganya adalah <strong>alat marketing yang bisa dibeli kapan saja oleh siapapun</strong> — termasuk oleh developer yang sedang bersiap dump ke kamu.</p>
+      <p class="prose">Perbedaannya bukan pada <em>apakah</em> mereka dipasang, tapi pada <em>kapan</em> mereka dipasang. Satu detail waktu ini bisa membedakan "sinyal positif" dengan "jebakan FOMO."</p>
+
+      <div class="info-box">
+        <div class="info-box-title">🍜 Warung mie ayam yang sewa antrian palsu</div>
+        <div class="info-box-body">Warung sepi menyewa belasan orang untuk berdiri mengantri di depan. Kamu lewat, melihat antrian panjang, pikir "pasti enak nih," lalu masuk dan pesan. Kamu beli dengan harga yang sudah dinaikkan. Keesokan harinya warung tutup, pemiliknya kabur. <em>Kamu adalah exit liquidity-nya.</em></div>
+      </div>
+
+      <hr class="divider">
+      <div class="section-label">Tiga fitur dan cara membacanya</div>
+      <div class="feature-cards">
+        <div class="feature-card">
+          <div class="feature-card-icon">💳</div>
+          <div class="feature-card-title">Dex Paid</div>
+          <div class="feature-card-desc">Biaya listing resmi ke DexScreener. Positif jika dipasang di <strong>awal launch</strong> — menunjukkan dev serius. Meragukan jika muncul setelah pump besar.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card-icon">📣</div>
+          <div class="feature-card-title">Ads (Iklan)</div>
+          <div class="feature-card-desc">Banner berbayar di DexScreener. Positif jika token masih kecil. <strong>Berbahaya</strong> jika muncul setelah harga di puncak — artinya mereka butuh pembeli baru untuk cuci gudang.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card-icon">🚀</div>
+          <div class="feature-card-title">Boost / Trending</div>
+          <div class="feature-card-desc">Mendorong token ke halaman Trending. Bisa dibeli kapan saja oleh siapapun termasuk scammer. <strong>Jangan beli hanya karena trending.</strong></div>
+        </div>
+      </div>
+
+      <hr class="divider">
+      <div class="callout warn">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-body">
+          <div class="callout-title">Pola berbahaya yang harus kamu hafal</div>
+          <div class="callout-text"><strong>Boost + Ads muncul mendadak setelah token sudah pump besar</strong> = sinyal distribusi. Developer dan whale yang sudah untung besar menggunakan visibility untuk menarik pembeli baru masuk di harga puncak. Begitu pembeli baru cukup banyak, mereka dump semuanya. Harga jatuh. Pembeli baru nyangkut.</div>
+        </div>
+      </div>
+      <div class="callout ok">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">
+          <div class="callout-title">Kapan Dex Paid jadi sinyal positif?</div>
+          <div class="callout-text">Ketika <strong>muncul di awal launch</strong> — sebelum token punya volume besar — bersamaan dengan narasi genuine dan komunitas organik yang aktif. Ini menunjukkan developer berkomitmen jangka panjang. Kombinasi ini jarang ada, tapi kalau muncul, itu yang kamu cari.</div>
+        </div>
+      </div>
+
+      <div class="panel-nav">
+        <button class="panel-nav-btn" onclick="switchPanel('p3')">← Meme vs Utility</button>
+        <span class="panel-counter">5 / 9</span>
+        <button class="panel-nav-btn primary" onclick="switchPanel('p5')">3 Konfirmasi →</button>
+      </div>
+    </div>
+
+    <!-- ===================== P5: 3 KONFIRMASI ===================== -->
+    <div class="panel" id="p5">
+      <div class="panel-eyebrow"><div class="panel-num">6</div><div class="panel-eyebrow-label">Ilmu Kelima (lanjutan)</div></div>
+      <div class="panel-rule"></div>
+      <h2 class="panel-title">3 Konfirmasi Candle —<br>Cara Nyari Dip yang Valid</h2>
+      <p class="panel-sub">Dari mana kamu tahu bahwa "dip ini kesempatan beli" bukan "dip ini sinyal jual"? Jawabannya ada di 3 konfirmasi candle.</p>
+      <div class="breadcrumb"><span>Vol. 1</span><span class="breadcrumb-sep">›</span><span>3 Konfirmasi Candle</span><span class="breadcrumb-sep">›</span><span>6 dari 9</span></div>
+
+      <div class="section-label">Penyakit FOMO yang umum terjadi</div>
+      <p class="prose">Salah satu kesalahan paling umum trader baru adalah refleks FOMO saat melihat chart turun tajam: <em>"Harganya lagi murah banget, kalau gue masuk sekarang pasti profit!"</em></p>
+      <p class="prose">Padahal pertanyaan yang benar adalah: <strong>dari mana kamu tahu ini dip yang akan balik naik, bukan awal dari kejatuhan menuju nol?</strong> Satu candle merah panjang belum berarti apa-apa. Kamu butuh konfirmasi.</p>
+      <div class="info-box">
+        <div class="info-box-title">🌊 Analoginya seperti cek ombak sebelum berenang</div>
+        <div class="info-box-body">Kamu tidak langsung terjun saat melihat ombak surut. Celupkan kaki dulu, rasakan tarikan arusnya. Baru kalau aman, masuk. Metode 3 Konfirmasi Candle bekerja persis sama — masuk bertahap, bukan sekaligus.</div>
+      </div>
+
+      <hr class="divider">
+      <div class="section-label">Tiga langkah metode Ponyin</div>
+      <div class="step-flow">
+        <div class="step">
+          <div class="step-num" style="background:#ef4444">1️⃣</div>
+          <div>
+            <div class="step-title">Dip Pertama — Jangan Masuk</div>
+            <div class="step-desc">Chart turun dari puncak. Banyak trader baru masuk karena "harganya sudah diskon." <strong>Tahan diri kamu.</strong> Data menunjukkan: dip pertama hampir selalu diikuti satu dip lagi di bawahnya sebelum ada pembalikan nyata.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:#f59e0b">2️⃣</div>
+          <div>
+            <div class="step-title">Bounce — Masuk 10% Saja</div>
+            <div class="step-desc">Harga memantul naik dari titik terendah pertama. Masuk di sini — tapi hanya <strong>10% dari total posisi yang direncanakan</strong>. Ini bukan main buy, ini "mark position." Kalau ternyata salah dan harga terus turun, kerugianmu hanya 10% dari rencana, bukan seluruhnya.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:#10b981">3️⃣</div>
+          <div>
+            <div class="step-title">Dip Kedua (Konfirmasi) — Entry Penuh</div>
+            <div class="step-desc">Harga turun lagi ke area yang mirip dip pertama atau sedikit di bawahnya, tapi tidak jauh. Ini tanda <em>area support</em> sedang terbentuk. <strong>Di sinilah kamu masuk dengan sisa posisi.</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider">
+      <div class="section-label">Manajemen risiko yang sesungguhnya</div>
+      <div class="callout danger">
+        <span class="callout-icon">🚨</span>
+        <div class="callout-body">
+          <div class="callout-title">Kalau dip kedua bablas jauh ke bawah?</div>
+          <div class="callout-text">Itu sinyal untuk mundur sepenuhnya. Tapi karena kamu hanya menaruh 10% di langkah kedua, kerugianmu sangat kecil — misalnya 0.1 SOL dari rencana 1 SOL.<br><br><strong>Inilah inti manajemen risiko</strong> — bukan menghindari kerugian sama sekali, tapi memastikan kerugiannya tidak mematikan. Selama masih bisa bertahan, kamu masih bisa belajar dan mencoba lagi.</div>
+        </div>
+      </div>
+      <div class="callout ok">
+        <span class="callout-icon">📊</span>
+        <div class="callout-body">
+          <div class="callout-title">Dampak nyata dari metode ini</div>
+          <div class="callout-text">Dengan tidak masuk sekaligus di candle pertama yang "terlihat murah," kamu mengubah skenario terburuk dari "boncos total" menjadi "boncos yang masih bisa dikendalikan." Secara statistik, metode ini menggeser probabilitas rugi besar dari 90% menjadi sekitar 50/50 — bukan karena kamu lebih pintar membaca chart, tapi karena kamu jauh lebih sabar dalam eksekusi.</div>
+        </div>
+      </div>
+
+      <div class="panel-nav">
+        <button class="panel-nav-btn" onclick="switchPanel('p4')">← Dex Paid</button>
+        <span class="panel-counter">6 / 9</span>
+        <button class="panel-nav-btn primary" onclick="switchPanel('p6')">Cabal Play →</button>
+      </div>
+    </div>
+
+    <!-- ===================== P6: CABAL PLAY ===================== -->
+    <div class="panel" id="p6">
+      <div class="panel-eyebrow"><div class="panel-num">7</div><div class="panel-eyebrow-label">Ilmu Keenam</div></div>
+      <div class="panel-rule"></div>
+      <h2 class="panel-title">Cabal Play —<br>Ketika Pasar Bergerak Terkoordinasi</h2>
+      <p class="panel-sub">Cabal adalah kelompok trader yang bergerak bersama secara terencana untuk mendorong harga sebuah token. Memahami cara kerja mereka bisa menyelamatkan kamu dari FOMO dan membuka peluang entry yang lebih baik.</p>
+      <div class="breadcrumb"><span>Vol. 1</span><span class="breadcrumb-sep">›</span><span>Cabal Play</span><span class="breadcrumb-sep">›</span><span>7 dari 9</span></div>
+
+      <div class="section-label">Apa itu Cabal?</div>
+      <p class="prose">Cabal adalah <strong>kelompok tertutup yang merencanakan peluncuran token secara terkoordinasi</strong>. Mereka bukan sekadar "grup trader yang kebetulan beli token yang sama." Mereka sudah merencanakan jauh sebelumnya — token apa yang di-deploy, kapan timing push-nya, dan di level harga berapa mereka mulai exit.</p>
+      <p class="prose">Dari luar, token cabal terlihat naik secara organik karena narasinya bagus. Komunitasnya ramai, momentumnya kuat, chart-nya meyakinkan. Padahal ada skenario yang sudah disusun jauh sebelum token itu bahkan diluncurkan.</p>
+
+      <hr class="divider">
+      <div class="section-label">Tiga tipe cabal yang ada</div>
+      <div class="feature-cards">
+        <div class="feature-card" style="background:var(--accent-soft);border-color:#bfdbfe">
+          <div class="feature-card-icon">👥</div>
+          <div class="feature-card-title" style="color:#1e40af">Cabal Kelompok</div>
+          <div class="feature-card-desc">Bergerak kolektif dan terkoordinasi. Kapan beli, kapan push, kapan distribusi ke retail — semua sudah ditetapkan. Contoh: Marcel, Lexapro, Cooker, Wynn.</div>
+        </div>
+        <div class="feature-card" style="background:var(--purple-soft);border-color:#ddd6fe">
+          <div class="feature-card-icon">👤</div>
+          <div class="feature-card-title" style="color:#4c1d95">Solo Cabal</div>
+          <div class="feature-card-desc">Trader individual dengan modal sangat besar dan "will power" yang kuat. Kontrol penuh di satu tangan. Contoh paling terkenal: Duvel.</div>
+        </div>
+        <div class="feature-card" style="background:var(--yellow-soft);border-color:#fde68a">
+          <div class="feature-card-icon">⚔️</div>
+          <div class="feature-card-title" style="color:#92400e">Konflik Cabal</div>
+          <div class="feature-card-desc">Dua cabal atau lebih bertabrakan di satu token — satu coba pump, yang lain coba sabotase. Volume bisa meledak luar biasa. Bisa jadi peluang bagi trader yang tahu posisinya.</div>
+        </div>
+      </div>
+
+      <hr class="divider">
+      <div class="section-label">Case study nyata: $yaranaika & Duvel</div>
+      <div class="callout purple">
+        <span class="callout-icon">📖</span>
+        <div class="callout-body">
+          <div class="callout-text">Token <strong>$yaranaika</strong> awalnya naik organik. Lalu ada yang melakukan "vamp" — aksi menyabotase dengan menjual besar-besaran untuk merusak momentum. Posisi Duvel di token itu kena.<br><br>Reaksi Duvel? Tidak mundur. Dia mengeluarkan amunisi dalam jumlah besar dan pump chart sendirian — sampai menembus level yang tidak ada seorang pun yang mengira mungkin. <em>Sendirian.</em> Itulah kekuatan solo cabal yang punya modal besar.</div>
+        </div>
+      </div>
+
+      <hr class="divider">
+      <div class="section-label">Cara memanfaatkan dinamika ini</div>
+      <ul class="checklist">
+        <li><span class="ck">1</span><span><strong>Pelajari "range" push mereka</strong> — Setiap cabal punya histori pergerakan yang bisa dipelajari. Dari sana kamu bisa memetakan level entry dan exit yang jauh lebih presisi daripada trading tanpa konteks.</span></li>
+        <li><span class="ck">2</span><span><strong>Monitor suhu konflik antar cabal</strong> — Semakin memanas persaingan di satu token, semakin tinggi potensi volume meledak. Konflik = bensin untuk chart.</span></li>
+        <li><span class="ck">3</span><span><strong>Track wallet, bukan FOMO ke token</strong> — Kalau ada token runner dan kamu sudah ketinggalan, jangan beli di pucuk. Buka tab transaksi, cari wallet yang masuk pertama. Mereka layak di-track untuk peluang berikutnya.</span></li>
+      </ul>
+      <div class="callout warn">
+        <span class="callout-icon">🔧</span>
+        <div class="callout-body">
+          <div class="callout-title">Tools untuk tracking cabal wallet</div>
+          <div class="callout-text"><strong>Helius Orb</strong>, <strong>Solscan</strong>, <strong>DexScreener</strong>, <strong>Bun_Scan</strong>, dan <strong>Terminal</strong>. Catatan penting: hampir semua indikator teknikal konvensional seperti RSI, MACD, Bollinger Bands — <em>tidak berguna di cabal play.</em> Yang berlaku di sini adalah informasi, kecepatan, dan pemahaman tentang siapa yang sedang bermain.</div>
+        </div>
+      </div>
+
+      <div class="panel-nav">
+        <button class="panel-nav-btn" onclick="switchPanel('p5')">← 3 Konfirmasi</button>
+        <span class="panel-counter">7 / 9</span>
+        <button class="panel-nav-btn primary" onclick="switchPanel('p7')">Membaca Holder →</button>
+      </div>
+    </div>
+
+    <!-- ===================== P7: MEMBACA HOLDER ===================== -->
+    <div class="panel" id="p7">
+      <div class="panel-eyebrow"><div class="panel-num">8</div><div class="panel-eyebrow-label">Ilmu Ketujuh</div></div>
+      <div class="panel-rule"></div>
+      <h2 class="panel-title">Membaca Holder —<br>Yang Terlihat dan Yang Sebenarnya</h2>
+      <p class="panel-sub">Pertanyaan "berapa persen holder yang bagus?" tidak punya jawaban yang berlaku universal. Setiap fase, setiap jenis play, punya konteks dan interpretasi yang sama sekali berbeda.</p>
+      <div class="breadcrumb"><span>Vol. 1</span><span class="breadcrumb-sep">›</span><span>Membaca Holder</span><span class="breadcrumb-sep">›</span><span>8 dari 9</span></div>
+
+      <div class="section-label">Kesalahan yang sangat umum terjadi</div>
+      <p class="prose">Data holder — siapa yang memegang berapa persen token — adalah data yang paling sering dilihat namun paling jarang dipahami dengan benar. Banyak yang berpikir: "kalau tidak ada satu holder pun yang pegang lebih dari 5%, berarti distribusinya sehat dan aman."</p>
+      <p class="prose">Ini pandangan yang <strong>sangat naif di era multi-wallet</strong>. Dan di sinilah banyak trader kehilangan uang mereka.</p>
+
+      <div class="info-box">
+        <div class="info-box-title">👤 Satu Orang, Banyak Identitas</div>
+        <div class="info-box-body">Trader yang terlihat "hanya punya 1 wallet dengan 2% supply" bisa saja mengendalikan 10 wallet berbeda — total kepemilikannya: <strong>20%</strong>. Dan kamu tidak bisa melihatnya di block explorer manapun.<br><br>
+        <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap">
+          <span style="background:var(--accent-soft);border:1px solid #bfdbfe;border-radius:6px;padding:3px 8px;font-size:12px;font-weight:700;color:var(--accent)">💼 2%</span>
+          <span style="background:var(--accent-soft);border:1px solid #bfdbfe;border-radius:6px;padding:3px 8px;font-size:12px;font-weight:700;color:var(--accent)">💼 2%</span>
+          <span style="background:var(--accent-soft);border:1px solid #bfdbfe;border-radius:6px;padding:3px 8px;font-size:12px;font-weight:700;color:var(--accent)">💼 2%</span>
+          <span style="background:var(--accent-soft);border:1px solid #bfdbfe;border-radius:6px;padding:3px 8px;font-size:12px;font-weight:700;color:var(--accent)">💼 2%</span>
+          <span style="background:var(--accent-soft);border:1px solid #bfdbfe;border-radius:6px;padding:3px 8px;font-size:12px;font-weight:700;color:var(--accent)">💼 2%</span>
+          <span style="background:var(--accent);border-radius:6px;padding:3px 10px;font-size:12px;font-weight:700;color:#fff">= 10% total (orang yang sama!)</span>
+        </div>
+        </div>
+      </div>
+
+      <hr class="divider">
+      <div class="section-label">Realita di pasar new pair</div>
+      <p class="prose">Di pasar new pair, kondisinya berjalan sangat cepat dan chaotic. Para pemain besar seperti Cupsey, Cented, Log, Decu membeli dalam jumlah besar secara agresif. Tidak ada yang peduli siapa punya berapa — selama narasi menarik dan momentum ada, semua orang langsung masuk. Inilah <em>PvP sesungguhnya.</em></p>
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <div class="callout-title">Mengapa aturan "holder di bawah 3%" sudah tidak relevan?</div>
+          <div class="callout-text">Untuk token dengan narasi besar — apalagi ada efek viral atau endorsement orang terkenal — holder dengan 7–10% per wallet sudah sangat wajar dan bukan red flag. Kamu tidak tahu wallet itu milik siapa. Multi-wallet adalah strategi standar di kalangan trader serius. <em>Zero-sum mentality berlaku untuk semua orang.</em></div>
+        </div>
+      </div>
+      <div class="callout warn">
+        <span class="callout-icon">🧠</span>
+        <div class="callout-body">
+          <div class="callout-title">Memahami zero-sum tanpa jadi paranoid</div>
+          <div class="callout-text">Semua orang di pasar ini bermain untuk kepentingan diri sendiri. Dari trader retail terkecil sampai whale terbesar. Bahkan yang paling "transparan" pun pada akhirnya akan protect posisi mereka duluan. Pahami ini agar kamu tidak naif saat membaca data holder.</div>
+        </div>
+      </div>
+
+      <div class="panel-nav">
+        <button class="panel-nav-btn" onclick="switchPanel('p6')">← Cabal Play</button>
+        <span class="panel-counter">8 / 9</span>
+        <button class="panel-nav-btn primary" onclick="switchPanel('p8')">Market Cap →</button>
+      </div>
+    </div>
+
+    <!-- ===================== P8: MARKET CAP ===================== -->
+    <div class="panel" id="p8">
+      <div class="panel-eyebrow"><div class="panel-num">9</div><div class="panel-eyebrow-label">Ilmu Kedelapan</div></div>
+      <div class="panel-rule"></div>
+      <h2 class="panel-title">Market Cap Tier —<br>Beda Level, Beda Lawan, Beda Strategi</h2>
+      <p class="panel-sub">Setiap tier market cap punya ekosistem pemain, level risiko, dan cara baca yang berbeda total. Strategi yang menghasilkan profit di micro cap bisa jadi bencana total kalau diterapkan di CEX play.</p>
+      <div class="breadcrumb"><span>Vol. 1</span><span class="breadcrumb-sep">›</span><span>Market Cap Tier</span><span class="breadcrumb-sep">›</span><span>9 dari 9</span></div>
+
+      <div class="section-label">Memahami tingkatan pasar</div>
+      <p class="prose"><strong>Market Cap</strong> = Harga token × Total supply beredar. Angka ini mengukur "seberapa besar" sebuah token dinilai oleh pasar saat ini. Setiap rentang market cap punya ekosistemnya sendiri — pemain berbeda, risiko berbeda, strategi yang sepenuhnya berbeda.</p>
+      <p class="prose">Kesalahan paling umum dari pemula adalah memakai strategi yang sama di semua level market cap. Kamu perlu tahu medan yang sedang kamu masuki sebelum eksekusi.</p>
+
+      <hr class="divider">
+      <div class="section-label">Panduan per level market cap</div>
+      <div class="step-flow">
+        <div class="step"><div class="step-num" style="background:#6b7280;font-size:20px">🌀</div><div><div class="step-title">New Pair — Pure Chaos</div><div class="step-desc">Dunia yang baru lahir dan belum ada aturannya. Narasi dan momentum adalah segalanya. Bot sniper, cabal, dan whale beradu dalam hitungan menit. Window sangat sempit — tapi kalau timing tepat, reward bisa luar biasa.</div></div></div>
+        <div class="step"><div class="step-num" style="background:#3b82f6;font-size:20px">🌱</div><div><div class="step-title">Micro Cap ($100k – $5M)</div><div class="step-desc">Di tier ini analisis teknikal mulai punya arti. Kamu bisa baca candle, cek holder distribution, lihat volume vs fee. Komunitas mulai terbentuk. Sangat cocok untuk scalp dan cari reversal yang terstruktur.</div></div></div>
+        <div class="step"><div class="step-num" style="background:#8b5cf6;font-size:20px">🐬</div><div><div class="step-title">Mid Cap ($5M – $50M)</div><div class="step-desc">Pemain serius mulai masuk. Pendorong harga sudah masuk ke media lebih mainstream. Bisa bermain dengan size lebih besar, tapi entry harus lebih presisi. Belum waktunya "beli lalu tidur."</div></div></div>
+        <div class="step"><div class="step-num" style="background:#f59e0b;font-size:20px">🐳</div><div><div class="step-title">High Cap ($50M – $200M)</div><div class="step-desc">Pergerakan chart dikontrol whale besar dan narasi media. Begitu outlet mainstream ramai membicarakannya — itu justru sinyal untuk mulai perlahan keluar. Puncak hype biasanya adalah puncak harga juga.</div></div></div>
+        <div class="step"><div class="step-num" style="background:#ef4444;font-size:20px">🏦</div><div><div class="step-title">CEX Listing</div><div class="step-desc">Retail masuk masif, volume meledak — tapi lawanmu bukan lagi sesama retail. Kamu berhadapan langsung dengan <strong>market maker profesional</strong> seperti Wintermute dan hedge fund tier atas. Di sini yang relevan adalah strategi institusional.</div></div></div>
+      </div>
+
+      <div class="panel-nav">
+        <button class="panel-nav-btn" onclick="switchPanel('p7')">← Membaca Holder</button>
+        <span class="panel-counter">9 / 9</span>
+        <button class="panel-nav-btn primary" onclick="switchPanel('p9')">Penutup →</button>
+      </div>
+    </div>
+
+    <!-- ===================== P9: PENUTUP ===================== -->
+    <div class="panel" id="p9">
+      <div class="panel-eyebrow"><div class="panel-num">★</div><div class="panel-eyebrow-label">Penutup</div></div>
+      <div class="panel-rule"></div>
+      <h2 class="panel-title">Dari Ponyin,<br>dengan Tulus.</h2>
+      <p class="panel-sub">Semua yang ada di sini hanyalah fondasi dasar. Masih banyak ilmu lain yang menunggu untuk dijelajahi — tapi fondasi yang kuat dan kokoh selalu lebih baik dari teknik yang canggih tapi berdiri di atas tanah yang rapuh.</p>
+      <div class="breadcrumb"><span>Vol. 1</span><span class="breadcrumb-sep">›</span><span>Penutup</span></div>
+
+      <div class="closing-card">
+        <div class="closing-quote">"Kejahatan lahir bukan karena mereka terstruktur. Kejahatan lahir karena banyak orang baik yang diam dan mendiamkan."<br><br>Sampai saat ini, prinsip ini yang terus gue pakai setiap hari. Makanya gue senang banget share ilmu yang memang seharusnya gratis dan bisa diakses semua orang.</div>
+        <p style="font-size:15px;color:rgba(255,255,255,.82);margin-bottom:22px;line-height:1.8">Terlebih kalau ilmu ini bermanfaat dan bisa digunakan sama orang lain untuk mengambil keputusan yang lebih baik. Guru melahirkan matahari, dan matahari melahirkan para guru.</p>
+        <div class="closing-sig">Salam hangat — dari dalam dan luar jaringan,<br>@ELPonyin ✨</div>
+      </div>
+
+      <div class="callout ok">
+        <span class="callout-icon">🙏</span>
+        <div class="callout-body">
+          <div class="callout-title">Kalau materi ini membantu kamu...</div>
+          <div class="callout-text">Jangan lupa bantu orang lain juga. Share ke teman yang masih belajar, atau setidaknya follow @elponyin di X untuk update materi selanjutnya. Ilmu yang disimpan sendirian tidak akan pernah berkembang — dan tidak akan pernah membantu siapapun selain dirimu sendiri.</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:24px">
+        <button class="btn btn-blue" style="background:#7c3aed;border-color:#7c3aed" onclick="switchPanel('pa0')">📖 Lanjut ke Vol 2 — Advance</button>
+        <button class="btn btn-outline" onclick="switchPanel('p0')">↺ Mulai dari awal</button>
+      </div>
+
+      <div class="panel-nav">
+        <button class="panel-nav-btn" onclick="switchPanel('p8')">← Market Cap Tier</button>
+        <span class="panel-counter">★</span>
+        <button class="panel-nav-btn primary" onclick="switchPanel('pa0')">Mulai Vol 2 →</button>
+      </div>
+    </div>
+
+    <!-- ===================== PA0: SNIPE EARLY ===================== -->
+    <div class="panel" id="pa0">
+      <div class="vol2-badge">Vol. 2 — Advance</div>
+      <div class="panel-eyebrow"><div class="panel-num adv">A1</div><div class="panel-eyebrow-label">Advance — Snipe</div></div>
+      <div class="panel-rule adv"></div>
+      <h2 class="panel-title">Cara Snipe<br>Early Project</h2>
+      <p class="panel-sub">Trading itu seperti perang. Persenjataan lengkap membantu, teknologi canggih membantu — tapi satu hal yang tidak tergantikan adalah informasi. Siapa yang tahu lebih dulu, dia yang menang.</p>
+      <div class="breadcrumb"><span>Vol. 2 Advance</span><span class="breadcrumb-sep">›</span><span>Snipe Early Project</span><span class="breadcrumb-sep">›</span><span>A1 dari A10</span></div>
+
+      <p class="prose"><strong>Apa itu Snipe?</strong> Snipe artinya membeli koin di detik-detik pertama peluncurannya — sebelum orang lain sempat sadar bahwa koin itu ada. Ibaratnya, kamu sudah duduk di baris paling depan bioskop sebelum pintunya dibuka untuk umum.</p>
+      <p class="prose">Untuk melakukan ini, kamu butuh tiga hal: <strong>informasi</strong> (tahu koin apa yang akan diluncurkan dan kapan), <strong>alat</strong> (bot sniper atau kode khusus), dan <strong>kecepatan</strong> (selisih milidetik bisa berarti selisih jutaan dolar). Tanpa ketiganya, kamu cuma "menembak dalam gelap."</p>
+
+      <div class="callout info">
+        <span class="callout-icon">🗺️</span>
+        <div class="callout-body">
+          <div class="callout-title">Langkah pertama: Mapping (Pemetaan)</div>
+          <div class="callout-text">Sebelum bisa snipe, kamu harus sudah tahu: <strong>akun mana yang akan membuat koin</strong>, koin itu akan diluncurkan oleh siapa, dan di pool (tempat jual-beli) mana launch-nya. Tanpa tiga informasi ini, peluang berhasilmu sangat kecil.</div>
+        </div>
+      </div>
+
+      <p class="prose"><strong>Contoh nyata:</strong> Naseem berhasil membeli koin $trump hanya 0.05 detik sebelum likuiditas (uang) ditambahkan ke pool. Dia menghabiskan sekitar $100.000 USD hanya untuk biaya gas (biaya transaksi) demi kecepatan. Modalnya $1 juta — hasilnya? Profit $302 juta. Ini bukan keberuntungan, tapi kombinasi informasi yang akurat, alat yang tepat, dan eksekusi yang presisi.</p>
+
+      <hr class="divider">
+      <div class="section-label">Tools untuk snipe (dari yang paling canggih)</div>
+      <ul class="checklist">
+        <li><span class="ck" style="background:#7c3aed">1</span><span><strong>Mintech</strong> — Bot sniper paling kuat. Cocok untuk peluncuran besar di mana kamu sudah punya semua info: nama koin, dompet Developer, dan waktu penambahan likuiditas. Harga mahal, tapi hasilnya setimpal.</span></li>
+        <li><span class="ck" style="background:#6d28d9">2</span><span><strong>Flux</strong> — Alternatif premium dengan fitur otomasi canggih untuk snipe dan trading sehari-hari.</span></li>
+        <li><span class="ck" style="background:#5b21b6">3</span><span><strong>Maestro</strong> — Gratis dan cukup handal untuk snipe standar. Cocok untuk pemula yang mau mulai belajar.</span></li>
+        <li><span class="ck" style="background:#2455d4">4</span><span><strong>Trojan</strong> — Gratis, bisa snipe sekaligus trading harian. Tampilan antarmukanya nyaman dipakai.</span></li>
+        <li><span class="ck" style="background:#059669">5</span><span><strong>Custom Helius Code</strong> — Untuk yang serius. Kamu menulis kode sendiri untuk bertransaksi langsung ke blockchain tanpa perantara (platform fee = $0). Biaya pengembangan: $5 sampai $100k tergantung kerumitan.</span></li>
+      </ul>
+
+      <div class="callout warn">
+        <span class="callout-icon">⚡</span>
+        <div class="callout-body">
+          <div class="callout-title">Kapan pakai snipe manual vs bot?</div>
+          <div class="callout-text">Snipe manual (tanpa bot) bisa dilakukan kalau kamu selalu standby depan layar. Tapi untuk peluncuran besar yang sudah diketahui waktunya — gunakan Mintech atau kode khusus. Di level itu, selisih milidetik = selisih jutaan dolar.</div>
+        </div>
+      </div>
+
+      <div class="panel-nav">
+        <span></span>
+        <span class="panel-counter">A1 / A10</span>
+        <button class="panel-nav-btn primary" onclick="switchPanel('pa1')">First 1K dari $100 →</button>
+      </div>
+    </div>
+
+    <!-- ===================== PA1: FIRST 1K ===================== -->
+    <div class="panel" id="pa1">
+      <div class="vol2-badge">Vol. 2 — Advance</div>
+      <div class="panel-eyebrow"><div class="panel-num adv">A2</div><div class="panel-eyebrow-label">Advance — Strategy</div></div>
+      <div class="panel-rule adv"></div>
+      <h2 class="panel-title">Cara Dapat<br>$1000 dari $100</h2>
+      <p class="panel-sub">Tidak ada jalan pintas yang benar-benar "pintas" — tapi ada dua jalur nyata yang sudah terbukti. Pilih sesuai kemampuan dan posisi kamu saat ini.</p>
+      <div class="breadcrumb"><span>Vol. 2 Advance</span><span class="breadcrumb-sep">›</span><span>First 1K</span><span class="breadcrumb-sep">›</span><span>A2 dari A10</span></div>
+
+      <div class="two-col">
+        <div>
+          <div class="section-label">Jalur Koneksi ("Mulut Manis")</div>
+          <p class="prose">Kamu membangun hubungan baik dengan cabal atau Developer yang sering meluncurkan koin. Minta supaya diajak masuk bareng di proyek mereka. Biasanya mereka akan memintamu membeli sejumlah SOL — ini untuk dompet "resmi" kamu yang mereka ketahui.</p>
+          <p class="prose">Tapi kamu juga punya dompet lain yang <em>mereka tidak tahu</em>. Ini bukan kecurangan — di dunia crypto, semua orang bermain untuk dirinya sendiri. Yang penting: <strong>saat menjual, jaga supaya grafik harga tetap sehat</strong> (jangan jual mendadak di saat harga sedang jatuh).</p>
+          <div class="callout ok">
+            <span class="callout-icon">✅</span>
+            <div class="callout-body">
+              <div class="callout-title">Cara menjual yang baik (menjaga chart)</div>
+              <div class="callout-text">Jangan jual di saat harga sedang merah (turun). Jangan jual di saat harga sedang naik cepat. Gunakan metode <strong>trailing stop</strong> — ikuti harga naik dan otomatis jual saat harga mulai turun dari puncak. Dengan cara ini, grafik harga tetap terlihat sehat dan reputasimu terjaga.</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="section-label">Jalur Deployer ("Si Pembuat")</div>
+          <p class="prose">Kamu membuat koin sendiri. Semua keputusan ada di tanganmu: waktu peluncuran, pembagian suplai, strategi promosi. Jalur ini potensinya lebih besar, tapi butuh kemampuan dan pengetahuan yang lebih dalam.</p>
+          <p class="prose">Tutorial lengkap cara membuat dan meluncurkan koin akan dibagikan di materi berikutnya. Yang terpenting dipahami saat ini: <em>reputasi adalah aset jangka panjang.</em> Sekali kamu dikenal bisa dipercaya di komunitas, pintu-pintu kesempatan berikutnya terbuka jauh lebih mudah.</p>
+          <div class="callout purple">
+            <span class="callout-icon">💡</span>
+            <div class="callout-body">
+              <div class="callout-title">Prinsip penting</div>
+              <div class="callout-text">Jangan berhenti berusaha hanya karena sudah dapat sedikit untung. Bangun reputasi, perluas jaringan, dan terus tingkatkan kemampuan — kombinasi ketiganya yang membuat seorang trader bertahan di jangka panjang.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-nav">
+        <button class="panel-nav-btn" onclick="switchPanel('pa0')">← Snipe Early Project</button>
+        <span class="panel-counter">A2 / A10</span>
+        <button class="panel-nav-btn primary" onclick="switchPanel('pa2')">Wallet Ping →</button>
+      </div>
+    </div>
+
+    <!-- ===================== PA2: WALLET PING ===================== -->
+    <div class="panel" id="pa2">
+      <div class="vol2-badge">Vol. 2 — Advance</div>
+      <div class="panel-eyebrow"><div class="panel-num adv">A3</div><div class="panel-eyebrow-label">Advance — Tracking</div></div>
+      <div class="panel-rule adv"></div>
+      <h2 class="panel-title">Cara Bikin<br>Mata Kamu Jadi Banyak</h2>
+      <p class="panel-sub">10 mata lebih baik dari 2 mata. Tapi bukan berarti kamu harus pantau 10 layar sekaligus — kamu cukup set wallet ping yang tepat, dan biarkan sistem yang bekerja.</p>
+      <div class="breadcrumb"><span>Vol. 2 Advance</span><span class="breadcrumb-sep">›</span><span>Wallet Ping</span><span class="breadcrumb-sep">›</span><span>A3 dari A10</span></div>
+
+      <p class="prose"><strong>Apa itu Wallet Ping?</strong> Wallet ping adalah sistem notifikasi yang mengirim peringatan (alert) setiap kali dompet yang kamu pantau melakukan transaksi. Setiap kali dompet tersebut membeli, menjual, atau menambah likuiditas — kamu langsung dapat pemberitahuan.</p>
+      <p class="prose"><strong>Penting:</strong> Ini <em>bukan</em> sinyal untuk langsung membeli. Ini hanya memberi tahu bahwa "ada sesuatu yang perlu kamu perhatikan di sini." Kamu tetap harus menganalisis sendiri sebelum bertindak.</p>
+
+      <div class="callout warn">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-body">
+          <div class="callout-title">Kesalahan paling umum</div>
+          <div class="callout-text">Banyak pemula langsung FOMO (takut ketinggalan) dan membeli setiap kali dapat ping. Jangan lakukan ini! Wallet ping hanya memberi tahu bahwa ada aktivitas menarik. Keputusan beli tetap harus berdasarkan analisis kamu sendiri.</div>
+        </div>
+      </div>
+
+      <hr class="divider">
+      <div class="section-label">Cara menemukan dompet bagus yang layak dipantau</div>
+      <ul class="checklist">
+        <li><span class="ck" style="background:#7c3aed">1</span><span><strong>Jangan FOMO saat ketinggalan</strong> — Kalau kamu ketinggalan koin yang sedang naik, jangan langsung beli di harga tertinggi. Justru ini kesempatan terbaik untuk mencari dompet-dompet bagus yang masuk lebih awal.</span></li>
+        <li><span class="ck" style="background:#6d28d9">2</span><span><strong>Buka DexScreener atau Terminal</strong> — Scroll ke bawah di koin yang sedang naik. Cari dompet-dompet yang masuk sangat awal, sebelum harga naik drastis.</span></li>
+        <li><span class="ck" style="background:#5b21b6">3</span><span><strong>Cek fitur "Top Trader"</strong> — Di setiap koin ada daftar 20 trader terbaik. Biasanya sekitar 5 di antaranya adalah pemain yang konsisten bagus dan layak dipantau jangka panjang.</span></li>
+        <li><span class="ck" style="background:#2455d4">4</span><span><strong>Lacak dari satu dompet ke dompet lain</strong> — Di blockchain, satu dompet bagus sering berinteraksi dengan dompet bagus lainnya. Ikuti rantainya — dari 1 dompet bisa menemukan 10 dompet berkualitas.</span></li>
+      </ul>
+
+      <div class="callout ok">
+        <span class="callout-icon">📈</span>
+        <div class="callout-body">
+          <div class="callout-title">Manfaat nyata dari wallet ping</div>
+          <div class="callout-text">Dengan sistem wallet ping yang tepat, risiko kamu terkena penipuan (rug pull) turun dari 90% menjadi sekitar 60% — dan bisa turun lagi ke 50% seiring kamu semakin mengenal pola dompet-dompet yang kamu pantau. Ini bukan fitur tambahan, ini adalah peningkatan fundamental cara bermainmu.</div>
+        </div>
+      </div>
+
+      <div class="panel-nav">
+        <button class="panel-nav-btn" onclick="switchPanel('pa1')">← First 1K dari $100</button>
+        <span class="panel-counter">A3 / A10</span>
+        <button class="panel-nav-btn primary" onclick="switchPanel('pa3')">Modal yang Tepat →</button>
+      </div>
+    </div>
+
+    <!-- ===================== PA3: MONEY MANAGEMENT ===================== -->
+    <div class="panel" id="pa3">
+      <div class="vol2-badge">Vol. 2 — Advance</div>
+      <div class="panel-eyebrow"><div class="panel-num adv">A4</div><div class="panel-eyebrow-label">Advance — Money Mgmt</div></div>
+      <div class="panel-rule adv"></div>
+      <h2 class="panel-title">Berapa Modal<br>yang Tepat untuk Trade?</h2>
+      <p class="panel-sub">Tidak ada angka yang berlaku untuk semua orang. Tapi ada kerangka yang terbukti bekerja — dan yang lebih penting, ada mental yang harus benar dulu sebelum angka apapun bisa bekerja.</p>
+      <div class="breadcrumb"><span>Vol. 2 Advance</span><span class="breadcrumb-sep">›</span><span>Money Management</span><span class="breadcrumb-sep">›</span><span>A4 dari A10</span></div>
+
+      <p class="prose"><strong>Berapa modal yang tepat untuk trading?</strong> Jawabannya bergantung pada posisimu: apakah kamu trading dengan uang yang memang "bebas" (uang dingin), atau ada tekanan hutang di belakangnya? Trading sambil dikejar hutang adalah kombinasi yang paling berbahaya — tekanan psikologis akan membuat semua keputusanmu menjadi emosional dan tidak rasional.</p>
+
+      <div class="two-col">
+        <div>
+          <div class="callout info">
+            <span class="callout-icon">💰</span>
+            <div class="callout-body">
+              <div class="callout-title">Strategi 35% Take Profit</div>
+              <div class="callout-text">Setiap kali kamu untung dari sebuah trade, ambil <strong>35% dari keuntungan itu</strong> dan pindahkan ke dompet baru yang terpisah. Dompet ini adalah "tabungan" kamu. Sisanya bisa kamu gunakan untuk trade lanjutan.</div>
+            </div>
+          </div>
+          <div class="callout ok">
+            <span class="callout-icon">📦</span>
+            <div class="callout-body">
+              <div class="callout-title">Kenapa pindah ke dompet baru?</div>
+              <div class="callout-text">Karena dengan memisahkan secara fisik, kamu tidak tergoda untuk langsung memasukkan semua keuntungan ke trade berikutnya. <em>Efek bunga berbunga (compounding) hanya bekerja kalau keuntungannya benar-benar diamankan.</em></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="callout ok">
+            <span class="callout-icon">🎯</span>
+            <div class="callout-body">
+              <div class="callout-title">Saat ada peluang bagus</div>
+              <div class="callout-text">Dari uang yang sudah terkumpul, masuk dengan 70–80% dari total simpanan. Target untung: cukup <strong>50% per trade</strong>, bukan 10x. Dengan efek compounding, 50% dari simpanan yang terus tumbuh jauh lebih berarti dari 10x dari modal kecil.</div>
+            </div>
+          </div>
+          <div class="callout purple">
+            <span class="callout-icon">🤖</span>
+            <div class="callout-body">
+              <div class="callout-title">Fitur Auto Take Profit</div>
+              <div class="callout-text">Ini senjata terbaik melawan keserakahan. Set targetmu, biarkan sistem yang menjual. Setelah target tercapai, <strong>berhenti</strong>. Jangan beli lagi koin yang sama. Disiplin ini yang membedakan trader yang bertahan lama.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider">
+      <div class="section-label">Tanda-tanda keserakahan yang harus dihindari</div>
+      <div class="callout danger">
+        <span class="callout-icon">🚨</span>
+        <div class="callout-body">
+          <div class="callout-title">Kenali tanda-tandanya</div>
+          <div class="callout-text">Merasa "sayang kalau jual sekarang, harusnya tunggu lebih tinggi" — ini serakah. Membeli lagi koin yang sudah kamu jual — ini serakah. Masuk dengan uang lebih besar dari biasanya karena "yakin banget" — ini serakah. Semua keputusan trading yang didasari emosi (bukan rencana) adalah tanda keserakahan sedang menguasaimu.</div>
+        </div>
+      </div>
+
+      <div class="panel-nav">
+        <button class="panel-nav-btn" onclick="switchPanel('pa2')">← Wallet Ping</button>
+        <span class="panel-counter">A4 / A10</span>
+        <button class="panel-nav-btn primary" onclick="switchPanel('pa4')">Transaksi Murah & Cepat →</button>
+      </div>
+    </div>
+
+    <!-- ===================== PA4: TRANSAKSI MURAH ===================== -->
+    <div class="panel" id="pa4">
+      <div class="vol2-badge">Vol. 2 — Advance</div>
+      <div class="panel-eyebrow"><div class="panel-num adv">A5</div><div class="panel-eyebrow-label">Advance — Tech</div></div>
+      <div class="panel-rule adv"></div>
+      <h2 class="panel-title">Transaksi Murah,<br>Speed Tetap Kencang</h2>
+      <p class="panel-sub">Platform trading seperti Trojan, Flux, dan Axiom memberikan kenyamanan UI yang luar biasa — tapi ada harga yang dibayar setiap kali kamu trade di sana: platform fee. Ada cara untuk menghilangkannya.</p>
+      <div class="breadcrumb"><span>Vol. 2 Advance</span><span class="breadcrumb-sep">›</span><span>Transaksi Murah</span><span class="breadcrumb-sep">›</span><span>A5 dari A10</span></div>
+
+      <p class="prose"><strong>Bagaimana cara mengurangi biaya trading?</strong> Platform seperti Trojan, Flux, dan Axiom memang nyaman dipakai, tapi setiap kali kamu bertransaksi di sana, ada "biaya layanan" (platform fee) yang dipotong. Kalau dihitung sebulan, jumlahnya bisa sangat besar. Ada dua cara untuk mengurangi atau menghilangkan biaya ini.</p>
+
+      <div class="two-col">
+        <div>
+          <div class="def-card">
+            <div class="def-icon">⚙️</div>
+            <div class="def-term">RUST untuk Trading</div>
+            <div class="def-desc"><strong>Apa itu?</strong> RUST adalah bahasa pemrograman yang dipakai oleh jaringan Solana. Kalau kamu bisa menulis kode transaksi sendiri dalam RUST, kamu bisa bertransaksi langsung ke blockchain tanpa perantara — artinya <strong>biaya platform = Rp 0</strong>.<br><br><strong>Butuh apa?</strong> Kemampuan coding dasar. Investasi waktu belajar cukup besar, tapi sangat sepadan untuk trader yang serius dan bertransaksi setiap hari.</div>
+          </div>
+        </div>
+        <div>
+          <div class="def-card">
+            <div class="def-icon">🌐</div>
+            <div class="def-term">RPC Langsung</div>
+            <div class="def-desc"><strong>Apa itu?</strong> RPC (Remote Procedure Call) adalah "gerbang komunikasi" antara kamu dan blockchain Solana. Platform berbayar menggunakan gerbang mereka sendiri dan menambahkan biaya di atasnya. Dengan berlangganan langsung ke penyedia RPC seperti <strong>Helius</strong>, <strong>QuikNode</strong>, atau <strong>Triton</strong> — kamu dapat kecepatan yang sama, tanpa biaya tambahan dari platform.<br><br><strong>Biaya langganan?</strong> Jauh lebih murah dibanding total fee platform yang kamu bayar setiap bulan.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <div class="callout-title">Contoh perhitungan nyata</div>
+          <div class="callout-text">Misalkan kamu trading 10 kali sehari, dengan rata-rata 0.5 SOL per transaksi. Biaya platform rata-rata 1% = 0.05 SOL per transaksi = 0.5 SOL per hari. Dalam sebulan: <strong>15 SOL</strong>. Setahun: <strong>180 SOL</strong>. Dengan RPC langsung + RUST, penghematan itu masuk ke kantongmu sendiri.</div>
+        </div>
+      </div>
+      <div class="callout warn">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-body">
+          <div class="callout-title">Kapan mulai belajar ini?</div>
+          <div class="callout-text">Belajar RUST dan menyiapkan RPC sendiri butuh waktu yang cukup besar. Saran: mulai <strong>setelah simpananmu stabil di atas 5 SOL</strong> dan kamu sudah punya pola trading yang konsisten. Jangan terburu-buru belajar sisi teknis sebelum dasar trading-mu sendiri sudah solid.</div>
+        </div>
+      </div>
+
+      <div class="panel-nav">
+        <button class="panel-nav-btn" onclick="switchPanel('pa3')">← Money Management</button>
+        <span class="panel-counter">A5 / A10</span>
+        <button class="panel-nav-btn primary" onclick="switchPanel('pa5')">Rent Refund →</button>
+      </div>
+    </div>
+
+    <!-- ===================== PA5: RENT REFUND ===================== -->
+    <div class="panel" id="pa5">
+      <div class="vol2-badge">Vol. 2 — Advance</div>
+      <div class="panel-eyebrow"><div class="panel-num adv">A6</div><div class="panel-eyebrow-label">Advance — Tools</div></div>
+      <div class="panel-rule adv"></div>
+      <h2 class="panel-title">Rent Refund —<br>Tarik Kembali Uang Sewa</h2>
+      <p class="panel-sub">Setiap kali kamu beli koin baru di Solana, ada saldo kecil yang tertahan sebagai uang sewa akun. Bayangkan kalau kamu sudah transaksi ratusan kali — berapa banyak uang kamu yang mengendap?</p>
+      <div class="breadcrumb"><span>Vol. 2 Advance</span><span class="breadcrumb-sep">›</span><span>Rent Refund</span><span class="breadcrumb-sep">›</span><span>A6 dari A10</span></div>
+
+      <p class="prose"><strong>Pernah merasa saldo SOL berkurang diam-diam tiap kali trading?</strong> Banyak degen yang belum tahu rahasia ini, apalagi yang baru pindah dari Ethereum. Di Ethereum, dompet kamu bertransaksi langsung dengan <em>smart contract</em>. Tapi di ekosistem Solana, arsitekturnya berbeda.</p>
+
+      <div class="info-box">
+        <div class="info-box-title">💰 Analogi Uang Bank & Emas</div>
+        <div class="info-box-body">Bayangkan kamu punya uang 10 Juta di bank, lalu ingin beli emas 5 Juta. Di Solana, kamu tidak membeli emas itu langsung dari rekening utamamu. Jaringan justru <strong>membuatkan rekening baru khusus</strong> hanya untuk menaruh emas tersebut.<br><br>Nah, rekening baru ini butuh biaya sewa (<em>Rent</em>) yang dipotong otomatis. Saat emasnya habis terjual, <strong>rekening kosongnya tetap ada dan biaya sewanya tidak otomatis kembali ke kamu!</strong></div>
+      </div>
+
+      <div class="callout ok">
+        <span class="callout-icon">💰</span>
+        <div class="callout-body">
+          <div class="callout-title">Tutup Rekening = Uang</div>
+          <div class="callout-text">Kabar baiknya: setiap kali kamu menutup 1 rekening kosong, kamu akan mendapat refund sekitar <strong>0.002 SOL</strong>. Coba hitung kalau kamu sudah scalping 50 koin baru bulan ini. Misal kamu tutup 40 akun: 40 x 0.002 SOL = 0.08 SOL — lumayan!</div>
+        </div>
+      </div>
+
+      <hr class="divider">
+      <div class="section-label">Platform yang direkomendasikan</div>
+      <ul class="checklist">
+        <li><span class="ck" style="background:#7c3aed">1</span><span><strong>Refundyoursol.com</strong> — Platform paling aman karena punya fitur talangan gas. Kalau saldo SOL kamu lagi nol untuk biaya gas menutup rekening, smart contract situs ini bisa "nalangin" bayarin gas kamu duluan secara otomatis.</span></li>
+        <li><span class="ck" style="background:#6d28d9">2</span><span><strong>Perhitungan Transparan</strong> — Misal kamu tutup 40 akun. 40 x 0.002 SOL = 0.08 SOL. Dari situ tinggal dikurangi otomatis untuk biaya gas talangan. Cukup klik dan beres.</span></li>
+        <li><span class="ck" style="background:#5b21b6">3</span><span><strong>Aman & Teruji</strong> — Sudah dipakai 6 bulan tanpa masalah. Terkadang juga ada bonus airdrop dari mereka.</span></li>
+      </ul>
+
+      <div class="callout warn">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-body">
+          <div class="callout-title">Catatan Penting: Hanya Koin Baru</div>
+          <div class="callout-text">Aturan ini eksklusif untuk <em>new pair</em>. Kalau kamu keluar-masuk (membeli lalu menjual) koin yang benar-benar sama hingga 10 kali, rekening khusus untuk koin itu hanya dibuat sekali. Jadi, refund yang didapat juga hanya satu kali.</div>
+        </div>
+      </div>
+
+      <div class="panel-nav">
+        <button class="panel-nav-btn" onclick="switchPanel('pa4')">← Transaksi Murah</button>
+        <span class="panel-counter">A6 / A10</span>
+        <button class="panel-nav-btn primary" onclick="switchPanel('pa6')">Instant Scalping →</button>
+      </div>
+    </div>
+
+    <!-- ===================== PA6: INSTANT SCALPING ===================== -->
+    <div class="panel" id="pa6">
+      <div class="vol2-badge">Vol. 2 — Advance</div>
+      <div class="panel-eyebrow"><div class="panel-num adv">A7</div><div class="panel-eyebrow-label">Advance — Scalping</div></div>
+      <div class="panel-rule adv"></div>
+      <h2 class="panel-title">Instant Scalping —<br>Cara Filter New Pair</h2>
+      <p class="panel-sub">Ini rahasia dapur yang sebenernya. 4 langkah sederhana yang bisa menghindarkan kamu dari rug — dan membuka peluang scalp 60–70% di fresh launch.</p>
+      <div class="breadcrumb"><span>Vol. 2 Advance</span><span class="breadcrumb-sep">›</span><span>Instant Scalping</span><span class="breadcrumb-sep">›</span><span>A7 dari A10</span></div>
+
+      <p class="prose"><strong>Ini rahasia dapur yang sebenernya.</strong> Setiap hari gw seneng banget ngeliat followers ngetag trading journey mereka — dan hampir <em>70% dari mereka berhasil nghindar dari rug</em> setelah nerapin 4 langkah ini. Bukan keberuntungan, tapi metode.</p>
+      <p class="prose">Cara kerja instant scalping di <strong>new pair fresh launch</strong> itu simpel: kamu bukan nentuin kapan masuk, tapi nentuin koin mana yang <em>layak</em> untuk dimasukin. 4 filter ini jadi penjagamu.</p>
+
+      <hr class="divider">
+      <div class="section-label">4 Filter Wajib Sebelum Scalp</div>
+      <div class="step-flow">
+        <div class="step"><div class="step-num" style="background:#3b82f6">1</div><div><div class="step-title">Tengok Global Gas Fee</div><div class="step-desc">Langkah pertama sebelum ngapa-ngapain: cek kondisi jaringan Solana. Kalau gas fee lagi tinggi banget, berarti traffic lagi padat — banyak bot dan trader lain juga ngejar koin yang sama. Di kondisi gini, execution kamu bisa lebih lambat dari orang lain. <strong>Pahami kondisi war sebelum masuk medan perang.</strong></div></div></div>
+        <div class="step"><div class="step-num" style="background:#10b981">2</div><div><div class="step-title">Cek Holder — Umur Funded Wallet</div><div class="step-desc">Langsung ke data holder di DexScreener atau tools tracking kamu. Yang dicari: <strong>funded wallet under 1 day</strong>. Kalau banyak holder yang dompetnya baru di-fund kurang dari sehari sebelum launch — itu sinyal bahwa dompet-dompet itu sengaja disiapkan untuk manipulasi. Ini red flag yang serius.</div></div></div>
+        <div class="step"><div class="step-num" style="background:#f59e0b">3</div><div><div class="step-title">Cek Balance Top Holder</div><div class="step-desc">Setelah cek usia wallet, lihat balance-nya. Kalau top holder di koin itu punya saldo <strong>under 0.2 SOL</strong> — ini artinya mereka bukan player besar yang siap nahan atau dorong harga. Mereka kemungkinan besar cuma fomo atau bagian dari skema yang sengaja bikin distro keliatan sehat.</div></div></div>
+        <div class="step"><div class="step-num" style="background:#a855f7">4</div><div><div class="step-title">Cek Entry Market Cap</div><div class="step-desc">Ini filter terakhir dan sering jadi penentu. Kalau koin itu <strong>udah ngepump abis di bawah 3K market cap</strong> pas deploy — berarti kamu kemungkinan besar masuk di atas, bukan awal. Pump awal biasanya dari insider. Setelah mereka keluar, kamu yang tanggung. <strong>Kalau entri kamu di bawah 3K dan udah ngepump — skip.</strong></div></div></div>
+      </div>
+
+      <div class="callout ok">
+        <span class="callout-icon">🎯</span>
+        <div class="callout-body">
+          <div class="callout-title">Rumus Simpelnya</div>
+          <div class="callout-text">Dari 4 filter di atas — <strong>kalau 2 atau lebih kena, langsung skip</strong> tanpa pikir panjang. Tapi kalau cuma 1 yang bermasalah? Selamat, kamu udah punya edge yang cukup buat scalp 60–70% di new pair fresh launch. Konsisten di filter ini = konsisten di profit.</div>
+        </div>
+      </div>
+      <div class="callout warn">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-body">
+          <div class="callout-title">Jangan Ganti Aturan di Tengah Jalan</div>
+          <div class="callout-text">Godaan terbesar waktu scalping new pair adalah FOMO — ngeliat koin satu naik, langsung skip filter dan masuk. <strong>Ini yang bikin rug.</strong> 4 step ini bukan saran, ini protokol. Kalau kamu lompatin salah satunya, jangan salahkan market — salahkan diri sendiri.</div>
+        </div>
+      </div>
+
+      <div class="panel-nav">
+        <button class="panel-nav-btn" onclick="switchPanel('pa5')">← Rent Refund</button>
+        <span class="panel-counter">A7 / A10</span>
+        <button class="panel-nav-btn primary" onclick="switchPanel('padp')">Day Phase Trade →</button>
+      </div>
+    </div>
+
+    <!-- ===================== PADP: DAY PHASE TRADE ===================== -->
+    <div class="panel" id="padp">
+      <div class="vol2-badge">Vol. 2 — Advance</div>
+      <div class="panel-eyebrow"><div class="panel-num adv">✦</div><div class="panel-eyebrow-label">Advance — Bonus Strat</div></div>
+      <div class="panel-rule adv"></div>
+      <h2 class="panel-title">Day Phase Trade —<br>Short Swing 3–7 Hari</h2>
+      <p class="panel-sub">Udah lama gak update materi trenching. Oke gw spill satu strat yang lumayan ampuh buat nambahin porto — bukan scalp cepet, bukan hold panjang, tapi di tengah-tengah. Cocok buat yang udah punya capital sehat.</p>
+      <div class="breadcrumb"><span>Vol. 2 Advance</span><span class="breadcrumb-sep">›</span><span>Day Phase Trade</span><span class="breadcrumb-sep">›</span><span>✦ Bonus Strat</span></div>
+
+      <p class="prose"><strong>Idenya simpel.</strong> Setiap koin punya fase hidupnya masing-masing: <em>hype awal → parabolic → cooldown → sideway</em>. Nah, Day Phase Trade main di fase <strong>cooldown ke sideway</strong>. Di titik ini, sellers udah capek, FOMO udah ilang, tapi meme-nya masih hidup. Ini zona yang paling sering dilewatin trader karena kelihatannya "boring" — justru di sini cuannya.</p>
+      <p class="prose">Cari token yang lagi trending seminggu atau dua minggu lalu — bukan yang lagi panas hari ini. Target yang kamu mau: <strong>harganya udah dip 50–70% dari ATH awal, chart lagi sideway, tapi komunitas masih aktif</strong>.</p>
+
+      <hr class="divider">
+      <div class="section-label">Kriteria token yang layak masuk watchlist</div>
+      <ul class="checklist">
+        <li><span class="ck" style="background:#7c3aed">1</span><span><strong>FDV di atas $1M</strong> — Skip micro cap. Di tier ini exit liquidity-mu aman dan chart lebih "jujur" dibanding koin-koin recehan.</span></li>
+        <li><span class="ck" style="background:#7c3aed">2</span><span><strong>Dip 50–70% dari ATH</strong> — Sweet spot-nya di sini. Dip kurang dari 40% biasanya masih distribution; dip lebih dari 80% biasanya udah mati beneran.</span></li>
+        <li><span class="ck" style="background:#7c3aed">3</span><span><strong>Chart udah sideway minimal 3–5 hari</strong> — Artinya sellers udah kehabisan tenaga. Bukan kamu yang nangkap pisau jatuh.</span></li>
+        <li><span class="ck" style="background:#7c3aed">4</span><span><strong>Meme / narrative masih relevan</strong> — Cek Twitter/X, grup TG, Discord. Kalau masih ada yang ngomongin (walaupun pelan) — itu sinyal bagus. Kalau udah zero engagement = lewat.</span></li>
+        <li><span class="ck" style="background:#7c3aed">5</span><span><strong>Holder count stabil atau naik tipis</strong> — Kalau holder turun cepet selama sideway, itu distribution terselubung. Skip.</span></li>
+      </ul>
+
+      <hr class="divider">
+      <div class="section-label">Empat fase hidup token (yang kita main di fase 3)</div>
+      <div class="step-flow">
+        <div class="step"><div class="step-num" style="background:#3b82f6;font-size:16px">1</div><div><div class="step-title">Hype Awal</div><div class="step-desc">Koin baru launch, pump 5–20x. Volume liar, chart vertikal. Ini zona scalper &amp; sniper.</div></div></div>
+        <div class="step"><div class="step-num" style="background:#ef4444;font-size:16px">2</div><div><div class="step-title">Parabolic / Peak</div><div class="step-desc">ATH dibuat. Influencer mulai masuk, retail FOMO. Fase paling berbahaya buat entry.</div></div></div>
+        <div class="step"><div class="step-num" style="background:#10b981;font-size:16px">3</div><div><div class="step-title">Cooldown → Sideway ✦ (ZONA KITA)</div><div class="step-desc">Turun 50–70%, volume kalem, sideway 3–7 hari. <strong>Ini zona kita.</strong> Day Phase Trade main di sini.</div></div></div>
+        <div class="step"><div class="step-num" style="background:#f59e0b;font-size:16px">4</div><div><div class="step-title">Revival / Death</div><div class="step-desc">Kalau meme masih hidup, biasanya pump lagi 40–70%. Kalau udah mati total, slow bleed ke zero.</div></div></div>
+      </div>
+
+      <hr class="divider">
+      <div class="two-col">
+        <div>
+          <div class="callout info">
+            <span class="callout-icon">📅</span>
+            <div class="callout-body">
+              <div class="callout-title">Eksekusi: Timing & Cara Masuk</div>
+              <div class="callout-text"><strong>Beli di weekend.</strong> Volume weekend lebih tipis = dip lebih dalem + lebih mudah dapet harga bagus tanpa kompetisi sama bot &amp; day trader. Gunakan waktu Sabtu–Minggu buat DCA (nyicil beli) — kamu punya ~2 hari penuh buat nyusun posisi, gak perlu all-in sekaligus.</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="callout ok">
+            <span class="callout-icon">🎯</span>
+            <div class="callout-body">
+              <div class="callout-title">Target exit &amp; kapan jual</div>
+              <div class="callout-text">Target: <strong>cuan 40–70%</strong> dari average entry. Jangan serakah nunggu 5x — strat ini bukan untuk itu. Jual di <strong>weekday</strong> saat volume balik naik (Selasa–Kamis biasanya paling rame).</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout purple">
+        <span class="callout-icon">👛</span>
+        <div class="callout-body">
+          <div class="callout-title">Size Position &amp; Multi Wallet</div>
+          <div class="callout-text">Karena kamu DCA dalam 2 hari, pecah posisi ke <strong>beberapa wallet</strong> (minimal 2–3). Tiap wallet masuk di harga beda-beda. Ini ngebantu 2 hal sekaligus: (1) average entry kamu lebih rata, dan (2) saat exit, kamu bisa keluar bertahap tanpa bikin chart keliatan dihajar satu orang.</div>
+        </div>
+      </div>
+      <div class="callout warn">
+        <span class="callout-icon">✦</span>
+        <div class="callout-body">
+          <div class="callout-title">Aturan penting yang sering dilupain</div>
+          <div class="callout-text">Strat ini cuma jalan buat yang <strong>udah punya capital sehat</strong>. Kalau modalmu masih kecil banget, kamu gak akan punya kesabaran buat nahan 3–7 hari — pasti tergoda exit early atau doubling down emosional. Fokus dulu ke Instant Scalping (A7) sampe porto naik, baru masuk ke ritme swing kayak gini.</div>
+        </div>
+      </div>
+      <div class="callout danger">
+        <span class="callout-icon">🚨</span>
+        <div class="callout-body">
+          <div class="callout-title">Jebakan yang harus dihindari</div>
+          <div class="callout-text"><strong>Jangan DCA ke koin yang holder-nya turun drastis.</strong> Itu bukan sideway, itu distribution rapi. <strong>Jangan pegang lewat 7 hari</strong> walaupun belum profit — kalau nggak bergerak dalam window itu, biasanya koin itu udah masuk fase 4 (slow death). Cut, cari yang lain.</div>
+        </div>
+      </div>
+
+      <div class="panel-nav">
+        <button class="panel-nav-btn" onclick="switchPanel('pa6')">← Instant Scalping</button>
+        <span class="panel-counter">✦ Bonus</span>
+        <button class="panel-nav-btn primary" onclick="switchPanel('pa7')">Multi Wallet →</button>
+      </div>
+    </div>
+
+    <!-- ===================== PA7: MULTI WALLET ===================== -->
+    <div class="panel" id="pa7">
+      <div class="vol2-badge">Vol. 2 — Advance</div>
+      <div class="panel-eyebrow"><div class="panel-num adv">A8</div><div class="panel-eyebrow-label">Advance — Multi Wallet</div></div>
+      <div class="panel-rule adv"></div>
+      <h2 class="panel-title">Multi Wallet —<br>Keajaiban yang Bukan Keajaiban</h2>
+      <p class="panel-sub">Multi wallet bukan tentang menyembunyikan diri. Ini tentang bermain lebih cerdas di ekosistem yang memang seperti itu adanya.</p>
+      <div class="breadcrumb"><span>Vol. 2 Advance</span><span class="breadcrumb-sep">›</span><span>Multi Wallet</span><span class="breadcrumb-sep">›</span><span>A8 dari A10</span></div>
+
+      <p class="prose"><strong>Apa itu Multi Wallet?</strong> Multi wallet artinya menggunakan beberapa dompet digital berbeda (bukan hanya satu) untuk beroperasi di pasar koin. Setiap dompet adalah "identitas terpisah" di blockchain. Dengan beberapa dompet, kamu bisa:</p>
+      <ul class="checklist">
+        <li><span class="ck" style="background:#7c3aed">→</span><span><strong>Menyebar kepemilikan</strong> — Supaya tidak terlihat seperti satu orang yang menguasai banyak koin</span></li>
+        <li><span class="ck" style="background:#7c3aed">→</span><span><strong>Memancing bot otomatis</strong> — Bot melihat distribusi pemegang yang sehat, lalu ikut membeli → harga otomatis naik</span></li>
+        <li><span class="ck" style="background:#7c3aed">→</span><span><strong>Proteksi keamanan</strong> — Kalau satu dompet diretas, uangmu di dompet lain tetap aman</span></li>
+        <li><span class="ck" style="background:#7c3aed">→</span><span><strong>DCA lebih efisien</strong> — Bisa membeli di harga berbeda-beda dengan dompet yang berbeda</span></li>
+      </ul>
+
+      <hr class="divider">
+      <div class="section-label">Cara kerjanya</div>
+      <p class="prose">Misalkan kamu ingin membeli 3 SOL di sebuah koin kecil. Alih-alih beli 3 SOL dari 1 dompet (yang langsung kelihatan di sistem sebagai pemegang besar), kamu memecahnya ke 3 dompet berbeda, masing-masing 1 SOL. Di sistem pelacak, kepemilikan terlihat merata — seperti 3 orang berbeda.</p>
+      <p class="prose">Bot otomatis melihat distribusi pemegang yang sehat dan ikut membeli. Volume perdagangan naik, harga ikut naik. Ini yang disebut "instant profit setelah kamu beli" — padahal kamu yang mengendalikan semua dompet itu.</p>
+
+      <div class="two-col">
+        <div>
+          <div class="callout ok">
+            <span class="callout-icon">✅</span>
+            <div class="callout-body">
+              <div class="callout-title">Kelebihannya</div>
+              <div class="callout-text">Potensi keuntungan maksimal dari setiap posisi. Koin yang seharusnya "mati" bisa punya peluang hidup lagi karena bot terpancing masuk. Ditambah perlindungan dari risiko peretasan — kalau satu dompet kena, yang lain tetap aman.</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="callout warn">
+            <span class="callout-icon">⚠️</span>
+            <div class="callout-body">
+              <div class="callout-title">Kekurangannya</div>
+              <div class="callout-text">Kamu bisa dicap sebagai "tukang jual murah" — ini risiko reputasi yang nyata. Selain itu, kamu harus pintar menghitung: keuntungan 10% dari dompetmu sendiri bisa jadi nol kalau kamu menjual ke dompetmu sendiri tanpa sadar.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout info">
+        <span class="callout-icon">📐</span>
+        <div class="callout-body">
+          <div class="callout-title">Strategi DCA Multi Wallet yang Benar</div>
+          <div class="callout-text">Kalau Dompet 1 beli di harga Rp 10.000 dan harganya turun — <strong>jangan beli lagi pakai Dompet 1.</strong> Gunakan Dompet 2 untuk membeli di harga lebih rendah. Kenapa? Karena dengan cara ini, kerugian di Dompet 1 bisa ditutup lebih efisien. Rata-rata harga beli keseluruhanmu turun tanpa terlihat seperti satu orang yang terus menumpuk pembelian.</div>
+        </div>
+      </div>
+      <div class="callout warn">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-body">
+          <div class="callout-title">Cocok untuk simpanan 5 SOL ke atas</div>
+          <div class="callout-text">Strategi ini butuh modal yang cukup untuk dipecah ke 2–3 dompet aktif. Di bawah 5 SOL, pembagiannya terlalu kecil dan kurang efektif. Mulai pelajari dari sekarang — saat simpananmu sudah cukup, tinggal langsung dijalankan.</div>
+        </div>
+      </div>
+
+      <div class="panel-nav">
+        <button class="panel-nav-btn" onclick="switchPanel('padp')">← Day Phase Trade</button>
+        <span class="panel-counter">A8 / A10</span>
+        <button class="panel-nav-btn primary" onclick="switchPanel('pa8')">Unwritten Rules →</button>
+      </div>
+    </div>
+
+    <!-- ===================== PA8: UNWRITTEN RULES ===================== -->
+    <div class="panel" id="pa8">
+      <div class="vol2-badge">Vol. 2 — Advance</div>
+      <div class="panel-eyebrow"><div class="panel-num adv">A9</div><div class="panel-eyebrow-label">Advance — Etika</div></div>
+      <div class="panel-rule adv"></div>
+      <h2 class="panel-title">Unwritten Rules —<br>Jangan Makan Orang Sendiri</h2>
+      <p class="panel-sub">Ada aturan tak tertulis yang menentukan siapa yang bertahan sampai akhir cycle. Ini bukan soal banyak-banyakan porto — tapi siapa yang bisa survive.</p>
+      <div class="breadcrumb"><span>Vol. 2 Advance</span><span class="breadcrumb-sep">›</span><span>Unwritten Rules</span><span class="breadcrumb-sep">›</span><span>A9 dari A10</span></div>
+
+      <p class="prose">Ada aturan tidak tertulis yang tidak pernah ditulis di whitepaper manapun — tapi menentukan siapa yang bertahan sampai akhir cycle dan siapa yang hancur di tengah jalan. Ini bukan soal banyak-banyakan porto. Tapi siapa yang bisa <em>survive</em>.</p>
+
+      <div class="callout warn">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          <div class="callout-title">1. Kalau Dikasih Early, Hormati Chart</div>
+          <div class="callout-text">Semisalnya ada orang baik di komunitas yang <strong>memberikan akses early</strong> (kasih tau kamu sebelum launch) dan memberikan <em>floor price</em> (harga batas bawah). Aturannya sederhana: <strong>JANGAN PERNAH JUAL SATU KALI (one clip).</strong><br><br>Ketika kamu ingin menjual, buat wallet baru dan kirim supply yang ingin kamu jual ke sana. Dengan cara ini, <strong>chart tetap terlihat naik</strong> dan orang-orang yang kasih kamu akses akan terus respek. Hasilnya? Mereka akan terus kasih kamu akses early di proyek-proyek berikutnya.</div>
+        </div>
+      </div>
+
+      <div class="callout danger">
+        <span class="callout-icon">🚫</span>
+        <div class="callout-body">
+          <div class="callout-title">2. Jangan Sekali-kali One Clip</div>
+          <div class="callout-text">Di micro cap market, <strong>lawan kamu bukan orang asing</strong>. Kamu berdagang dengan orang-orang yang mungkin saja teman seasal negara — yang modalnya terbatas, yang UMR-nya cuma 3.5 SOL.<br><br>Kalau kamu one clip, kamu bisa menyebabkan panic sell dan merugikan orang-orang kecil. Lebih parahnya: <strong>mereka tidak akan pernah kasih kamu akses early lagi.</strong> Reputasi kamu di komunitas akan hancur.</div>
+        </div>
+      </div>
+
+      <div class="callout info">
+        <span class="callout-icon">📊</span>
+        <div class="callout-body">
+          <div class="callout-title">Case Study Nyata</div>
+          <div class="callout-text">Banyak akun Crypto Twitter besar membantu push sebuah proyek. Kamu diberi entry di 5K market cap. Kamu beli 1.5 SOL. Di 50K market cap, kamu sudah untung 15 SOL.<br><br><strong>Sangat tidak bijak</strong> kalau kamu menjual 15 SOL itu dalam satu kali jual (one clip). Chart akan turun drastis, dan kamu akan terlihat seperti orang yang tidak menghargai kepercayaan.</div>
+        </div>
+      </div>
+
+      <div class="callout ok">
+        <span class="callout-icon">📈</span>
+        <div class="callout-body">
+          <div class="callout-title">3. Pikir Jangka Panjang</div>
+          <div class="callout-text">Kripto bukan tentang banyak-banyakan porto. <strong>Ini tentang siapa yang bisa bertahan sampai akhir cycle.</strong> Trader yang memikirkan jangka panjang akan:<br>• Terus diundang ke proyek-proyek baru<br>• Dapat akses early lebih banyak<br>• Mendapat kepercayaan dari komunitas<br>• Bisa bangun reputasi yang bernilai seumur hidup</div>
+        </div>
+      </div>
+
+      <div class="callout purple">
+        <span class="callout-icon">🌍</span>
+        <div class="callout-body">
+          <div class="callout-title">4. Mid Cap &amp; High Cap Beda Cerita</div>
+          <div class="callout-text">Kalau sudah masuk mid cap atau high cap, situasinya beda. <strong>Orang asing (buleh) biasanya sudah lebih banyak</strong> dan uang mereka lebih besar. Di level ini, kamu bisa lebih agresif karena risiko affecting "orang sendiri" sudah lebih kecil.</div>
+        </div>
+      </div>
+
+      <div style="margin-top:32px;padding:24px;background:linear-gradient(135deg,#1e3a8a,#312e81);border-radius:16px;text-align:center">
+        <h3 style="color:#fff;font-size:20px;margin-bottom:12px;font-family:'Lora',serif">Intinya</h3>
+        <p style="color:rgba(255,255,255,0.9);font-size:15px;line-height:1.7">Jadilah trader yang <strong>dihormati</strong>, bukan yang <strong>ditakuti</strong>. Bangun reputasi dengan menjaga etika. Rejeki akan datang sendiri kalau kamu survive dan tetap di jalan yang benar.</p>
+      </div>
+
+      <div class="panel-nav">
+        <button class="panel-nav-btn" onclick="switchPanel('pa7')">← Multi Wallet</button>
+        <span class="panel-counter">A9 / A10</span>
+        <button class="panel-nav-btn primary" onclick="switchPanel('pa9')">Skema Penipuan →</button>
+      </div>
+    </div>
+
+    <!-- ===================== PA9: SKEMA PENIPUAN ===================== -->
+    <div class="panel" id="pa9">
+      <div class="vol2-badge">Vol. 2 — Advance</div>
+      <div class="panel-eyebrow"><div class="panel-num adv">A10</div><div class="panel-eyebrow-label">Advance — Security</div></div>
+      <div class="panel-rule adv"></div>
+      <h2 class="panel-title">Skema Penipuan —<br>Pig Butchering & Drainer</h2>
+      <p class="panel-sub">Di dunia kripto, uangmu bisa hilang bukan cuma karena market turun, tapi karena jebakan manipulasi psikologis dan smart contract.</p>
+      <div class="breadcrumb"><span>Vol. 2 Advance</span><span class="breadcrumb-sep">›</span><span>Skema Penipuan</span><span class="breadcrumb-sep">›</span><span>A10 dari A10</span></div>
+
+      <p class="prose"><strong>Ini thread tentang macam-macam scam paling umum di kripto.</strong> Fenomena penipuan ini sasarannya justru bukan pemula, tapi orang-orang yang sudah advance dan portofolionya sudah pada besar. Jangan sampai kamu lengah.</p>
+
+      <div class="callout danger">
+        <span class="callout-icon">🐷</span>
+        <div class="callout-body">
+          <div class="callout-title">1. Pig Butchering (Penjagalan Babi)</div>
+          <div class="callout-text">Bayangin kamu ini kayak babi yang dikasih makan, dibikin gendut. Pas udah banyak dagingnya... kamu langsung dipotong buat dipanen.<br><br><strong>Skemanya:</strong> Si pelaku akan berusaha approach kamu secara halus. Ngeluh, cerita, curhat, sampai dia dapat atensi dari kamu. Modusnya nanti dia akan minta ajarin gimana cara nge-trade dsb. Diajak teleponan, share screen, dll. Bahkan mereka tidak takut untuk mengirim kamu uang duluan.<br><br>Nanti pas kamu lengah dan percaya, baru mereka beraksi menguras hartamu. Di luar kripto juga ada: job online dibayar ShopeePay cuma suruh like comment YouTube, nanti ujungnya kamu disuruh kirim uang untuk "klaim" uang. Mirip persis.</div>
+        </div>
+      </div>
+
+      <div class="callout warn">
+        <span class="callout-icon">🪂</span>
+        <div class="callout-body">
+          <div class="callout-title">2. Airdrop Drainer</div>
+          <div class="callout-text">Bayangin kamu lagi asik trade, tiba-tiba ada yang mengirim kamu koin dengan nama yang sama dengan koin bagus. Kamu gak pernah beli itu, pure dikirim ke wallet kamu.<br><br>Niatnya kamu mau jual koin gratisan itu, tapi tiba-tiba habis interact dengan smart contract-nya... <strong>Wallet kamu ter-drain. Isinya dikuras habis.</strong><br><br>Si pembuat scam menyisipkan "Backdoor" pada smart contract di koin yang dia airdrop. Pas korban interact (jual token tersebut), pelaku langsung dapat akses ke wallet korban.<br><br><strong>Cara hindarinya:</strong> Jangan pernah interact sama koin yang kamu merasa tidak garap atau beli.</div>
+        </div>
+      </div>
+
+      <div class="callout info">
+        <span class="callout-icon">🤖</span>
+        <div class="callout-body">
+          <div class="callout-title">3. Bot VIP Drainer</div>
+          <div class="callout-text">Banyak banget yang udah kena ini. Paling sering muncul dari iklan Telegram.<br><br>Pelaku membuat iklan bot trading VIP palsu, saat kamu klik dan start, bot tersebut meminta akses atau mnemonic phrase-mu.<br><br><strong>Makanya sangat disarankan:</strong> kalau kamu punya uang, beli Telegram Premium. Gunanya untuk menghindari salah pencet / fat finger iklan Telegram yang mengarah ke bot drainer ini.</div>
+        </div>
+      </div>
+
+      <hr class="divider">
+      <div class="scam-warn">
+        <div class="scam-warn-title">⚠️ Daftar Akun Penipu yang Mengatasnamakan Ponyin</div>
+        <div class="scam-warn-body">Akun-akun di bawah ini adalah PENIPU yang mengkloning nama/profil Ponyin. Jangan percaya klaim mereka. Akun resmi hanya @elponyin di X dan @ponyinnn di Telegram.</div>
+        <ul class="scam-list">
+          <li><span class="scam-badge">SCAM</span>@fadeproXBT — X (Twitter)</li>
+          <li><span class="scam-badge">SCAM</span>@Hopium_papa — X (Twitter) · cloning scam</li>
+          <li><span class="scam-badge">SCAM</span>@fabolousgringo — X (Twitter)</li>
+          <li><span class="scam-badge">SCAM</span>@zeusyxyz — X (Twitter)</li>
+          <li><span class="scam-badge">SCAM</span>@maverickthefirst — X (Twitter)</li>
+          <li><span class="scam-badge">SCAM</span>@hussainyn2 — TikTok</li>
+          <li><span class="scam-badge">SCAM</span>@mrpepe.idn — TikTok</li>
+        </ul>
+      </div>
+
+      <div class="panel-nav">
+        <button class="panel-nav-btn" onclick="switchPanel('pa8')">← Unwritten Rules</button>
+        <span class="panel-counter">A10 / A10</span>
+        <button class="panel-nav-btn primary" onclick="switchPanel('p0')">Mulai dari awal ↺</button>
+      </div>
+    </div>
+
+  </div><!-- end content-area -->
+</div><!-- end main-layout -->
+
+<!-- FOOTER -->
+<footer>
+  <h3>Ponyin<span style="color:#93c5fd">.</span></h3>
+  <p>Materi trading on-chain yang disampaikan jujur dan simpel. Tidak ada jargon yang sengaja dibikin susah — karena ilmu yang bagus harusnya bisa dipahami semua orang.</p>
+  <div class="ft-links">
+    <a href="https://x.com/elponyin" target="_blank" rel="noopener">𝕏 Follow @elponyin di X</a>
+    <a href="https://trojan.com/@Ponyinnn" target="_blank" rel="noopener">⚡ Mulai trading di Trojan</a>
+  </div>
+  <div class="ft-copy">© 2025 Ponyin Trading Intel Hub · Semua konten dilindungi · Dilarang menyalin tanpa izin · Arsip offline untuk keperluan belajar</div>
+</footer>
+
+<script>
+function switchPanel(id) {
+  // Hide all panels
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  // Show target
+  const target = document.getElementById(id);
+  if (target) target.classList.add('active');
+
+  // Update sidebar
+  document.querySelectorAll('.sb-item').forEach(el => {
+    el.classList.remove('active');
+    if (el.getAttribute('onclick') && el.getAttribute('onclick').includes("'" + id + "'")) {
+      el.classList.add('active');
+    }
+  });
+
+  // Update mobile tabs
+  document.querySelectorAll('.mob-tab').forEach(el => {
+    el.classList.remove('active');
+    if (el.getAttribute('onclick') && el.getAttribute('onclick').includes("'" + id + "'")) {
+      el.classList.add('active');
+      el.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
+    }
+  });
+
+  // Scroll to top of content
+  const mainLayout = document.getElementById('materi');
+  if (mainLayout) {
+    window.scrollTo({ top: mainLayout.offsetTop - 64, behavior: 'smooth' });
+  }
+}
+
+// Scroll hint for hero button
+document.querySelector('a[href="#materi"]') && document.querySelector('a[href="#materi"]').addEventListener('click', function(e) {
+  e.preventDefault();
+  document.getElementById('materi').scrollIntoView({ behavior: 'smooth' });
+});
+</script>
+</body>
+</html>
