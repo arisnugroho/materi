@@ -1,300 +1,410 @@
-
-
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrackSOL — Wallet Monitor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
 <style>
-  :root {
-    --bg: #f8f9fa; --surface: #ffffff; --surface2: #f1f3f5;
-    --border: #e5e7eb; --border2: #d1d5db;
-    --text1: #111827; --text2: #4b5563; --text3: #9ca3af;
-    --accent: #185FA5; --accent-bg: #e6f1fb;
-    --pos: #15803d; --pos-bg: #dcfce7; --pos-text: #166534;
-    --neg: #dc2626; --neg-bg: #fee2e2; --neg-text: #991b1b;
-    --warn-bg: #fef9c3; --warn-text: #854d0e;
-    --info-bg: #e0f2fe; --info-text: #0c4a6e;
-    --sidebar: #ffffff; --nav: #ffffff;
-    --dot-green: #22c55e; --dot-amber: #f59e0b; --dot-gray: #d1d5db;
-  }
-  .dark {
-    --bg: #0f1117; --surface: #1a1d27; --surface2: #252836;
-    --border: #2d3148; --border2: #3d4166;
-    --text1: #f1f5f9; --text2: #94a3b8; --text3: #475569;
-    --accent: #60a5fa; --accent-bg: #1e3a5f;
-    --pos: #4ade80; --pos-bg: #14532d; --pos-text: #86efac;
-    --neg: #f87171; --neg-bg: #450a0a; --neg-text: #fca5a5;
-    --warn-bg: #422006; --warn-text: #fcd34d;
-    --info-bg: #0c2a4a; --info-text: #7dd3fc;
-    --sidebar: #1a1d27; --nav: #1a1d27;
-    --dot-gray: #374151;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  .app { background: var(--bg); min-height: 600px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 13px; color: var(--text1); display: flex; flex-direction: column; }
+:root {
+  --bg:#f8f9fa;--surface:#fff;--surface2:#f1f3f5;--surface3:#e9ecef;
+  --border:#e5e7eb;--border2:#d1d5db;
+  --t1:#111827;--t2:#4b5563;--t3:#9ca3af;
+  --accent:#185FA5;--accent-bg:#e6f1fb;--accent-t:#0c4a6e;
+  --pos:#15803d;--pos-bg:#dcfce7;--pos-t:#166534;
+  --neg:#dc2626;--neg-bg:#fee2e2;--neg-t:#991b1b;
+  --warn-bg:#fef9c3;--warn-t:#854d0e;
+  --info-bg:#e0f2fe;--info-t:#0c4a6e;
+  --g:#22c55e;--amb:#f59e0b;--gray-dot:#d1d5db;
+  --sh:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+}
+.dark {
+  --bg:#0f1117;--surface:#1a1d27;--surface2:#252836;--surface3:#2d3148;
+  --border:#2d3148;--border2:#3d4166;
+  --t1:#f1f5f9;--t2:#94a3b8;--t3:#475569;
+  --accent:#60a5fa;--accent-bg:#1e3a5f;--accent-t:#7dd3fc;
+  --pos:#4ade80;--pos-bg:#14532d;--pos-t:#86efac;
+  --neg:#f87171;--neg-bg:#450a0a;--neg-t:#fca5a5;
+  --warn-bg:#422006;--warn-t:#fcd34d;
+  --info-bg:#0c2a4a;--info-t:#7dd3fc;
+  --gray-dot:#374151;
+  --sh:0 1px 3px rgba(0,0,0,.3);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;font-size:13px;background:var(--bg);color:var(--t1);min-height:100vh}
+button{font-family:inherit;cursor:pointer}
+select{font-family:inherit}
+a{text-decoration:none}
 
-  .nav { background: var(--nav); border-bottom: 1px solid var(--border); padding: 0 20px; height: 48px; display: flex; align-items: center; justify-content: space-between; }
-  .nav-left { display: flex; align-items: center; gap: 24px; }
-  .nav-logo { font-size: 15px; font-weight: 600; color: var(--text1); letter-spacing: -.3px; }
-  .nav-links { display: flex; gap: 2px; }
-  .nav-link { padding: 5px 10px; border-radius: 6px; font-size: 12px; color: var(--text2); cursor: pointer; border: none; background: transparent; }
-  .nav-link:hover { background: var(--surface2); color: var(--text1); }
-  .nav-link.active { background: var(--accent-bg); color: var(--accent); font-weight: 500; }
-  .nav-right { display: flex; align-items: center; gap: 10px; }
-  .sol-price { font-size: 12px; font-weight: 500; color: var(--text1); background: var(--surface2); padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border); }
-  .live-pill { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text2); }
-  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--dot-green); animation: pulse 1.5s infinite; flex-shrink: 0; }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
-  .icon-btn { background: transparent; border: 1px solid var(--border); border-radius: 7px; padding: 5px 8px; cursor: pointer; color: var(--text2); font-size: 14px; display: flex; align-items: center; gap: 4px; }
-  .icon-btn:hover { background: var(--surface2); }
-  .dm-label { font-size: 11px; color: var(--text2); }
+/* NAV */
+.nav{position:sticky;top:0;z-index:50;background:var(--surface);border-bottom:1px solid var(--border);padding:0 20px;height:48px;display:flex;align-items:center;justify-content:space-between;box-shadow:var(--sh)}
+.nav-logo{font-size:15px;font-weight:600;letter-spacing:-.3px;color:var(--t1)}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:2px;margin-left:20px}
+.nav-link{padding:5px 10px;border-radius:6px;font-size:12px;font-weight:500;color:var(--t2);border:none;background:transparent;display:flex;align-items:center;gap:4px;transition:all .15s}
+.nav-link:hover{background:var(--surface2);color:var(--t1)}
+.nav-link.active{background:var(--accent-bg);color:var(--accent)}
+.nav-r{display:flex;align-items:center;gap:8px}
+.sol-chip{font-size:12px;font-weight:500;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 10px;color:var(--t1)}
+.live-pill{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--t2);background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 10px}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--g);animation:pulse 1.5s infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.icon-btn{background:transparent;border:1px solid var(--border);border-radius:7px;padding:5px 9px;color:var(--t2);display:flex;align-items:center;gap:4px;font-size:13px;transition:all .15s}
+.icon-btn:hover{background:var(--surface2)}
+.avatar{width:30px;height:30px;border-radius:50%;background:var(--accent-bg);color:var(--accent);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;border:1px solid var(--border)}
 
-  .body { display: flex; flex: 1; }
+/* LAYOUT */
+.body{display:flex;min-height:calc(100vh - 48px)}
+.sidebar{width:200px;background:var(--surface);border-right:1px solid var(--border);padding:12px 0;flex-shrink:0;overflow-y:auto}
+.main{flex:1;padding:16px;overflow:hidden;min-width:0}
 
-  .sidebar { width: 200px; background: var(--sidebar); border-right: 1px solid var(--border); padding: 14px 0; flex-shrink: 0; }
-  .sb-section { margin-bottom: 18px; }
-  .sb-label { font-size: 10px; font-weight: 600; color: var(--text3); letter-spacing: .07em; text-transform: uppercase; padding: 0 14px; margin-bottom: 4px; }
-  .sb-item { display: flex; align-items: center; gap: 8px; padding: 7px 14px; cursor: pointer; border: none; background: transparent; width: 100%; text-align: left; }
-  .sb-item:hover { background: var(--surface2); }
-  .sb-item.active { background: var(--accent-bg); }
-  .sb-item.active .sb-name { color: var(--accent); font-weight: 500; }
-  .sb-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
-  .sb-name { font-size: 12px; color: var(--text2); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .sb-pnl { font-size: 11px; font-weight: 500; flex-shrink: 0; }
-  .sb-addr { font-size: 10px; color: var(--text3); font-family: monospace; }
+/* SIDEBAR */
+.sb-sec{margin-bottom:16px}
+.sb-lbl{font-size:10px;font-weight:600;color:var(--t3);letter-spacing:.07em;text-transform:uppercase;padding:0 14px;margin-bottom:4px}
+.sb-item{display:flex;align-items:center;gap:8px;padding:6px 14px;border:none;background:transparent;width:100%;text-align:left;cursor:pointer;transition:background .12s}
+.sb-item:hover{background:var(--surface2)}
+.sb-item.active{background:var(--accent-bg)}
+.sb-item.active .sb-name{color:var(--accent);font-weight:500}
+.sb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.sb-name{font-size:12px;color:var(--t2);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left}
+.sb-pnl{font-size:11px;font-weight:500;flex-shrink:0}
+.sb-sub{font-size:10px;color:var(--t3);font-family:'JetBrains Mono',monospace}
 
-  .main { flex: 1; padding: 16px; overflow: hidden; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+/* PAGES */
+.page{display:none}
+.page.active{display:block}
 
-  .stat-row { display: grid; grid-template-columns: repeat(6, minmax(0,1fr)); gap: 8px; }
-  .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
-  .stat-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 5px; }
-  .stat-val { font-size: 18px; font-weight: 600; line-height: 1.1; color: var(--text1); }
-  .stat-sub { font-size: 11px; color: var(--text3); margin-top: 3px; }
-  .stat-sel { font-size: 11px; color: var(--text2); background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 2px 4px; margin-top: 5px; cursor: pointer; width: 100%; }
+/* CARDS */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:var(--sh)}
+.card-hd{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--border)}
+.card-title{font-size:12px;font-weight:500;color:var(--t1);display:flex;align-items:center;gap:6px}
+.card-actions{display:flex;gap:5px;align-items:center}
+.pill{font-size:10px;font-weight:500;padding:3px 8px;border-radius:4px;border:1px solid var(--border);background:var(--surface2);color:var(--t2);cursor:pointer;transition:all .12s}
+.pill:hover{border-color:var(--border2)}
+.pill.on{background:var(--accent-bg);color:var(--accent);border-color:transparent}
 
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
-  .card-head { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-bottom: 1px solid var(--border); }
-  .card-title { font-size: 12px; font-weight: 500; color: var(--text1); display: flex; align-items: center; gap: 6px; }
-  .card-actions { display: flex; gap: 5px; }
-  .pill { font-size: 10px; font-weight: 500; padding: 2px 7px; border-radius: 4px; border: 1px solid var(--border); background: var(--surface2); color: var(--text2); cursor: pointer; }
-  .pill:hover { border-color: var(--border2); }
-  .pill.on { background: var(--accent-bg); color: var(--accent); border-color: transparent; }
+/* STATS */
+.stat-row{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin-bottom:14px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 14px;box-shadow:var(--sh)}
+.stat-lbl{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+.stat-val{font-size:18px;font-weight:600;line-height:1.15;color:var(--t1)}
+.stat-sub{font-size:11px;color:var(--t3);margin-top:3px}
+.stat-sel{font-size:11px;color:var(--t2);background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:2px 4px;margin-top:5px;cursor:pointer;width:100%}
 
-  .tx-wrap { max-height: 340px; overflow-y: auto; }
-  table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-  th { font-size: 10px; font-weight: 500; color: var(--text3); text-transform: uppercase; letter-spacing: .04em; padding: 7px 10px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); text-align: left; white-space: nowrap; background: var(--surface); }
-  th:last-child { border-right: none; }
-  td { padding: 8px 10px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); vertical-align: middle; overflow: hidden; }
-  td:last-child { border-right: none; }
-  tr:last-child td { border-bottom: none; }
-  tr:hover td { background: var(--surface2); }
-  .mono { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 10px; color: var(--text3); display: block; margin-top: 1px; }
-  .tag { display: inline-block; font-size: 10px; font-weight: 500; padding: 2px 6px; border-radius: 3px; white-space: nowrap; }
-  .tag-buy { background: var(--pos-bg); color: var(--pos-text); }
-  .tag-sell { background: var(--neg-bg); color: var(--neg-text); }
-  .tag-partial { background: var(--warn-bg); color: var(--warn-text); }
-  .tag-more { background: var(--info-bg); color: var(--info-text); }
-  .tlink { color: var(--accent); text-decoration: none; font-weight: 500; }
-  .pos { color: var(--pos); }
-  .neg { color: var(--neg); }
-  .convoy-hot { background: var(--neg-bg); color: var(--neg-text); font-size: 10px; font-weight: 500; padding: 2px 6px; border-radius: 3px; }
-  .convoy-mid { background: var(--warn-bg); color: var(--warn-text); font-size: 10px; font-weight: 500; padding: 2px 6px; border-radius: 3px; }
+/* TABLE */
+.tx-wrap{overflow-x:auto;max-height:340px;overflow-y:auto}
+table{width:100%;border-collapse:collapse;table-layout:fixed}
+th{font-size:10px;font-weight:500;color:var(--t3);text-transform:uppercase;letter-spacing:.04em;padding:7px 10px;border-bottom:1px solid var(--border);border-right:1px solid var(--border);text-align:left;white-space:nowrap;background:var(--surface);position:sticky;top:0;z-index:1}
+th:last-child{border-right:none}
+td{padding:8px 10px;border-bottom:1px solid var(--border);border-right:1px solid var(--border);vertical-align:middle;overflow:hidden}
+td:last-child{border-right:none}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--surface2)}
+.mono{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t3);display:block;margin-top:1px}
+.tag{display:inline-block;font-size:10px;font-weight:500;padding:2px 6px;border-radius:3px;white-space:nowrap}
+.tag-buy{background:var(--pos-bg);color:var(--pos-t)}
+.tag-sell{background:var(--neg-bg);color:var(--neg-t)}
+.tag-partial{background:var(--warn-bg);color:var(--warn-t)}
+.tag-more{background:var(--info-bg);color:var(--info-t)}
+.tlink{color:var(--accent);font-weight:500}
+.pos{color:var(--pos)}
+.neg{color:var(--neg)}
+.muted{color:var(--t3)}
+.convoy-hot{background:var(--neg-bg);color:var(--neg-t);font-size:10px;font-weight:500;padding:2px 6px;border-radius:3px}
+.convoy-mid{background:var(--warn-bg);color:var(--warn-t);font-size:10px;font-weight:500;padding:2px 6px;border-radius:3px}
 
-  .pagination { display: flex; align-items: center; justify-content: space-between; padding: 8px 14px; border-top: 1px solid var(--border); }
-  .pg-info { font-size: 11px; color: var(--text3); }
-  .pg-btns { display: flex; gap: 4px; }
-  .pg-btn { font-size: 11px; padding: 3px 9px; border-radius: 5px; border: 1px solid var(--border); background: var(--surface); color: var(--text2); cursor: pointer; }
-  .pg-btn:hover { background: var(--surface2); }
-  .pg-btn.active { background: var(--accent-bg); color: var(--accent); border-color: transparent; font-weight: 500; }
-  .pg-btn:disabled { opacity: .4; cursor: default; }
+/* PAGINATION */
+.pagination{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;border-top:1px solid var(--border)}
+.pg-info{font-size:11px;color:var(--t3)}
+.pg-btns{display:flex;gap:3px}
+.pg-btn{font-size:11px;padding:3px 9px;border-radius:5px;border:1px solid var(--border);background:var(--surface);color:var(--t2);cursor:pointer;transition:all .12s}
+.pg-btn:hover:not(:disabled){background:var(--surface2)}
+.pg-btn.active{background:var(--accent-bg);color:var(--accent);border-color:transparent;font-weight:500}
+.pg-btn:disabled{opacity:.4;cursor:default}
 
-  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .three { display: grid; grid-template-columns: 3fr 2fr; gap: 12px; }
+/* GRIDS */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.three{display:grid;grid-template-columns:3fr 2fr;gap:12px}
+.four{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 
-  .heat-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 8px; padding: 12px; }
-  .heat-item { border: 1px solid var(--border); border-radius: 8px; padding: 10px; }
-  .heat-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-  .heat-name { font-size: 13px; font-weight: 600; }
-  .heat-bar-bg { height: 3px; background: var(--surface2); border-radius: 2px; margin: 5px 0 4px; }
-  .heat-bar { height: 3px; border-radius: 2px; }
-  .heat-meta { font-size: 10px; color: var(--text3); }
-  .heat-who { font-size: 11px; color: var(--text2); margin-top: 2px; }
+/* HEATMAP */
+.heat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:12px}
+.heat-item{border:1px solid var(--border);border-radius:8px;padding:10px;transition:border-color .15s}
+.heat-item:hover{border-color:var(--border2)}
+.heat-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.heat-name{font-size:13px;font-weight:600}
+.heat-bar-bg{height:3px;background:var(--surface2);border-radius:2px;margin:5px 0 4px}
+.heat-bar{height:3px;border-radius:2px}
+.heat-meta{font-size:10px;color:var(--t3);margin-top:2px}
+.heat-who{font-size:11px;color:var(--t2)}
 
-  .pf-table td, .pf-table th { padding: 8px 12px; }
+/* WALLET TRACKER */
+.wrow{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s}
+.wrow:last-child{border-bottom:none}
+.wrow:hover{background:var(--surface2)}
+.wleft{display:flex;align-items:center;gap:8px}
+.wname{font-size:12px;font-weight:500;color:var(--t1)}
+.wright{text-align:right}
+.wr-pct{font-size:12px;font-weight:500}
+.wr-bar{height:3px;background:var(--surface2);border-radius:2px;width:64px;margin:3px 0 2px;margin-left:auto}
+.wr-fill{height:3px;border-radius:2px}
+.wr-sub{font-size:10px;color:var(--t3)}
 
-  .wrow { display: flex; align-items: center; justify-content: space-between; padding: 8px 14px; border-bottom: 1px solid var(--border); }
-  .wrow:last-child { border-bottom: none; }
-  .wrow:hover { background: var(--surface2); }
-  .wleft { display: flex; align-items: center; gap: 8px; }
-  .wname { font-size: 12px; font-weight: 500; color: var(--text1); }
-  .waddr { font-size: 10px; color: var(--text3); font-family: monospace; }
-  .wright { text-align: right; }
-  .wr-pct { font-size: 12px; font-weight: 500; }
-  .wr-bar { height: 3px; background: var(--surface2); border-radius: 2px; width: 64px; margin: 3px 0 2px; margin-left: auto; }
-  .wr-fill { height: 3px; border-radius: 2px; }
-  .wr-sub { font-size: 10px; color: var(--text3); }
+/* PAGE-SPECIFIC */
+.page-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.page-title{font-size:15px;font-weight:600;color:var(--t1)}
+.page-sub{font-size:12px;color:var(--t3);margin-top:2px}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:7px;font-size:12px;font-weight:500;border:1px solid var(--border);background:var(--surface);color:var(--t2);cursor:pointer;transition:all .15s}
+.btn:hover{background:var(--surface2);border-color:var(--border2)}
+.btn-primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn-primary:hover{opacity:.9}
+.btn-danger{background:var(--neg-bg);color:var(--neg-t);border-color:transparent}
+.badge{display:inline-block;font-size:10px;font-weight:500;padding:2px 7px;border-radius:4px}
+.badge-green{background:var(--pos-bg);color:var(--pos-t)}
+.badge-red{background:var(--neg-bg);color:var(--neg-t)}
+.badge-blue{background:var(--accent-bg);color:var(--accent-t)}
+.badge-gray{background:var(--surface2);color:var(--t2)}
+.badge-warn{background:var(--warn-bg);color:var(--warn-t)}
+.input{width:100%;padding:7px 10px;border:1px solid var(--border);border-radius:7px;background:var(--surface);color:var(--t1);font-size:12px;font-family:'Inter',sans-serif;outline:none;transition:border-color .15s}
+.input:focus{border-color:var(--accent)}
+.select{padding:7px 10px;border:1px solid var(--border);border-radius:7px;background:var(--surface);color:var(--t1);font-size:12px;font-family:'Inter',sans-serif;outline:none;cursor:pointer}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.form-label{font-size:11px;font-weight:500;color:var(--t2);margin-bottom:4px;display:block}
+.form-group{margin-bottom:10px}
+.divider{height:1px;background:var(--border);margin:14px 0}
+.section-title{font-size:11px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+
+/* WALLET PAGE */
+.wallet-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;box-shadow:var(--sh);transition:border-color .15s}
+.wallet-card:hover{border-color:var(--border2)}
+.wallet-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.wc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
+.wc-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0}
+.wc-meta{flex:1;margin-left:10px}
+.wc-name{font-size:13px;font-weight:600;color:var(--t1)}
+.wc-addr{font-size:10px;color:var(--t3);font-family:'JetBrains Mono',monospace;margin-top:1px}
+.wc-stats{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+.wc-stat{background:var(--surface2);border-radius:6px;padding:6px 8px}
+.wc-sl{font-size:10px;color:var(--t3);margin-bottom:2px}
+.wc-sv{font-size:12px;font-weight:600}
+.wc-footer{display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding-top:8px;border-top:1px solid var(--border)}
+.activity-bar{display:flex;gap:2px;align-items:flex-end;height:28px}
+.ab{width:5px;border-radius:1px 1px 0 0;flex-shrink:0}
+
+/* ALERT PAGE */
+.alert-item{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-bottom:1px solid var(--border);transition:background .12s;cursor:pointer}
+.alert-item:last-child{border-bottom:none}
+.alert-item:hover{background:var(--surface2)}
+.alert-item.unread{border-left:3px solid var(--accent)}
+.alert-item.unread-buy{border-left:3px solid var(--pos)}
+.alert-item.unread-sell{border-left:3px solid var(--neg)}
+.alert-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;margin-top:1px}
+.al-main{flex:1;min-width:0}
+.al-title{font-size:12px;font-weight:500;color:var(--t1);margin-bottom:2px}
+.al-sub{font-size:11px;color:var(--t2);line-height:1.5}
+.al-time{font-size:10px;color:var(--t3);flex-shrink:0;margin-top:2px}
+.alert-filters{display:flex;gap:6px;padding:10px 14px;border-bottom:1px solid var(--border);background:var(--surface2)}
+
+/* SETTINGS */
+.settings-layout{display:grid;grid-template-columns:180px 1fr;gap:16px}
+.settings-nav{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:8px 0;box-shadow:var(--sh);align-self:start}
+.sn-item{display:flex;align-items:center;gap:8px;padding:7px 14px;cursor:pointer;border:none;background:transparent;width:100%;text-align:left;font-size:12px;font-weight:500;color:var(--t2);border-radius:0;transition:all .12s}
+.sn-item:hover{background:var(--surface2);color:var(--t1)}
+.sn-item.active{background:var(--accent-bg);color:var(--accent)}
+.settings-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px 20px;box-shadow:var(--sh)}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}
+.toggle-row:last-child{border-bottom:none}
+.toggle-info{}
+.toggle-label{font-size:13px;font-weight:500;color:var(--t1)}
+.toggle-desc{font-size:11px;color:var(--t3);margin-top:2px}
+.toggle{position:relative;width:36px;height:20px;flex-shrink:0}
+.toggle input{opacity:0;width:0;height:0;position:absolute}
+.toggle-slider{position:absolute;inset:0;background:var(--surface3);border-radius:10px;cursor:pointer;transition:background .2s;border:1px solid var(--border)}
+.toggle input:checked + .toggle-slider{background:var(--accent);border-color:var(--accent)}
+.toggle-slider:before{content:'';position:absolute;width:14px;height:14px;border-radius:50%;background:#fff;bottom:2px;left:2px;transition:transform .2s;box-shadow:0 1px 2px rgba(0,0,0,.2)}
+.toggle input:checked + .toggle-slider:before{transform:translateX(16px)}
+.threshold-row{display:grid;grid-template-columns:1fr 120px;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)}
+.threshold-row:last-child{border-bottom:none}
+.thr-label{font-size:12px;color:var(--t1)}
+.thr-sub{font-size:11px;color:var(--t3);margin-top:2px}
+
+/* PORTFOLIO */
+.pf-stat-row{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:14px}
+.pf-chart-placeholder{height:100px;background:var(--surface2);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--t3);font-size:12px;margin:12px}
+.sparkline{display:flex;align-items:flex-end;gap:2px;height:24px}
+.sp{width:5px;border-radius:1px 1px 0 0}
 </style>
+</head>
+<body>
 
-<h2 style="position:absolute;left:-9999px">Trading dashboard website mockup</h2>
+<nav class="nav">
+  <div style="display:flex;align-items:center">
+    <div class="nav-logo">Track<span>SOL</span></div>
+    <div class="nav-links">
+      <button class="nav-link active" onclick="nav('dashboard')"><i class="ti ti-layout-dashboard" style="font-size:13px"></i> Dashboard</button>
+      <button class="nav-link" onclick="nav('wallets')"><i class="ti ti-wallet" style="font-size:13px"></i> Wallets</button>
+      <button class="nav-link" onclick="nav('portfolio')"><i class="ti ti-chart-bar" style="font-size:13px"></i> Portfolio</button>
+      <button class="nav-link" onclick="nav('alerts')"><i class="ti ti-bell" style="font-size:13px"></i> Alerts <span id="alert-badge" style="background:var(--neg);color:#fff;font-size:9px;font-weight:600;padding:1px 5px;border-radius:10px;margin-left:2px">8</span></button>
+      <button class="nav-link" onclick="nav('settings')"><i class="ti ti-settings" style="font-size:13px"></i> Settings</button>
+    </div>
+  </div>
+  <div class="nav-r">
+    <div class="sol-chip">SOL $148.32 <span class="pos" style="font-size:11px">+2.4%</span></div>
+    <div class="live-pill"><div class="dot"></div> Live · &lt;2s delay</div>
+    <button class="icon-btn" onclick="toggleDark()"><i class="ti ti-moon" id="dm-icon" style="font-size:14px"></i> <span id="dm-lbl" style="font-size:11px">Dark</span></button>
+    <div class="avatar">YN</div>
+  </div>
+</nav>
 
-<div class="app" id="app">
-
-  <nav class="nav">
-    <div class="nav-left">
-      <div class="nav-logo">TrackSOL</div>
-      <div class="nav-links">
-        <button class="nav-link active"><i class="ti ti-layout-dashboard" aria-hidden="true" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i>Dashboard</button>
-        <button class="nav-link"><i class="ti ti-wallet" aria-hidden="true" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i>Wallets</button>
-        <button class="nav-link"><i class="ti ti-chart-bar" aria-hidden="true" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i>Portfolio</button>
-        <button class="nav-link"><i class="ti ti-bell" aria-hidden="true" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i>Alerts</button>
-        <button class="nav-link"><i class="ti ti-settings" aria-hidden="true" style="font-size:13px;vertical-align:-1px;margin-right:4px"></i>Settings</button>
+<div class="body">
+  <aside class="sidebar">
+    <div class="sb-sec">
+      <div class="sb-lbl">My wallet</div>
+      <div class="sb-item active">
+        <div class="sb-dot" style="background:var(--g)"></div>
+        <div style="flex:1;min-width:0">
+          <div class="sb-name" style="color:var(--accent);font-weight:500">My Portfolio</div>
+          <div class="sb-sub">3HxK…7mQp</div>
+        </div>
+        <span class="sb-pnl pos">+$214</span>
       </div>
     </div>
-    <div class="nav-right">
-      <div class="sol-price">SOL $148.32</div>
-      <div class="live-pill"><div class="dot"></div>Live · delay &lt;2s</div>
-      <button class="icon-btn" onclick="toggleDark()" aria-label="Toggle dark mode">
-        <i class="ti ti-moon" id="dm-icon" aria-hidden="true" style="font-size:14px"></i>
-        <span class="dm-label" id="dm-label">Dark</span>
-      </button>
-      <button class="icon-btn" aria-label="User profile"><i class="ti ti-user" aria-hidden="true" style="font-size:14px"></i></button>
+    <div class="sb-sec">
+      <div class="sb-lbl">KOL (8)</div>
+      <div class="sb-item">
+        <div class="sb-dot" style="background:var(--g)"></div>
+        <div style="flex:1;min-width:0"><div class="sb-name">ansem.sol</div><div class="sb-sub">30s lalu</div></div>
+        <span class="sb-pnl pos">+78%</span>
+      </div>
+      <div class="sb-item">
+        <div class="sb-dot" style="background:var(--g)"></div>
+        <div style="flex:1;min-width:0"><div class="sb-name">AlphaDegen</div><div class="sb-sub">2m lalu</div></div>
+        <span class="sb-pnl pos">+41%</span>
+      </div>
+      <div class="sb-item">
+        <div class="sb-dot" style="background:var(--amb)"></div>
+        <div style="flex:1;min-width:0"><div class="sb-name">SolWhale_X</div><div class="sb-sub">18m lalu</div></div>
+        <span class="sb-pnl pos">+12%</span>
+      </div>
+      <div class="sb-item">
+        <div class="sb-dot" style="background:var(--gray-dot)"></div>
+        <div style="flex:1;min-width:0"><div class="sb-name">CryptoKing99</div><div class="sb-sub">1j lalu</div></div>
+        <span class="sb-pnl neg">-5%</span>
+      </div>
+      <div class="sb-item">
+        <div class="sb-dot" style="background:var(--g)"></div>
+        <div style="flex:1;min-width:0"><div class="sb-name">GemFinder_K</div><div class="sb-sub">4m lalu</div></div>
+        <span class="sb-pnl pos">+33%</span>
+      </div>
     </div>
-  </nav>
-
-  <div class="body">
-    <aside class="sidebar">
-      <div class="sb-section">
-        <div class="sb-label">My wallet</div>
-        <div class="sb-item active">
-          <div class="sb-dot" style="background:var(--dot-green)"></div>
-          <div style="flex:1;min-width:0">
-            <div class="sb-name" style="color:var(--accent);font-weight:500">My Portfolio</div>
-            <div class="sb-addr">3HxK…7mQp</div>
-          </div>
-          <span class="sb-pnl pos">+$214</span>
-        </div>
+    <div class="sb-sec">
+      <div class="sb-lbl">Top traders (14)</div>
+      <div class="sb-item">
+        <div class="sb-dot" style="background:var(--g)"></div>
+        <div style="flex:1;min-width:0"><div class="sb-name">Trader_0x91</div><div class="sb-sub">5m lalu</div></div>
+        <span class="sb-pnl pos">+128%</span>
       </div>
-      <div class="sb-section">
-        <div class="sb-label">KOL (8)</div>
-        <div class="sb-item">
-          <div class="sb-dot" style="background:var(--dot-green)"></div>
-          <div style="flex:1;min-width:0"><div class="sb-name">ansem.sol</div><div class="sb-addr">30s lalu</div></div>
-          <span class="sb-pnl pos">+78%</span>
-        </div>
-        <div class="sb-item">
-          <div class="sb-dot" style="background:var(--dot-green)"></div>
-          <div style="flex:1;min-width:0"><div class="sb-name">AlphaDegen</div><div class="sb-addr">2m lalu</div></div>
-          <span class="sb-pnl pos">+41%</span>
-        </div>
-        <div class="sb-item">
-          <div class="sb-dot" style="background:var(--dot-amber)"></div>
-          <div style="flex:1;min-width:0"><div class="sb-name">SolWhale_X</div><div class="sb-addr">18m lalu</div></div>
-          <span class="sb-pnl pos">+12%</span>
-        </div>
-        <div class="sb-item">
-          <div class="sb-dot" style="background:var(--dot-gray)"></div>
-          <div style="flex:1;min-width:0"><div class="sb-name">CryptoKing99</div><div class="sb-addr">1j lalu</div></div>
-          <span class="sb-pnl neg">-5%</span>
-        </div>
+      <div class="sb-item">
+        <div class="sb-dot" style="background:var(--g)"></div>
+        <div style="flex:1;min-width:0"><div class="sb-name">Sol_Sniper_7</div><div class="sb-sub">8m lalu</div></div>
+        <span class="sb-pnl pos">+96%</span>
       </div>
-      <div class="sb-section">
-        <div class="sb-label">Top traders (14)</div>
-        <div class="sb-item">
-          <div class="sb-dot" style="background:var(--dot-green)"></div>
-          <div style="flex:1;min-width:0"><div class="sb-name">Trader_0x91</div><div class="sb-addr">5m lalu</div></div>
-          <span class="sb-pnl pos">+128%</span>
-        </div>
-        <div class="sb-item">
-          <div class="sb-dot" style="background:var(--dot-green)"></div>
-          <div style="flex:1;min-width:0"><div class="sb-name">Sol_Sniper_7</div><div class="sb-addr">8m lalu</div></div>
-          <span class="sb-pnl pos">+96%</span>
-        </div>
-        <div class="sb-item">
-          <div class="sb-dot" style="background:var(--dot-amber)"></div>
-          <div style="flex:1;min-width:0"><div class="sb-name">MoonBag Pro</div><div class="sb-addr">22m lalu</div></div>
-          <span class="sb-pnl pos">+67%</span>
-        </div>
-        <div class="sb-item">
-          <div class="sb-dot" style="background:var(--dot-amber)"></div>
-          <div style="flex:1;min-width:0"><div class="sb-name">DeFi_Hunter</div><div class="sb-addr">35m lalu</div></div>
-          <span class="sb-pnl pos">+23%</span>
-        </div>
+      <div class="sb-item">
+        <div class="sb-dot" style="background:var(--amb)"></div>
+        <div style="flex:1;min-width:0"><div class="sb-name">MoonBag Pro</div><div class="sb-sub">22m lalu</div></div>
+        <span class="sb-pnl pos">+67%</span>
       </div>
-    </aside>
+      <div class="sb-item">
+        <div class="sb-dot" style="background:var(--amb)"></div>
+        <div style="flex:1;min-width:0"><div class="sb-name">DeFi_Hunter</div><div class="sb-sub">35m lalu</div></div>
+        <span class="sb-pnl pos">+23%</span>
+      </div>
+      <div class="sb-item">
+        <div class="sb-dot" style="background:var(--gray-dot)"></div>
+        <div style="flex:1;min-width:0"><div class="sb-name">NightOwl_X</div><div class="sb-sub">2j lalu</div></div>
+        <span class="sb-pnl neg">-11%</span>
+      </div>
+    </div>
+  </aside>
 
-    <main class="main">
+  <main class="main">
 
+    <!-- ===== DASHBOARD ===== -->
+    <div class="page active" id="page-dashboard">
       <div class="stat-row">
-        <div class="stat-card">
-          <div class="stat-label">Realized PNL</div>
+        <div class="stat">
+          <div class="stat-lbl">Realized PNL</div>
           <div class="stat-val pos">+$2,841</div>
-          <select class="stat-sel"><option>1 day</option><option>3 day</option><option>7 day</option><option selected>30 day</option></select>
+          <select class="stat-sel"><option>1 day</option><option>7 day</option><option selected>30 day</option></select>
         </div>
-        <div class="stat-card">
-          <div class="stat-label">Win rate</div>
+        <div class="stat">
+          <div class="stat-lbl">Win rate</div>
           <div class="stat-val">67%</div>
           <div class="stat-sub">34W / 17L</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-label">Total wallet</div>
+        <div class="stat">
+          <div class="stat-lbl">Total wallet</div>
           <div class="stat-val">$4,217</div>
           <div class="stat-sub">≈ 28.4 SOL</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-label">Wallets aktif</div>
-          <div class="stat-val">8 <span style="font-size:13px;font-weight:400;color:var(--text3)">/ 24</span></div>
+        <div class="stat">
+          <div class="stat-lbl">Wallets aktif</div>
+          <div class="stat-val">8 <span style="font-size:13px;font-weight:400;color:var(--t3)">/ 24</span></div>
           <div class="stat-sub">hari ini</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-label">Alerts today</div>
+        <div class="stat">
+          <div class="stat-lbl">Alerts today</div>
           <div class="stat-val">12</div>
-          <div class="stat-sub">8 buys · 4 sells</div>
+          <div class="stat-sub">8 buy · 4 sell</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-label">My wallet PNL</div>
+        <div class="stat">
+          <div class="stat-lbl">My PNL</div>
           <div class="stat-val pos">+$214</div>
-          <select class="stat-sel"><option>1 day</option><option>3 day</option><option>7 day</option><option selected>30 day</option></select>
+          <select class="stat-sel"><option>1 day</option><option>7 day</option><option selected>30 day</option></select>
         </div>
       </div>
 
-      <div class="card">
-        <div class="card-head">
-          <div class="card-title"><div class="dot"></div>Recent transactions</div>
+      <div class="card" style="margin-bottom:12px">
+        <div class="card-hd">
+          <div class="card-title"><div class="dot"></div> Recent transactions</div>
           <div class="card-actions">
-            <span class="pill on">All</span>
-            <span class="pill">First buy</span>
-            <span class="pill">Sell all</span>
-            <span class="pill">Partial</span>
+            <span class="pill on" onclick="filterTx('all',this)">All</span>
+            <span class="pill" onclick="filterTx('First buy',this)">First buy</span>
+            <span class="pill" onclick="filterTx('Sell all',this)">Sell all</span>
+            <span class="pill" onclick="filterTx('Partial sell',this)">Partial</span>
           </div>
         </div>
-        <div class="tx-wrap" id="tx-table">
-          <table>
-            <colgroup>
-              <col style="width:58px"><col style="width:78px"><col style="width:100px"><col style="width:100px"><col style="width:82px"><col style="width:78px"><col style="width:54px"><col style="width:76px"><col style="width:64px">
-            </colgroup>
-            <thead>
-              <tr>
-                <th>Age</th><th>Type</th><th>Wallet</th><th>Token</th><th style="text-align:right">SOL size</th><th style="text-align:right">MCap</th><th style="text-align:right">5m</th><th style="text-align:right">PNL</th><th style="text-align:center">Convoy</th>
-              </tr>
-            </thead>
-            <tbody id="tx-body"></tbody>
-          </table>
-        </div>
+        <div class="tx-wrap"><table>
+          <colgroup><col style="width:56px"><col style="width:80px"><col style="width:105px"><col style="width:100px"><col style="width:82px"><col style="width:76px"><col style="width:52px"><col style="width:78px"><col style="width:62px"></colgroup>
+          <thead><tr>
+            <th>Age</th><th>Type</th><th>Wallet</th><th>Token</th>
+            <th style="text-align:right">SOL size</th><th style="text-align:right">MCap</th>
+            <th style="text-align:right">5m%</th><th style="text-align:right">PNL</th><th style="text-align:center">Convoy</th>
+          </tr></thead>
+          <tbody id="tx-body"></tbody>
+        </table></div>
         <div class="pagination">
-          <div class="pg-info" id="pg-info">Menampilkan 1–10 dari 47 transaksi</div>
+          <div class="pg-info" id="pg-info">—</div>
           <div class="pg-btns" id="pg-btns"></div>
         </div>
       </div>
 
-      <div class="card">
-        <div class="card-head"><div class="card-title">Token heatmap — konvergensi hari ini</div></div>
+      <div class="card" style="margin-bottom:12px">
+        <div class="card-hd"><div class="card-title">Token heatmap — konvergensi hari ini</div><span class="badge badge-blue">4 token aktif</span></div>
         <div class="heat-grid">
           <div class="heat-item">
             <div class="heat-top"><div class="heat-name"><a class="tlink" href="#">$BONK</a></div><span class="tag tag-buy">+22%</span></div>
             <div class="heat-bar-bg"><div class="heat-bar" style="width:90%;background:var(--pos)"></div></div>
             <div class="heat-who">ansem.sol, Sol_Sniper_7, AlphaDegen</div>
-            <div class="heat-meta">MCap $9K · 3 wallets</div>
+            <div class="heat-meta">MCap $9K · <strong>3 wallets</strong></div>
           </div>
           <div class="heat-item">
             <div class="heat-top"><div class="heat-name"><a class="tlink" href="#">$DOGE3</a></div><span class="tag tag-buy">+54%</span></div>
             <div class="heat-bar-bg"><div class="heat-bar" style="width:60%;background:var(--pos)"></div></div>
             <div class="heat-who">Sol_Sniper_7, Trader_0x91</div>
-            <div class="heat-meta">MCap $2.1M · 2 wallets</div>
+            <div class="heat-meta">MCap $2.1M · <strong>2 wallets</strong></div>
           </div>
           <div class="heat-item">
             <div class="heat-top"><div class="heat-name"><a class="tlink" href="#">$MOON7</a></div><span class="tag tag-more">+11%</span></div>
@@ -306,163 +416,621 @@
             <div class="heat-top"><div class="heat-name"><a class="tlink" href="#">$PEPE2</a></div><span class="tag tag-sell">-18%</span></div>
             <div class="heat-bar-bg"><div class="heat-bar" style="width:20%;background:var(--neg)"></div></div>
             <div class="heat-who">Trader_0x91</div>
-            <div class="heat-meta">MCap $12M · 1 wallet jual</div>
+            <div class="heat-meta">MCap $12M · 1 jual</div>
           </div>
         </div>
       </div>
 
       <div class="three">
         <div class="card">
-          <div class="card-head"><div class="card-title">Portfolio performance</div></div>
-          <table class="pf-table">
-            <colgroup><col style="width:60px"><col style="width:68px"><col style="width:130px"><col style="width:110px"><col style="width:64px"><col style="width:70px"></colgroup>
+          <div class="card-hd"><div class="card-title">Portfolio performance</div></div>
+          <table>
+            <colgroup><col style="width:60px"><col style="width:72px"><col style="width:130px"><col style="width:110px"><col style="width:54px"><col style="width:70px"></colgroup>
             <thead><tr>
               <th>Token</th><th style="text-align:right">Balance</th><th style="text-align:right">Realized / Unrealized</th><th style="text-align:right">Invested / Sold</th><th style="text-align:right">B/S</th><th style="text-align:right">MCap</th>
             </tr></thead>
             <tbody>
-              <tr>
-                <td style="font-weight:500">ETH</td>
-                <td style="text-align:right">$32.7</td>
-                <td style="text-align:right"><span class="pos">+$2.18</span> <span style="color:var(--text3)">/ +$0.90</span><div class="mono" style="text-align:right">open</div></td>
-                <td style="text-align:right">$30.6 / $0</td>
-                <td style="text-align:right">4/2</td>
-                <td style="text-align:right">$229K</td>
-              </tr>
-              <tr>
-                <td style="font-weight:500">SHIBA</td>
-                <td style="text-align:right">$32.7</td>
-                <td style="text-align:right"><span class="pos">+$2.18</span> <span style="color:var(--text3)">/ -$0.40</span><div class="mono" style="text-align:right">open</div></td>
-                <td style="text-align:right">$30.6 / $0</td>
-                <td style="text-align:right">4/2</td>
-                <td style="text-align:right">$229K</td>
-              </tr>
-              <tr>
-                <td style="font-weight:500">DOGE</td>
-                <td style="text-align:right">$32.7</td>
-                <td style="text-align:right"><span class="neg">-$1.20</span> <span style="color:var(--text3)">/ —</span><div class="mono" style="text-align:right">closed</div></td>
-                <td style="text-align:right">$30.6 / $0</td>
-                <td style="text-align:right">4/2</td>
-                <td style="text-align:right">$229K</td>
-              </tr>
+              <tr><td style="font-weight:500">$BONK</td><td style="text-align:right">$32.7</td><td style="text-align:right"><span class="pos">+$2.18</span> <span class="muted">/ +$0.90</span><div class="mono" style="text-align:right">open</div></td><td style="text-align:right">$30.6 / $0</td><td style="text-align:right">4/2</td><td style="text-align:right">$9K</td></tr>
+              <tr><td style="font-weight:500">$WIF</td><td style="text-align:right">$18.2</td><td style="text-align:right"><span class="pos">+$5.44</span> <span class="muted">/ -$0.40</span><div class="mono" style="text-align:right">open</div></td><td style="text-align:right">$14.2 / $0</td><td style="text-align:right">3/1</td><td style="text-align:right">$2.1M</td></tr>
+              <tr><td style="font-weight:500">$DOGE3</td><td style="text-align:right">—</td><td style="text-align:right"><span class="neg">-$1.20</span> <span class="muted">/ —</span><div class="mono" style="text-align:right">closed</div></td><td style="text-align:right">$20.0 / $18.8</td><td style="text-align:right">2/2</td><td style="text-align:right">$840K</td></tr>
             </tbody>
           </table>
         </div>
-
         <div class="card">
-          <div class="card-head">
-            <div class="card-title">Wallet tracker</div>
-            <div style="font-size:11px;color:var(--text3)">8 aktif hari ini</div>
+          <div class="card-hd"><div class="card-title">Wallet tracker</div><div style="font-size:11px;color:var(--t3)">8 aktif hari ini</div></div>
+          <div class="wrow"><div class="wleft"><div class="sb-dot" style="background:var(--g)"></div><div><div class="wname">ansem.sol</div><div class="sb-sub">30s lalu</div></div></div><div class="wright"><div class="wr-pct pos">WR 78%</div><div class="wr-bar"><div class="wr-fill" style="width:78%;background:var(--pos)"></div></div><div class="wr-sub">avg hold 4h</div></div></div>
+          <div class="wrow"><div class="wleft"><div class="sb-dot" style="background:var(--g)"></div><div><div class="wname">Sol_Sniper_7</div><div class="sb-sub">8m lalu</div></div></div><div class="wright"><div class="wr-pct pos">WR 71%</div><div class="wr-bar"><div class="wr-fill" style="width:71%;background:var(--pos)"></div></div><div class="wr-sub">avg hold 2h</div></div></div>
+          <div class="wrow"><div class="wleft"><div class="sb-dot" style="background:var(--g)"></div><div><div class="wname">AlphaDegen</div><div class="sb-sub">2m lalu</div></div></div><div class="wright"><div class="wr-pct pos">WR 65%</div><div class="wr-bar"><div class="wr-fill" style="width:65%;background:var(--pos)"></div></div><div class="wr-sub">avg hold 6h</div></div></div>
+          <div class="wrow"><div class="wleft"><div class="sb-dot" style="background:var(--amb)"></div><div><div class="wname">Trader_0x91</div><div class="sb-sub">22m lalu</div></div></div><div class="wright"><div class="wr-pct" style="color:#d97706">WR 52%</div><div class="wr-bar"><div class="wr-fill" style="width:52%;background:#d97706"></div></div><div class="wr-sub">avg hold 1h</div></div></div>
+          <div class="wrow"><div class="wleft"><div class="sb-dot" style="background:var(--gray-dot)"></div><div><div class="wname">CryptoKing99</div><div class="sb-sub">3j lalu</div></div></div><div class="wright"><div class="wr-pct neg">WR 41%</div><div class="wr-bar"><div class="wr-fill" style="width:41%;background:var(--neg)"></div></div><div class="wr-sub">avg hold 30m</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== WALLETS ===== -->
+    <div class="page" id="page-wallets">
+      <div class="page-hd">
+        <div>
+          <div class="page-title">Wallet database</div>
+          <div class="page-sub">24 wallet terdaftar · 8 aktif hari ini</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <input class="input" style="width:200px" placeholder="Cari wallet atau address…">
+          <select class="select"><option>Semua kategori</option><option>KOL</option><option>Top trader</option></select>
+          <button class="btn btn-primary"><i class="ti ti-plus" style="font-size:13px"></i> Tambah wallet</button>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:8px;margin-bottom:12px">
+        <span class="pill on">Semua (24)</span>
+        <span class="pill">KOL (8)</span>
+        <span class="pill">Top trader (14)</span>
+        <span class="pill">Aktif hari ini (8)</span>
+        <span class="pill neg" style="background:var(--neg-bg);color:var(--neg-t);border-color:transparent">Performa buruk (3)</span>
+      </div>
+
+      <div class="wallet-grid">
+        <div class="wallet-card">
+          <div class="wc-top">
+            <div class="wc-avatar" style="background:var(--accent-bg);color:var(--accent)">AS</div>
+            <div class="wc-meta">
+              <div class="wc-name">ansem.sol</div>
+              <div class="wc-addr">F4nR…2kLx</div>
+            </div>
+            <span class="badge badge-blue">KOL</span>
           </div>
-          <div class="wrow">
-            <div class="wleft"><div class="sb-dot" style="background:var(--dot-green)"></div><div><div class="wname">ansem.sol</div><div class="waddr">30s lalu</div></div></div>
-            <div class="wright"><div class="wr-pct pos">WR 78%</div><div class="wr-bar"><div class="wr-fill" style="width:78%;background:var(--pos)"></div></div><div class="wr-sub">avg hold 4h</div></div>
+          <div class="wc-stats">
+            <div class="wc-stat"><div class="wc-sl">Win rate</div><div class="wc-sv pos">78%</div></div>
+            <div class="wc-stat"><div class="wc-sl">PNL 30d</div><div class="wc-sv pos">+142 SOL</div></div>
+            <div class="wc-stat"><div class="wc-sl">Avg hold</div><div class="wc-sv">4h 20m</div></div>
+            <div class="wc-stat"><div class="wc-sl">Total trades</div><div class="wc-sv">87</div></div>
           </div>
-          <div class="wrow">
-            <div class="wleft"><div class="sb-dot" style="background:var(--dot-green)"></div><div><div class="wname">Sol_Sniper_7</div><div class="waddr">8m lalu</div></div></div>
-            <div class="wright"><div class="wr-pct pos">WR 71%</div><div class="wr-bar"><div class="wr-fill" style="width:71%;background:var(--pos)"></div></div><div class="wr-sub">avg hold 2h</div></div>
+          <div class="wc-footer">
+            <div class="activity-bar">
+              <div class="ab" style="height:40%;background:var(--pos)"></div>
+              <div class="ab" style="height:80%;background:var(--pos)"></div>
+              <div class="ab" style="height:30%;background:var(--neg)"></div>
+              <div class="ab" style="height:90%;background:var(--pos)"></div>
+              <div class="ab" style="height:60%;background:var(--pos)"></div>
+              <div class="ab" style="height:70%;background:var(--pos)"></div>
+              <div class="ab" style="height:50%;background:var(--pos)"></div>
+            </div>
+            <div style="display:flex;gap:5px">
+              <button class="btn" style="padding:4px 8px;font-size:11px"><i class="ti ti-external-link" style="font-size:12px"></i> Solscan</button>
+              <button class="btn" style="padding:4px 8px;font-size:11px"><i class="ti ti-bell" style="font-size:12px"></i> Alert</button>
+              <button class="btn btn-danger" style="padding:4px 8px;font-size:11px"><i class="ti ti-trash" style="font-size:12px"></i></button>
+            </div>
           </div>
-          <div class="wrow">
-            <div class="wleft"><div class="sb-dot" style="background:var(--dot-green)"></div><div><div class="wname">AlphaDegen</div><div class="waddr">8m lalu</div></div></div>
-            <div class="wright"><div class="wr-pct pos">WR 65%</div><div class="wr-bar"><div class="wr-fill" style="width:65%;background:var(--pos)"></div></div><div class="wr-sub">avg hold 6h</div></div>
+        </div>
+
+        <div class="wallet-card">
+          <div class="wc-top">
+            <div class="wc-avatar" style="background:var(--pos-bg);color:var(--pos-t)">SS</div>
+            <div class="wc-meta">
+              <div class="wc-name">Sol_Sniper_7</div>
+              <div class="wc-addr">B3wN…9pKj</div>
+            </div>
+            <span class="badge" style="background:var(--pos-bg);color:var(--pos-t)">Top</span>
           </div>
-          <div class="wrow">
-            <div class="wleft"><div class="sb-dot" style="background:var(--dot-amber)"></div><div><div class="wname">Trader_0x91</div><div class="waddr">22m lalu</div></div></div>
-            <div class="wright"><div class="wr-pct" style="color:#d97706">WR 52%</div><div class="wr-bar"><div class="wr-fill" style="width:52%;background:#d97706"></div></div><div class="wr-sub">avg hold 1h</div></div>
+          <div class="wc-stats">
+            <div class="wc-stat"><div class="wc-sl">Win rate</div><div class="wc-sv pos">71%</div></div>
+            <div class="wc-stat"><div class="wc-sl">PNL 30d</div><div class="wc-sv pos">+98 SOL</div></div>
+            <div class="wc-stat"><div class="wc-sl">Avg hold</div><div class="wc-sv">2h 10m</div></div>
+            <div class="wc-stat"><div class="wc-sl">Total trades</div><div class="wc-sv">124</div></div>
           </div>
-          <div class="wrow">
-            <div class="wleft"><div class="sb-dot" style="background:var(--dot-gray)"></div><div><div class="wname">CryptoKing99</div><div class="waddr">3j lalu</div></div></div>
-            <div class="wright"><div class="wr-pct neg">WR 41%</div><div class="wr-bar"><div class="wr-fill" style="width:41%;background:var(--neg)"></div></div><div class="wr-sub">avg hold 30m</div></div>
+          <div class="wc-footer">
+            <div class="activity-bar">
+              <div class="ab" style="height:70%;background:var(--pos)"></div>
+              <div class="ab" style="height:90%;background:var(--pos)"></div>
+              <div class="ab" style="height:60%;background:var(--pos)"></div>
+              <div class="ab" style="height:40%;background:var(--neg)"></div>
+              <div class="ab" style="height:85%;background:var(--pos)"></div>
+              <div class="ab" style="height:55%;background:var(--pos)"></div>
+              <div class="ab" style="height:75%;background:var(--pos)"></div>
+            </div>
+            <div style="display:flex;gap:5px">
+              <button class="btn" style="padding:4px 8px;font-size:11px"><i class="ti ti-external-link" style="font-size:12px"></i> Solscan</button>
+              <button class="btn" style="padding:4px 8px;font-size:11px"><i class="ti ti-bell" style="font-size:12px"></i> Alert</button>
+              <button class="btn btn-danger" style="padding:4px 8px;font-size:11px"><i class="ti ti-trash" style="font-size:12px"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="wallet-card">
+          <div class="wc-top">
+            <div class="wc-avatar" style="background:var(--warn-bg);color:var(--warn-t)">CK</div>
+            <div class="wc-meta">
+              <div class="wc-name">CryptoKing99</div>
+              <div class="wc-addr">A7mF…3jYc</div>
+            </div>
+            <span class="badge badge-blue">KOL</span>
+          </div>
+          <div class="wc-stats">
+            <div class="wc-stat"><div class="wc-sl">Win rate</div><div class="wc-sv neg">41%</div></div>
+            <div class="wc-stat"><div class="wc-sl">PNL 30d</div><div class="wc-sv neg">-12 SOL</div></div>
+            <div class="wc-stat"><div class="wc-sl">Avg hold</div><div class="wc-sv">30m</div></div>
+            <div class="wc-stat"><div class="wc-sl">Total trades</div><div class="wc-sv">63</div></div>
+          </div>
+          <div class="wc-footer">
+            <div class="activity-bar">
+              <div class="ab" style="height:80%;background:var(--neg)"></div>
+              <div class="ab" style="height:50%;background:var(--neg)"></div>
+              <div class="ab" style="height:30%;background:var(--pos)"></div>
+              <div class="ab" style="height:60%;background:var(--neg)"></div>
+              <div class="ab" style="height:40%;background:var(--neg)"></div>
+              <div class="ab" style="height:25%;background:var(--neg)"></div>
+              <div class="ab" style="height:45%;background:var(--neg)"></div>
+            </div>
+            <div style="display:flex;gap:5px">
+              <button class="btn" style="padding:4px 8px;font-size:11px"><i class="ti ti-external-link" style="font-size:12px"></i> Solscan</button>
+              <button class="btn" style="padding:4px 8px;font-size:11px"><i class="ti ti-bell" style="font-size:12px"></i> Alert</button>
+              <button class="btn btn-danger" style="padding:4px 8px;font-size:11px"><i class="ti ti-trash" style="font-size:12px"></i></button>
+            </div>
           </div>
         </div>
       </div>
 
-    </main>
-  </div>
+      <div style="margin-top:10px;text-align:center;font-size:12px;color:var(--t3)">Menampilkan 3 dari 24 wallet · <a class="tlink" href="#">Lihat semua</a></div>
+    </div>
+
+    <!-- ===== PORTFOLIO ===== -->
+    <div class="page" id="page-portfolio">
+      <div class="page-hd">
+        <div>
+          <div class="page-title">Portfolio performance</div>
+          <div class="page-sub">PNL, posisi, dan historis trade kamu</div>
+        </div>
+        <div style="display:flex;gap:6px">
+          <select class="select"><option>30 hari</option><option>7 hari</option><option>1 hari</option><option>All time</option></select>
+          <button class="btn"><i class="ti ti-download" style="font-size:13px"></i> Export CSV</button>
+        </div>
+      </div>
+
+      <div class="pf-stat-row">
+        <div class="stat"><div class="stat-lbl">Realized PNL</div><div class="stat-val pos">+$2,841</div><div class="stat-sub">+47.3 SOL</div></div>
+        <div class="stat"><div class="stat-lbl">Unrealized PNL</div><div class="stat-val pos">+$490</div><div class="stat-sub">posisi terbuka</div></div>
+        <div class="stat"><div class="stat-lbl">Total invested</div><div class="stat-val">$8,320</div><div class="stat-sub">56.1 SOL</div></div>
+        <div class="stat"><div class="stat-lbl">Win rate</div><div class="stat-val">67%</div><div class="stat-sub">34W · 17L</div></div>
+        <div class="stat"><div class="stat-lbl">Best trade</div><div class="stat-val pos">+312%</div><div class="stat-sub">$BONK · 14 Apr</div></div>
+      </div>
+
+      <div class="two" style="margin-bottom:12px">
+        <div class="card">
+          <div class="card-hd"><div class="card-title">Posisi terbuka</div><span class="badge badge-green">2 aktif</span></div>
+          <table>
+            <colgroup><col style="width:70px"><col style="width:80px"><col style="width:90px"><col style="width:80px"><col style="width:90px"></colgroup>
+            <thead><tr><th>Token</th><th style="text-align:right">Invested</th><th style="text-align:right">Current</th><th style="text-align:right">PNL</th><th style="text-align:right">Trend 7d</th></tr></thead>
+            <tbody>
+              <tr>
+                <td style="font-weight:500">$BONK</td>
+                <td style="text-align:right">$30.6</td>
+                <td style="text-align:right">$32.7</td>
+                <td style="text-align:right"><span class="pos">+$2.18 (+7%)</span></td>
+                <td style="text-align:right"><div class="sparkline" style="justify-content:flex-end"><div class="sp" style="height:40%;background:var(--pos)"></div><div class="sp" style="height:55%;background:var(--pos)"></div><div class="sp" style="height:70%;background:var(--pos)"></div><div class="sp" style="height:60%;background:var(--pos)"></div><div class="sp" style="height:90%;background:var(--pos)"></div></div></td>
+              </tr>
+              <tr>
+                <td style="font-weight:500">$WIF</td>
+                <td style="text-align:right">$14.2</td>
+                <td style="text-align:right">$18.2</td>
+                <td style="text-align:right"><span class="pos">+$4.0 (+28%)</span></td>
+                <td style="text-align:right"><div class="sparkline" style="justify-content:flex-end"><div class="sp" style="height:30%;background:var(--neg)"></div><div class="sp" style="height:50%;background:var(--pos)"></div><div class="sp" style="height:65%;background:var(--pos)"></div><div class="sp" style="height:80%;background:var(--pos)"></div><div class="sp" style="height:95%;background:var(--pos)"></div></div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card">
+          <div class="card-hd"><div class="card-title">PNL harian (14 hari)</div></div>
+          <div style="padding:12px 14px">
+            <div style="display:flex;align-items:flex-end;gap:5px;height:72px;margin-bottom:6px">
+              <div style="flex:1;border-radius:2px 2px 0 0;height:30%;background:var(--neg-bg);border-top:2px solid var(--neg)"></div>
+              <div style="flex:1;border-radius:2px 2px 0 0;height:55%;background:var(--pos-bg);border-top:2px solid var(--pos)"></div>
+              <div style="flex:1;border-radius:2px 2px 0 0;height:40%;background:var(--neg-bg);border-top:2px solid var(--neg)"></div>
+              <div style="flex:1;border-radius:2px 2px 0 0;height:70%;background:var(--pos-bg);border-top:2px solid var(--pos)"></div>
+              <div style="flex:1;border-radius:2px 2px 0 0;height:85%;background:var(--pos-bg);border-top:2px solid var(--pos)"></div>
+              <div style="flex:1;border-radius:2px 2px 0 0;height:45%;background:var(--neg-bg);border-top:2px solid var(--neg)"></div>
+              <div style="flex:1;border-radius:2px 2px 0 0;height:95%;background:var(--pos-bg);border-top:2px solid var(--pos)"></div>
+              <div style="flex:1;border-radius:2px 2px 0 0;height:60%;background:var(--pos-bg);border-top:2px solid var(--pos)"></div>
+              <div style="flex:1;border-radius:2px 2px 0 0;height:35%;background:var(--neg-bg);border-top:2px solid var(--neg)"></div>
+              <div style="flex:1;border-radius:2px 2px 0 0;height:75%;background:var(--pos-bg);border-top:2px solid var(--pos)"></div>
+              <div style="flex:1;border-radius:2px 2px 0 0;height:100%;background:var(--pos-bg);border-top:2px solid var(--pos)"></div>
+              <div style="flex:1;border-radius:2px 2px 0 0;height:65%;background:var(--pos-bg);border-top:2px solid var(--pos)"></div>
+              <div style="flex:1;border-radius:2px 2px 0 0;height:40%;background:var(--neg-bg);border-top:2px solid var(--neg)"></div>
+              <div style="flex:1;border-radius:2px 2px 0 0;height:80%;background:var(--pos-bg);border-top:2px solid var(--pos)"></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t3)"><span>29 Apr</span><span>12 Mei</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-hd"><div class="card-title">Histori trade (closed)</div><div class="card-actions"><span class="pill on">Semua</span><span class="pill">Profit</span><span class="pill">Loss</span></div></div>
+        <table>
+          <colgroup><col style="width:80px"><col style="width:90px"><col style="width:90px"><col style="width:90px"><col style="width:90px"><col style="width:80px"><col style="width:80px"></colgroup>
+          <thead><tr><th>Token</th><th>Beli</th><th>Jual</th><th style="text-align:right">Invested</th><th style="text-align:right">Return</th><th style="text-align:right">PNL %</th><th style="text-align:right">Hold</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:500">$DOGE3</td><td><div class="mono">14 Apr 09:12</div></td><td><div class="mono">14 Apr 13:44</div></td><td style="text-align:right">2.0 SOL</td><td style="text-align:right">8.24 SOL</td><td style="text-align:right"><span class="pos">+312%</span></td><td style="text-align:right">4h 32m</td></tr>
+            <tr><td style="font-weight:500">$MOON7</td><td><div class="mono">12 Apr 14:30</div></td><td><div class="mono">12 Apr 18:10</div></td><td style="text-align:right">1.5 SOL</td><td style="text-align:right">2.18 SOL</td><td style="text-align:right"><span class="pos">+45%</span></td><td style="text-align:right">3h 40m</td></tr>
+            <tr><td style="font-weight:500">$PEPE2</td><td><div class="mono">10 Apr 11:00</div></td><td><div class="mono">10 Apr 12:22</div></td><td style="text-align:right">3.0 SOL</td><td style="text-align:right">2.46 SOL</td><td style="text-align:right"><span class="neg">-18%</span></td><td style="text-align:right">1h 22m</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== ALERTS ===== -->
+    <div class="page" id="page-alerts">
+      <div class="page-hd">
+        <div>
+          <div class="page-title">Alerts</div>
+          <div class="page-sub">8 belum dibaca · 12 total hari ini</div>
+        </div>
+        <div style="display:flex;gap:6px">
+          <button class="btn">Tandai semua dibaca</button>
+          <button class="btn btn-primary"><i class="ti ti-plus" style="font-size:13px"></i> Buat alert</button>
+        </div>
+      </div>
+
+      <div class="two" style="margin-bottom:12px;align-items:start">
+        <div>
+          <div class="card" style="margin-bottom:12px">
+            <div class="alert-filters">
+              <span class="pill on">Semua (12)</span>
+              <span class="pill">Buy (8)</span>
+              <span class="pill">Sell (4)</span>
+              <span class="pill">Convoy (3)</span>
+            </div>
+            <div class="alert-item unread-buy">
+              <div class="alert-icon" style="background:var(--pos-bg)"><i class="ti ti-trending-up" style="color:var(--pos);font-size:16px"></i></div>
+              <div class="al-main">
+                <div class="al-title">ansem.sol membeli $BONK</div>
+                <div class="al-sub">2.0 SOL · MCap $9K · <span class="pos" style="font-weight:500">+22% 5m</span></div>
+              </div>
+              <div class="al-time">30s lalu</div>
+            </div>
+            <div class="alert-item unread-buy">
+              <div class="alert-icon" style="background:var(--neg-bg)"><i class="ti ti-users" style="color:var(--neg);font-size:16px"></i></div>
+              <div class="al-main">
+                <div class="al-title">Convoy: 3 wallet masuk $BONK</div>
+                <div class="al-sub">ansem.sol, Sol_Sniper_7, AlphaDegen · dalam 5 menit</div>
+              </div>
+              <div class="al-time">2m lalu</div>
+            </div>
+            <div class="alert-item unread-sell">
+              <div class="alert-icon" style="background:var(--neg-bg)"><i class="ti ti-trending-down" style="color:var(--neg);font-size:16px"></i></div>
+              <div class="al-main">
+                <div class="al-title">Duvel menjual semua $WIF</div>
+                <div class="al-sub">8.1 SOL keluar · <span class="pos" style="font-weight:500">+84% PNL</span> · hold 6j</div>
+              </div>
+              <div class="al-time">47m lalu</div>
+            </div>
+            <div class="alert-item unread-buy">
+              <div class="alert-icon" style="background:var(--pos-bg)"><i class="ti ti-trending-up" style="color:var(--pos);font-size:16px"></i></div>
+              <div class="al-main">
+                <div class="al-title">Sol_Sniper_7 first buy $DOGE3</div>
+                <div class="al-sub">1.8 SOL · MCap $2.1M · entry awal</div>
+              </div>
+              <div class="al-time">2j lalu</div>
+            </div>
+            <div class="alert-item">
+              <div class="alert-icon" style="background:var(--surface2)"><i class="ti ti-trending-down" style="color:var(--t3);font-size:16px"></i></div>
+              <div class="al-main">
+                <div class="al-title">Cented menjual $MOODENG</div>
+                <div class="al-sub">4.7 SOL · <span class="neg" style="font-weight:500">-8% PNL</span></div>
+              </div>
+              <div class="al-time">3j lalu</div>
+            </div>
+            <div class="alert-item">
+              <div class="alert-icon" style="background:var(--warn-bg)"><i class="ti ti-alert-triangle" style="color:var(--warn-t);font-size:16px"></i></div>
+              <div class="al-main">
+                <div class="al-title">CryptoKing99 performa buruk bulan ini</div>
+                <div class="al-sub">Win rate 41% · 5 loss beruntun · pertimbangkan remove</div>
+              </div>
+              <div class="al-time">5j lalu</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="card" style="margin-bottom:12px">
+            <div class="card-hd"><div class="card-title"><i class="ti ti-settings" style="font-size:14px"></i> Alert rules aktif</div><button class="btn" style="font-size:11px;padding:3px 8px"><i class="ti ti-plus" style="font-size:12px"></i> Tambah</button></div>
+            <div style="padding:0">
+              <div style="padding:10px 14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center">
+                <div>
+                  <div style="font-size:12px;font-weight:500;color:var(--t1)">First buy any KOL</div>
+                  <div style="font-size:11px;color:var(--t3)">Telegram + in-app · semua KOL</div>
+                </div>
+                <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+              </div>
+              <div style="padding:10px 14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center">
+                <div>
+                  <div style="font-size:12px;font-weight:500;color:var(--t1)">Convoy ≥ 2 wallet</div>
+                  <div style="font-size:11px;color:var(--t3)">Telegram · high priority</div>
+                </div>
+                <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+              </div>
+              <div style="padding:10px 14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center">
+                <div>
+                  <div style="font-size:12px;font-weight:500;color:var(--t1)">Sell all (top traders)</div>
+                  <div style="font-size:11px;color:var(--t3)">In-app · semua top trader</div>
+                </div>
+                <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+              </div>
+              <div style="padding:10px 14px;display:flex;justify-content:space-between;align-items:center">
+                <div>
+                  <div style="font-size:12px;font-weight:500;color:var(--t1)">Size &gt; 5 SOL</div>
+                  <div style="font-size:11px;color:var(--t3)">Telegram · transaksi besar</div>
+                </div>
+                <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-hd"><div class="card-title">Ringkasan hari ini</div></div>
+            <div style="padding:12px 14px">
+              <div style="display:flex;justify-content:space-between;padding:5px 0;font-size:12px;border-bottom:1px solid var(--border)"><span class="muted">Total alerts</span><span style="font-weight:500">12</span></div>
+              <div style="display:flex;justify-content:space-between;padding:5px 0;font-size:12px;border-bottom:1px solid var(--border)"><span class="muted">Buy signals</span><span style="font-weight:500;color:var(--pos)">8</span></div>
+              <div style="display:flex;justify-content:space-between;padding:5px 0;font-size:12px;border-bottom:1px solid var(--border)"><span class="muted">Sell signals</span><span style="font-weight:500;color:var(--neg)">4</span></div>
+              <div style="display:flex;justify-content:space-between;padding:5px 0;font-size:12px"><span class="muted">Convoy alerts</span><span style="font-weight:500;color:var(--warn-t)">3</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SETTINGS ===== -->
+    <div class="page" id="page-settings">
+      <div class="page-hd">
+        <div><div class="page-title">Settings</div><div class="page-sub">Konfigurasi dashboard dan notifikasi</div></div>
+      </div>
+
+      <div class="settings-layout">
+        <div class="settings-nav">
+          <button class="sn-item active" onclick="settingsNav('general',this)"><i class="ti ti-settings" style="font-size:14px"></i> General</button>
+          <button class="sn-item" onclick="settingsNav('notifications',this)"><i class="ti ti-bell" style="font-size:14px"></i> Notifikasi</button>
+          <button class="sn-item" onclick="settingsNav('filters',this)"><i class="ti ti-filter" style="font-size:14px"></i> Filter</button>
+          <button class="sn-item" onclick="settingsNav('connections',this)"><i class="ti ti-plug" style="font-size:14px"></i> API & koneksi</button>
+          <button class="sn-item" onclick="settingsNav('security',this)"><i class="ti ti-lock" style="font-size:14px"></i> Keamanan</button>
+        </div>
+
+        <div id="settings-content">
+          <div id="s-general" class="settings-card">
+            <div class="section-title">Tampilan</div>
+            <div class="toggle-row">
+              <div class="toggle-info"><div class="toggle-label">Dark mode</div><div class="toggle-desc">Gunakan tema gelap untuk dashboard</div></div>
+              <label class="toggle"><input type="checkbox" id="s-dark" onchange="toggleDarkSetting(this)"><span class="toggle-slider"></span></label>
+            </div>
+            <div class="toggle-row">
+              <div class="toggle-info"><div class="toggle-label">Compact view</div><div class="toggle-desc">Perkecil spacing untuk muat lebih banyak data</div></div>
+              <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label>
+            </div>
+            <div class="toggle-row">
+              <div class="toggle-info"><div class="toggle-label">Auto-refresh live feed</div><div class="toggle-desc">Update otomatis tanpa reload halaman</div></div>
+              <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+            </div>
+            <div class="divider"></div>
+            <div class="section-title">Default tampilan</div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">PNL default period</label>
+                <select class="select" style="width:100%"><option>30 hari</option><option>7 hari</option><option>1 hari</option></select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Timezone</label>
+                <select class="select" style="width:100%"><option>Asia/Jakarta (WIB)</option><option>UTC</option></select>
+              </div>
+            </div>
+          </div>
+
+          <div id="s-notifications" class="settings-card" style="display:none">
+            <div class="section-title">Telegram bot</div>
+            <div class="form-group">
+              <label class="form-label">Bot token</label>
+              <input class="input" type="password" value="7234819234:AAH-xxxxxxxxxxxx" placeholder="Masukkan bot token">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Chat ID</label>
+              <input class="input" value="@yourchannel" placeholder="Chat ID atau username">
+            </div>
+            <button class="btn btn-primary" style="margin-bottom:14px"><i class="ti ti-send" style="font-size:13px"></i> Test kirim pesan</button>
+            <div class="divider"></div>
+            <div class="section-title">Jenis notifikasi</div>
+            <div class="toggle-row">
+              <div class="toggle-info"><div class="toggle-label">First buy alert</div><div class="toggle-desc">Kirim notif saat wallet tracked pertama kali beli token baru</div></div>
+              <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+            </div>
+            <div class="toggle-row">
+              <div class="toggle-info"><div class="toggle-label">Convoy alert</div><div class="toggle-desc">Kirim notif saat ≥2 wallet beli token yang sama dalam 5 menit</div></div>
+              <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+            </div>
+            <div class="toggle-row">
+              <div class="toggle-info"><div class="toggle-label">Sell all alert</div><div class="toggle-desc">Kirim notif saat wallet tracked jual semua posisi</div></div>
+              <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+            </div>
+            <div class="toggle-row">
+              <div class="toggle-info"><div class="toggle-label">Large transaction alert</div><div class="toggle-desc">Kirim notif transaksi di atas threshold SOL</div></div>
+              <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label>
+            </div>
+          </div>
+
+          <div id="s-filters" class="settings-card" style="display:none">
+            <div class="section-title">Filter transaksi</div>
+            <div class="threshold-row">
+              <div><div class="thr-label">Minimum SOL size</div><div class="thr-sub">Abaikan transaksi di bawah nilai ini</div></div>
+              <input class="input" style="width:120px" type="number" value="0.1" step="0.05" min="0">
+            </div>
+            <div class="threshold-row">
+              <div><div class="thr-label">Minimum MCap (USD)</div><div class="thr-sub">Abaikan token di bawah market cap ini</div></div>
+              <input class="input" style="width:120px" type="number" value="5000">
+            </div>
+            <div class="threshold-row">
+              <div><div class="thr-label">Convoy window (menit)</div><div class="thr-sub">Jendela waktu untuk hitung convoy</div></div>
+              <input class="input" style="width:120px" type="number" value="5" min="1" max="60">
+            </div>
+            <div class="threshold-row">
+              <div><div class="thr-label">Min wallets untuk convoy</div><div class="thr-sub">Minimal berapa wallet untuk trigger convoy alert</div></div>
+              <input class="input" style="width:120px" type="number" value="2" min="2">
+            </div>
+            <div class="divider"></div>
+            <div class="section-title">Kategori transaksi</div>
+            <div class="toggle-row">
+              <div class="toggle-info"><div class="toggle-label">Tampilkan "First buy" saja</div><div class="toggle-desc">Filter tabel hanya ke entry pertama per token per wallet</div></div>
+              <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label>
+            </div>
+            <div class="toggle-row">
+              <div class="toggle-info"><div class="toggle-label">Sembunyikan dust transactions</div><div class="toggle-desc">Sembunyikan transaksi &lt;0.01 SOL</div></div>
+              <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+            </div>
+            <div style="margin-top:16px"><button class="btn btn-primary">Simpan filter</button></div>
+          </div>
+
+          <div id="s-connections" class="settings-card" style="display:none">
+            <div class="section-title">API connections</div>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:12px;border:1px solid var(--border);border-radius:8px">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <div style="width:32px;height:32px;border-radius:8px;background:var(--pos-bg);display:flex;align-items:center;justify-content:center"><i class="ti ti-antenna" style="color:var(--pos);font-size:16px"></i></div>
+                  <div><div style="font-size:12px;font-weight:500">Helius RPC</div><div style="font-size:11px;color:var(--t3)">WebSocket · free tier</div></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px"><span class="badge badge-green">Connected</span><button class="btn" style="font-size:11px;padding:3px 8px">Edit</button></div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:12px;border:1px solid var(--border);border-radius:8px">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <div style="width:32px;height:32px;border-radius:8px;background:var(--accent-bg);display:flex;align-items:center;justify-content:center"><i class="ti ti-chart-dots" style="color:var(--accent);font-size:16px"></i></div>
+                  <div><div style="font-size:12px;font-weight:500">DexScreener API</div><div style="font-size:11px;color:var(--t3)">Token data · free</div></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px"><span class="badge badge-green">Connected</span><button class="btn" style="font-size:11px;padding:3px 8px">Edit</button></div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:12px;border:1px solid var(--border);border-radius:8px">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <div style="width:32px;height:32px;border-radius:8px;background:var(--surface2);display:flex;align-items:center;justify-content:center"><i class="ti ti-shield-check" style="color:var(--t3);font-size:16px"></i></div>
+                  <div><div style="font-size:12px;font-weight:500">RugCheck API</div><div style="font-size:11px;color:var(--t3)">Safety check · free</div></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px"><span class="badge badge-gray">Not connected</span><button class="btn btn-primary" style="font-size:11px;padding:3px 8px">Connect</button></div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:12px;border:1px solid var(--border);border-radius:8px">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <div style="width:32px;height:32px;border-radius:8px;background:var(--info-bg);display:flex;align-items:center;justify-content:center"><i class="ti ti-send" style="color:var(--info-t);font-size:16px"></i></div>
+                  <div><div style="font-size:12px;font-weight:500">Telegram Bot</div><div style="font-size:11px;color:var(--t3)">Notifikasi real-time</div></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px"><span class="badge badge-green">Connected</span><button class="btn" style="font-size:11px;padding:3px 8px">Edit</button></div>
+              </div>
+            </div>
+          </div>
+
+          <div id="s-security" class="settings-card" style="display:none">
+            <div class="section-title">Keamanan akses</div>
+            <div class="form-group">
+              <label class="form-label">Metode login</label>
+              <select class="select" style="width:100%"><option>Google OAuth (direkomendasikan)</option><option>Password</option></select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email yang diizinkan</label>
+              <input class="input" value="youremail@gmail.com" placeholder="Hanya email ini yang bisa login">
+              <div style="font-size:11px;color:var(--t3);margin-top:4px">Semua email lain otomatis ditolak</div>
+            </div>
+            <div class="divider"></div>
+            <div class="section-title">Session</div>
+            <div class="toggle-row">
+              <div class="toggle-info"><div class="toggle-label">Auto logout setelah idle</div><div class="toggle-desc">Logout otomatis setelah 24 jam tidak aktif</div></div>
+              <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+            </div>
+            <div class="toggle-row">
+              <div class="toggle-info"><div class="toggle-label">Log akses</div><div class="toggle-desc">Catat semua aktivitas login ke database</div></div>
+              <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+            </div>
+            <div style="margin-top:16px"><button class="btn btn-primary">Simpan perubahan</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
 </div>
 
 <script>
-  const wallets = ['ansem.sol','Sol_Sniper_7','AlphaDegen','Trader_0x91','MoonBag Pro','DeFi_Hunter','SolWhale_X','CryptoKing99','GemFinder_K','Trader_0x44'];
-  const addrs = ['F4nR…2kLx','B3wN…9pKj','9Btz…5wAm','C9aL…1bXw','E5vQ…4rTs','G1dY…6cUn','D2kP…8nRq','A7mF…3jYc','H8xB…2oVs','K2pR…9mYt'];
-  const tokens = ['$BONK','$PEPE2','$DOGE3','$MOON7','$WIF','$BOME','$MYRO','$POPCAT','$GUAC','$NYAN','$SLERF','$CAT'];
-  const types = ['First buy','Sell all','Partial sell','Buy more','First buy','Sell all','Buy more','First buy','Partial sell','Sell all'];
-  const tagClass = {'First buy':'tag-buy','Sell all':'tag-sell','Partial sell':'tag-partial','Buy more':'tag-more'};
-  const ages = ['12s','28s','45s','1m','2m','3m','4m','5m','7m','8m','10m','12m','14m','16m','18m','20m','22m','25m','27m','30m','33m','36m','39m','42m','45m','48m','50m','53m','56m','1h','1h3m','1h7m','1h12m','1h18m','1h24m','1h30m','1h38m','1h45m','1h52m','2h','2h10m','2h22m','2h35m','2h48m','3h','3h15m','3h30m'];
-  const mcaps = ['$9K','$12M','$2.1M','$840K','$450K','$1.2M','$340K','$5.6M','$890K','$67K','$3.4M','$220K'];
-  const convoys = [null,'3 wallets',null,'2 wallets',null,null,'2 wallets',null,null,'3 wallets',null,null,null,'2 wallets',null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null];
+const wallets=['ansem.sol','Sol_Sniper_7','AlphaDegen','Trader_0x91','MoonBag Pro','DeFi_Hunter','SolWhale_X','CryptoKing99','GemFinder_K','Trader_0x44'];
+const addrs=['F4nR…2kLx','B3wN…9pKj','9Btz…5wAm','C9aL…1bXw','E5vQ…4rTs','G1dY…6cUn','D2kP…8nRq','A7mF…3jYc','H8xB…2oVs','K2pR…9mYt'];
+const tokens=['$BONK','$PEPE2','$DOGE3','$MOON7','$WIF','$BOME','$MYRO','$POPCAT','$GUAC','$NYAN','$SLERF','$CAT'];
+const types=['First buy','Sell all','Partial sell','Buy more','First buy','Sell all','Buy more','First buy','Partial sell','Sell all'];
+const tagClass={'First buy':'tag-buy','Sell all':'tag-sell','Partial sell':'tag-partial','Buy more':'tag-more'};
+const ages=['12s','28s','45s','1m','2m','3m','4m','5m','7m','8m','10m','12m','14m','16m','18m','20m','22m','25m','27m','30m','33m','36m','39m','42m','45m','48m','50m','53m','56m','1h','1h3m','1h7m','1h12m','1h18m','1h24m','1h30m','1h38m','1h45m','1h52m','2h','2h10m','2h22m','2h35m','2h48m','3h','3h15m','3h30m'];
+const mcaps=['$9K','$12M','$2.1M','$840K','$450K','$1.2M','$340K','$5.6M','$890K','$67K','$3.4M','$220K'];
+const convoys=[null,'3 wallets',null,'2 wallets',null,null,'2 wallets',null,null,'3 wallets',null,null,null,'2 wallets',null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null];
 
-  function rnd(arr) { return arr[Math.floor(Math.random()*arr.length)]; }
-  function genPnl() { const v = (Math.random()*120-30).toFixed(1); return parseFloat(v); }
-  function gen5m() { const v = (Math.random()*10-4).toFixed(1); return parseFloat(v); }
+let allTx=ages.map((_,i)=>({
+  age:ages[i],type:types[i%types.length],
+  wallet:wallets[i%wallets.length],addr:addrs[i%addrs.length],
+  token:tokens[i%tokens.length],sol:(Math.random()*4+0.1).toFixed(2),
+  mcap:mcaps[i%mcaps.length],
+  m5:parseFloat((Math.random()*10-4).toFixed(1)),
+  pnl:parseFloat((Math.random()*120-30).toFixed(1)),
+  convoy:convoys[i]
+}));
 
-  const allTx = ages.map((_,i) => ({
-    age: ages[i], type: types[i%types.length],
-    wallet: wallets[i%wallets.length], addr: addrs[i%addrs.length],
-    token: tokens[i%tokens.length], sol: (Math.random()*4+0.1).toFixed(2),
-    mcap: mcaps[i%mcaps.length], m5: gen5m(), pnl: genPnl(),
-    convoy: convoys[i]
-  }));
+let filtered=allTx;
+const PER=10;let page=1;
 
-  const PER_PAGE = 10;
-  let currentPage = 1;
-  const totalPages = Math.ceil(allTx.length / PER_PAGE);
+function filterTx(f,el){
+  document.querySelectorAll('.card-actions .pill').forEach(p=>p.classList.remove('on'));
+  el.classList.add('on');
+  filtered=f==='all'?allTx:allTx.filter(t=>t.type===f);
+  page=1;renderTable();
+}
 
-  function renderTable(page) {
-    const start = (page-1)*PER_PAGE;
-    const slice = allTx.slice(start, start+PER_PAGE);
-    const tbody = document.getElementById('tx-body');
-    tbody.innerHTML = slice.map(tx => {
-      const pnlColor = tx.pnl >= 0 ? 'color:var(--pos)' : 'color:var(--neg)';
-      const m5Color = tx.m5 >= 0 ? 'color:var(--pos)' : 'color:var(--neg)';
-      const convoyHtml = tx.convoy
-        ? `<span class="${tx.convoy.startsWith('3') ? 'convoy-hot' : 'convoy-mid'}">${tx.convoy}</span>`
-        : `<span style="color:var(--text3)">—</span>`;
-      return `<tr>
-        <td style="color:var(--text3)">${tx.age}</td>
-        <td><span class="tag ${tagClass[tx.type]}">${tx.type}</span></td>
-        <td><div style="font-weight:500;font-size:12px;color:var(--text1)">${tx.wallet}</div><div class="mono">${tx.addr}</div></td>
-        <td><a class="tlink" href="#">${tx.token}</a><div class="mono">${tx.token.replace('$','')}/SOL</div></td>
-        <td style="text-align:right">${tx.sol} SOL<div class="mono" style="text-align:right">$${Math.round(tx.sol*148)}</div></td>
-        <td style="text-align:right">${tx.mcap}</td>
-        <td style="text-align:right;${m5Color}">${tx.m5>=0?'+':''}${tx.m5}%</td>
-        <td style="text-align:right;font-weight:500;${pnlColor}">${tx.pnl>=0?'+':''}${tx.pnl}%</td>
-        <td style="text-align:center">${convoyHtml}</td>
-      </tr>`;
-    }).join('');
+function renderTable(){
+  const total=filtered.length;
+  const totalPages=Math.ceil(total/PER);
+  const sl=filtered.slice((page-1)*PER,(page-1)*PER+PER);
+  document.getElementById('tx-body').innerHTML=sl.map(tx=>{
+    const pc=tx.pnl>=0?'color:var(--pos)':'color:var(--neg)';
+    const mc=tx.m5>=0?'color:var(--pos)':'color:var(--neg)';
+    const conv=tx.convoy?`<span class="${tx.convoy.startsWith('3')?'convoy-hot':'convoy-mid'}">${tx.convoy}</span>`:`<span class="muted">—</span>`;
+    return`<tr>
+      <td class="muted">${tx.age}</td>
+      <td><span class="tag ${tagClass[tx.type]}">${tx.type}</span></td>
+      <td><div style="font-weight:500;font-size:12px">${tx.wallet}</div><div class="mono">${tx.addr}</div></td>
+      <td><a class="tlink" href="#">${tx.token}</a><div class="mono">${tx.token.replace('$','')}/SOL</div></td>
+      <td style="text-align:right">${tx.sol} SOL<div class="mono" style="text-align:right">$${Math.round(tx.sol*148)}</div></td>
+      <td style="text-align:right">${tx.mcap}</td>
+      <td style="text-align:right;${mc}">${tx.m5>=0?'+':''}${tx.m5}%</td>
+      <td style="text-align:right;font-weight:500;${pc}">${tx.pnl>=0?'+':''}${tx.pnl}%</td>
+      <td style="text-align:center">${conv}</td>
+    </tr>`;
+  }).join('');
+  const s=(page-1)*PER;
+  document.getElementById('pg-info').textContent=`${s+1}–${Math.min(s+PER,total)} dari ${total} transaksi`;
+  let phtml=`<button class="pg-btn" onclick="goPage(${page-1})" ${page===1?'disabled':''}><i class="ti ti-chevron-left" style="font-size:12px;vertical-align:-1px"></i> Prev</button>`;
+  const ps=Math.max(1,page-2),pe=Math.min(totalPages,page+2);
+  for(let i=ps;i<=pe;i++)phtml+=`<button class="pg-btn ${i===page?'active':''}" onclick="goPage(${i})">${i}</button>`;
+  phtml+=`<button class="pg-btn" onclick="goPage(${page+1})" ${page===totalPages?'disabled':''}>Next <i class="ti ti-chevron-right" style="font-size:12px;vertical-align:-1px"></i></button>`;
+  document.getElementById('pg-btns').innerHTML=phtml;
+  document.querySelector('.tx-wrap').scrollTop=0;
+}
 
-    document.getElementById('pg-info').textContent = `Menampilkan ${start+1}–${Math.min(start+PER_PAGE, allTx.length)} dari ${allTx.length} transaksi`;
-    renderPagination(page);
-    document.getElementById('tx-table').scrollTop = 0;
-  }
+function goPage(p){const tp=Math.ceil(filtered.length/PER);if(p<1||p>tp)return;page=p;renderTable();}
 
-  function renderPagination(page) {
-    const container = document.getElementById('pg-btns');
-    let html = `<button class="pg-btn" onclick="goPage(${page-1})" ${page===1?'disabled':''}>
-      <i class="ti ti-chevron-left" style="font-size:12px;vertical-align:-1px"></i> Prev
-    </button>`;
-    const start = Math.max(1, page-2);
-    const end = Math.min(totalPages, page+2);
-    for (let i = start; i <= end; i++) {
-      html += `<button class="pg-btn ${i===page?'active':''}" onclick="goPage(${i})">${i}</button>`;
-    }
-    html += `<button class="pg-btn" onclick="goPage(${page+1})" ${page===totalPages?'disabled':''}>
-      Next <i class="ti ti-chevron-right" style="font-size:12px;vertical-align:-1px"></i>
-    </button>`;
-    container.innerHTML = html;
-  }
+let isDark=false;
+function toggleDark(){isDark=!isDark;document.body.classList.toggle('dark',isDark);document.getElementById('dm-icon').className=isDark?'ti ti-sun':'ti ti-moon';document.getElementById('dm-lbl').textContent=isDark?'Light':'Dark';const sc=document.getElementById('s-dark');if(sc)sc.checked=isDark;}
+function toggleDarkSetting(el){isDark=el.checked;document.body.classList.toggle('dark',isDark);document.getElementById('dm-icon').className=isDark?'ti ti-sun':'ti ti-moon';document.getElementById('dm-lbl').textContent=isDark?'Light':'Dark';}
 
-  function goPage(p) {
-    if (p < 1 || p > totalPages) return;
-    currentPage = p;
-    renderTable(p);
-  }
+const pages=['dashboard','wallets','portfolio','alerts','settings'];
+function nav(p){
+  pages.forEach(pg=>{
+    document.getElementById('page-'+pg).classList.toggle('active',pg===p);
+  });
+  document.querySelectorAll('.nav-link').forEach((el,i)=>{el.classList.toggle('active',pages[i]===p);});
+}
 
-  let isDark = false;
-  function toggleDark() {
-    isDark = !isDark;
-    document.getElementById('app').classList.toggle('dark', isDark);
-    document.getElementById('dm-icon').className = isDark ? 'ti ti-sun' : 'ti ti-moon';
-    document.getElementById('dm-label').textContent = isDark ? 'Light' : 'Dark';
-  }
+function settingsNav(sec,el){
+  ['general','notifications','filters','connections','security'].forEach(s=>{
+    const el2=document.getElementById('s-'+s);
+    if(el2)el2.style.display=s===sec?'block':'none';
+  });
+  document.querySelectorAll('.sn-item').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+}
 
-  renderTable(1);
+renderTable();
 </script>
+</body>
+</html>
